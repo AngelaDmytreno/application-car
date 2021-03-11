@@ -1,0 +1,25 @@
+.menu__item{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.menu__link{
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 63px;
+  margin: 0 auto;
+}
+// .menu__link:hover{
+//  border-right: 3px solid #fff ;
+ 
+// }
+.line{
+  width: 2px;
+  height: 40px;
+  background-color: #fff;
+}
