@@ -1,0 +1,18 @@
+.dealrspage__conatainer{
+  background-color: gold;
+  width: 100vw;
+  height: 100vh;
+ 
+}
+.dealrspage__item{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 10px 0px 40px;
+  align-items: center;
+  
+}
+.rigth{
+  width: 20vw;
+  
+}

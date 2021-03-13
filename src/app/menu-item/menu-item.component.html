@@ -1,0 +1,10 @@
+<div class="menu__item">
+  <div class="menu__item-icon">
+    <a class="menu__link" (click)="onClick()">
+      <mat-icon aria-hidden="false">{{icon}}</mat-icon>
+      <p>{{title}}</p>
+    </a>
+  </div>
+
+  <div [ngClass]="visibility"></div>
+</div>
