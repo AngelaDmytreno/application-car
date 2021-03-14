@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu-item',
@@ -10,6 +11,7 @@ export class MenuItemComponent implements OnInit {
   // @Input('aria-label') ariaLabel: string; // Спросить у Нади?
   @Input('icon') icon: string;
   @Input('title') title: string;
+  @Input('path') path: string;
   @Input('is-selected') set isSelected(value: boolean) {
     if (value) {
       this.visibility = this.lineStyleVisible;
@@ -23,14 +25,15 @@ export class MenuItemComponent implements OnInit {
   lineStyleVisible: any = { 'line-visible': true };
   lineStyleUnVisible: any = { 'line-unvisible': true };
 
-  constructor() { }
+  constructor(private router: Router) { }
   ngOnInit(): void { 
     if (this.isSelected) {
       this.visibility = this.lineStyleUnVisible;
     }
   }
 
-  onClick(): void {
+  onNavigate(): void {
     this.selected.emit(this.title);
+    this.router.navigate([this.path]);
   }
 }

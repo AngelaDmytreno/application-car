@@ -10,9 +10,9 @@ import { BehaviorSubject } from 'rxjs';
 export class MenuComponent implements OnInit {
 
   menuItems: Array<MenuItem> = [
-    new MenuItem('Home', 'home', true),
-    new MenuItem('Cars', 'directions_car', false),
-    new MenuItem('Dealers', 'stars', false)
+    new MenuItem('Home', 'home', true, ''),
+    new MenuItem('Cars', 'directions_car', false, 'cars'),
+    new MenuItem('Dealers', 'stars', false, 'dealers')
   ];
 
   constructor() { }

@@ -4,7 +4,6 @@
   justify-content: space-between;
   cursor: pointer;
 }
-
 .menu__link{
   text-decoration: none;
   color: #fff;
@@ -14,14 +13,16 @@
   align-items: center;
   width: 4.7vw;
   margin: 0 auto;
+  transition: .1s;
 }
-
+.menu__link:hover{
+  color: gold;
+}
 .line-visible{
   width: 3px;
   height: 40px;
   background-color: #fff;
 }
-
 .line-unvisible{
   width: 3px;
   visibility: hidden;
