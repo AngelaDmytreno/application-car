@@ -28,6 +28,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { ByCategoryCarsComponent } from './by-category-cars/by-category-cars.component';
 import { AllCarsComponent } from './all-cars/all-cars.component';
+import { MdCarCardComponent } from './md-car-card/md-car-card.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { AllCarsComponent } from './all-cars/all-cars.component';
     SlideToggleComponent,
     CarsTabsComponent,
     ByCategoryCarsComponent,
-    AllCarsComponent
+    AllCarsComponent,
+    MdCarCardComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,7 @@ import { AllCarsComponent } from './all-cars/all-cars.component';
     MatSlideToggleModule,
     MatTabsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService)
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { apiBase: '/', delay: 200 })
   ],
 
   providers: [],

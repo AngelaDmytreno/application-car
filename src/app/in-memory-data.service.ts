@@ -7,7 +7,7 @@ import { Car } from './car';
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb(): {} {
-    const cars: Array<any> = [
+    let cars: Array<any> = [
       {
         id: '0308202883',
         brand: 'Chevrolet',
@@ -87,7 +87,6 @@ export class InMemoryDataService implements InMemoryDbService {
         year: 2011,
         color: 'yellow',
         category: 'offroader',
-        class: '',
         image: './assets/images/jeep-wrangler.jpg',
         liked: true,
         newItem: false
@@ -310,7 +309,6 @@ export class InMemoryDataService implements InMemoryDbService {
         year: 1953,
         color: 'black',
         liked: false,
-        class: '',
         newItem: false
       },
       {
@@ -322,7 +320,6 @@ export class InMemoryDataService implements InMemoryDbService {
         category: 'coupe',
         image: './assets/images/mercedes-amg.jpg',
         liked: true,
-        class: '',
         newItem: false
       },
       {
@@ -332,7 +329,6 @@ export class InMemoryDataService implements InMemoryDbService {
         year: null,
         color: 'red',
         category: 'sedan',
-        class: '',
         liked: false,
         newItem: false
       },
@@ -342,7 +338,6 @@ export class InMemoryDataService implements InMemoryDbService {
         model: 'A1',
         year: 2010,
         color: 'blue',
-        class: '',
         category: 'sedan',
         liked: false,
         newItem: false
@@ -353,7 +348,6 @@ export class InMemoryDataService implements InMemoryDbService {
         model: 'Series 62',
         year: 1953,
         color: 'pink',
-        class: '',
         category: 'coupe',
         liked: false,
         newItem: false
@@ -364,7 +358,6 @@ export class InMemoryDataService implements InMemoryDbService {
         model: 'Thunderbird',
         year: 1955,
         color: 'red',
-        class: '',
         category: 'coupe',
         image: './assets/images/ford-thunderbird.jpg',
         liked: false,
@@ -389,7 +382,6 @@ export class InMemoryDataService implements InMemoryDbService {
         year: null,
         color: 'red',
         category: 'offroader',
-        class: '',
         image: './assets/images/land-rover-range.jpg',
         liked: false,
         newItem: false
@@ -400,7 +392,6 @@ export class InMemoryDataService implements InMemoryDbService {
         model: 'Raptor SuperCrew',
         year: null,
         color: 'blue',
-        class: '',
         category: 'pickup truck',
         image: './assets/images/ford-raptor.jpg',
         liked: false,
@@ -413,12 +404,11 @@ export class InMemoryDataService implements InMemoryDbService {
         year: null,
         color: 'red',
         category: 'pickup truck',
-        class: '',
         image: './assets/images/mercedes-x-class.jpg',
         liked: false,
         newItem: false
       }
     ];
-    return {cars};
+    return { cars };
   }
 }

@@ -26,7 +26,6 @@ export class MenuItemComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void { 
-    console.log(this.menuItem);
     if (this.menuItem.isSelected) {
       this.visibility = this.lineStyleVisible;
     }

@@ -9,9 +9,9 @@ import { SmCarCardInfo } from '../sm-card-car/sm-car-card-info';
 export class CarILikeComponent implements OnInit {
 
   carItems: Array<SmCarCardInfo> = [
-    new SmCarCardInfo('P1', 'Mclaren', 'https://material.angular.io/assets/img/examples/shiba2.jpg', 'Photo of a Shiba Inu'),
-    new SmCarCardInfo('P2', 'Mclaren2', 'https://material.angular.io/assets/img/examples/shiba2.jpg', 'Photo of a Shiba Inu'),
-    new SmCarCardInfo('P3', 'Mclaren3', 'https://material.angular.io/assets/img/examples/shiba2.jpg', 'Photo of a Shiba Inu'),
+    new SmCarCardInfo('Chevrolet','Camaro Z/28', './assets/images/z28-camaro.jpg', 'Camaro Z/28'),
+    new SmCarCardInfo('Pagani', 'Huayra BC', './assets/images/pagani-huayra.jpg', 'Huayra BC'),
+    new SmCarCardInfo('P1', 'Mclaren1', './assets/images/mclaren-p1.jpg', 'Mclaren1'),
   ];
   
   constructor() { }

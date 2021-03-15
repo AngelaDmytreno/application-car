@@ -1,0 +1,13 @@
+.cars__conatainer{
+  width: 100vw;
+  height: 100vh;
+}
+
+.category__conatainer{
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  height: 80px;
+  align-items: center;
+}

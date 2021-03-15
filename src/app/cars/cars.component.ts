@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { from } from 'rxjs';
+import { ByCategoryCarsComponent } from '../by-category-cars/by-category-cars.component'
+
 
 @Component({
   selector: 'app-cars',
