@@ -1,0 +1,11 @@
+<div class="like__conatiner-column">
+  <div class="like__item">
+    <h4>Car I Like</h4>
+  </div>
+</div>
+
+<div class="card__container">
+    <div *ngFor="let carItem of carItems" class="card-item__container">
+      <app-sm-card-car [car-item]="carItem"></app-sm-card-car>
+    </div>
+</div>

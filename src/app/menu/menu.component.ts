@@ -10,17 +10,17 @@ import { BehaviorSubject } from 'rxjs';
 export class MenuComponent implements OnInit {
 
   menuItems: Array<MenuItem> = [
-    new MenuItem('Home', 'home', true, ''),
-    new MenuItem('Cars', 'directions_car', false, 'cars'),
-    new MenuItem('Dealers', 'stars', false, 'dealers')
+    new MenuItem('Home', 'home', true, '', 'Home label'),
+    new MenuItem('Cars', 'directions_car', false, 'cars', 'Cars label'),
+    new MenuItem('Dealers', 'stars', false, 'dealers', 'Dealers label')
   ];
 
   constructor() { }
   ngOnInit(): void { }
 
-  onSelected(title: string): void {
+  onSelected(selectedMenuItem: MenuItem): void {
     this.menuItems.forEach((menuItem: MenuItem) => {
-      if (menuItem.title === title) {
+      if (menuItem.title === selectedMenuItem.title) {
         menuItem.isSelected = true;
       } else {
         menuItem.isSelected = false;
