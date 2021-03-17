@@ -2,7 +2,7 @@
   <div class="menu__item-icon">
     <a class="menu__link" (click)="onNavigate()">
       <mat-icon aria-label="Trololo" aria-hidden="false">{{menuItem.icon}}</mat-icon>
-      <!-- <mat-icon aria-label="{{menuItem.ariaLabel}}" aria-hidden="false">{{menuItem.icon}}</mat-icon> -->
+      <!-- <mat-icon [aria-label]="menuItem.ariaLabel" aria-hidden="false">{{menuItem.icon}}</mat-icon> -->
       <p>{{menuItem.title}}</p>
     </a>
   </div>

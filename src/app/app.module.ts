@@ -10,13 +10,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MenuComponent } from './menu/menu.component';
 import { MenuItemComponent } from './menu-item/menu-item.component';
-import { HomeComponent } from './home/home.component';
 import { CarsComponent } from './cars/cars.component';
-import { CarILikeComponent } from './car-i-like/car-i-like.component';
-import { MycarsComponent } from './my-cars/mycars.component';
-import { MyDealersComponent } from './my-dealers/my-dealers.component';
 import { MatButtonModule } from '@angular/material/button';
-import { SmCardCarComponent } from './sm-card-car/sm-card-car.component';
+import { SmCardCarComponent } from './shared-components/sm-card-car/sm-card-car.component';
 import { MatCardModule } from '@angular/material/card';
 import { DealersComponent } from './dealers/dealers.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
@@ -29,6 +25,9 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { ByCategoryCarsComponent } from './by-category-cars/by-category-cars.component';
 import { AllCarsComponent } from './all-cars/all-cars.component';
 import { MdCarCardComponent } from './md-car-card/md-car-card.component';
+import { MainComponent } from './main/main.component';
+import { HomeModule } from './home/home.module';
+import { HomeComponent } from './home/home/home.component';
 
 @NgModule({
   declarations: [
@@ -36,18 +35,14 @@ import { MdCarCardComponent } from './md-car-card/md-car-card.component';
     HeaderComponent,
     MenuComponent,
     MenuItemComponent,
-    HomeComponent,
     CarsComponent,
-    CarILikeComponent,
-    MycarsComponent,
-    MyDealersComponent,
-    SmCardCarComponent,
     DealersComponent,
     SlideToggleComponent,
     CarsTabsComponent,
     ByCategoryCarsComponent,
     AllCarsComponent,
-    MdCarCardComponent
+    MdCarCardComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
@@ -61,10 +56,11 @@ import { MdCarCardComponent } from './md-car-card/md-car-card.component';
     MatSlideToggleModule,
     MatTabsModule,
     HttpClientModule,
+    HomeModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { apiBase: '/', delay: 200 })
   ],
-
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

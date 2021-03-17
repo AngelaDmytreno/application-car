@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SmCarCardInfo } from '../sm-card-car/sm-car-card-info';
+import { SmCarCardInfo } from '../../shared-components/sm-card-car/sm-car-card-info';
 
 @Component({
   selector: 'app-car-i-like',

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SmCarCardInfo } from '../sm-card-car/sm-car-card-info';
+import { SmCarCardInfo } from './sm-car-card-info';
 
 @Component({
   selector: 'app-sm-card-car',
@@ -8,11 +8,8 @@ import { SmCarCardInfo } from '../sm-card-car/sm-car-card-info';
 })
 export class SmCardCarComponent implements OnInit {
 
-
   @Input('car-item') carItem: SmCarCardInfo;
+
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 }
