@@ -14,7 +14,7 @@ import { CarsComponent } from './cars/cars.component';
 import { MatButtonModule } from '@angular/material/button';
 import { SmCardCarComponent } from './shared-components/sm-card-car/sm-card-car.component';
 import { MatCardModule } from '@angular/material/card';
-import { DealersComponent } from './dealers/dealers.component';
+
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CarsTabsComponent } from './cars-tabs/cars-tabs.component';
@@ -27,7 +27,9 @@ import { AllCarsComponent } from './all-cars/all-cars.component';
 import { MdCarCardComponent } from './md-car-card/md-car-card.component';
 import { MainComponent } from './main/main.component';
 import { HomeModule } from './home/home.module';
-import { HomeComponent } from './home/home/home.component';
+import { DealersModule } from './dealers/dealers.module';
+
+
 
 @NgModule({
   declarations: [
@@ -36,7 +38,7 @@ import { HomeComponent } from './home/home/home.component';
     MenuComponent,
     MenuItemComponent,
     CarsComponent,
-    DealersComponent,
+    
     SlideToggleComponent,
     CarsTabsComponent,
     ByCategoryCarsComponent,
@@ -57,6 +59,7 @@ import { HomeComponent } from './home/home/home.component';
     MatTabsModule,
     HttpClientModule,
     HomeModule,
+    DealersModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { apiBase: '/', delay: 200 })
   ],
   providers: [],
