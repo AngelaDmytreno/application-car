@@ -1,8 +1,22 @@
 <div class="car-cotainer">
   <div class="category__conatainer">
-    <app-cars-tabs [categories]="categories"></app-cars-tabs>
+    <nav mat-tab-nav-bar [backgroundColor]="background">
+      <a mat-tab-link *ngFor="let category of carsCategories"
+         (click)="activeLink = category; takeCarsByCategory(category)"
+         [active]="activeLink == category"> {{category | titlecase}}
+      </a>
+    </nav>
     <app-slide-toggle></app-slide-toggle>
    </div>
 </div>
 
+<ul>
+  <li *ngFor="let car of carsByCategory">
+    <span>Brand: {{car.brand}} | Model: {{car.model}} | Category: {{car.category}}</span>
+    <button (click)="selectCar(car)">Show</button>
+  </li>
+</ul>
 
+<div *ngIf="selectedCar != null">
+  {{selectedCar.color}}
+</div>

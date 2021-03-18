@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { Car } from '../../shared/entities/car.interface';
 import { CarsService } from '../../shared/servises/cars.service';
 
@@ -10,9 +11,12 @@ import { CarsService } from '../../shared/servises/cars.service';
 export class ByCategoryCarsComponent implements OnInit {
 
   allCars: Array<Car> = new Array<Car>();
-  categories: Set<string> = new Set<string>();
-  carsByCategory: Array<Car> = new Array<Car>();
   carsCategories: Set<string> = new Set<string>();
+  carsByCategory: Array<Car>;
+  selectedCar: Car;
+
+  activeLink: string;
+  background: ThemePalette = undefined;
 
   constructor(public carsService: CarsService) { }
 
@@ -24,26 +28,30 @@ export class ByCategoryCarsComponent implements OnInit {
       },
       err => console.log(err)
     );
-    this.allCars = this.carsService.allCars;
-    this.categories = this.carsService.carsCategories;
+    this.activeLink = this.carsCategories[0];
   }
-
 
   takeAllCategories(): void {
     this.allCars.forEach((car: Car )=> {
-      let category: string = 'other';
       if (car.category != null) {
-        category = car.category;
+        this.carsCategories.add(car.category);
       }
-      this.carsCategories.add(category);
     });
+    this.carsCategories.add('Other');
   }
- 
+
+  selectCar(car: Car): void {
+    this.selectedCar = car;
+  }
+
   takeCarsByCategory(category: string): void {
-    this.carsByCategory = this.allCars.map((car: Car) => {
-      if (car.category === category) {
-        return car;
+    this.carsByCategory = this.allCars.filter((car: Car) => {
+      if (category != 'Other') {
+        return car.category == category.toLowerCase();
+      } else {
+        return car.category == undefined;
       }
     });
+    this.selectedCar = null;
   }
 }

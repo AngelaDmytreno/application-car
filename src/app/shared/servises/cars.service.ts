@@ -9,13 +9,10 @@ import { Car } from '../entities/car.interface';
 export class CarsService {
 
   carsUrl: string = '/cars';
-  allCars: Array<Car>;
-  carsCategories: Set<string> = new Set<string>();
 
   constructor(private http: HttpClient) { }
 
   getAllCars(): Observable<Array<Car>> {
     return this.http.get<Array<Car>>(this.carsUrl);
   }
-
 }
