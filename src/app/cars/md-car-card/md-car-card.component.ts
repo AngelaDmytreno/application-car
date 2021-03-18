@@ -1,5 +1,5 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { MdCarCardInfo } from '../md-car-card/md-car-card-info';
+import { MdCarCardInfo } from './md-car-card-info';
 import {MatIconModule} from '@angular/material/icon'; 
 
 @Component({

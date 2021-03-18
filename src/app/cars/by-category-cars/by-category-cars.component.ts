@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Car } from '../shared/entities/car.interface';
-import { CarsService } from '../shared/servises/cars.service';
+import { Car } from '../../shared/entities/car.interface';
+import { CarsService } from '../../shared/servises/cars.service';
 
 @Component({
   selector: 'app-by-category-cars',
