@@ -1,6 +1,11 @@
 .cars__conatainer{
   width: 100vw;
   height: 100vh;
+  
+}
+.mat-selection-list{
+  width: 300px;
+  
 }
 
 .category__conatainer{
@@ -8,65 +13,34 @@
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  height: 80px;
   align-items: center;
+  margin-top: 15px;
+
 }
 .container__info{
   display: flex;
-  width: 100vw;
-  flex-direction: row;
-  
-}
-li{
-  list-style: none;
+  width: 60vw;
+  position: absolute;
+  top: 9vw;
+  right: 10vw;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  background-color: gray;
-  padding: 10px;
-  margin: 10px;
-  width: 250px;
-  height: 50px;
-  border-radius: 5px;
-  box-shadow: 1px 1px 1px 1px #000;
+  flex-direction: row; 
+
 }
-.brand{
-  font-weight: bold;
-}
-.car__info{
-  display: flex;
-  flex-direction: column;
-}
-.car__button{
-  border-radius: 50%;
-  width: 55px;
-  height: 55px;
-  border: 1px solid #000;
-  font-weight: 600;
-  cursor: pointer;
-}
+
 .car__img{
   width: 500px;
   height: 250px;
   margin-top: 20px;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-right: 20px;
 }
 img{
-  border-radius: 5px;
   width: 500px;
   height: 250px;
 }
 .detail__info{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin-top: 20px;
-  padding: 10px;
+  padding: 15px;
   width: 150px;
-  background-color: gainsboro;
-  height: 120px;
-  border: 1px solid #000;
-  border-radius: 5px;
 }

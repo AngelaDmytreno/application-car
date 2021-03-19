@@ -35,9 +35,10 @@
  
 // }
 
-.all-car-cotainer{
-  // width: 100vw;
-  height: 40px;
+.all-car-container{
+  width: 100vw;
+  background-color: gray;
+  // height: 40px;
   display: flex;
   flex-direction: row;
   padding-left: 40px;
@@ -48,16 +49,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 input{
   border: none;
   border-bottom: 1px solid #000;
-  font-size: 16px;
+  font-size: 18px;
 }
 .all-car-list__container{
   width: 70vw;
   margin: 0 auto;
+  
 }
 .all-car-list__container{
   display: flex;
@@ -72,6 +74,7 @@ input{
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 20px;
+  background-color: green;
 }
 .example-button-row{
   width: 70vw;

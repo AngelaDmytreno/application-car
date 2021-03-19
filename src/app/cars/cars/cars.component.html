@@ -1,2 +1,18 @@
-<app-by-category-cars></app-by-category-cars>
-<!-- <app-all-cars></app-all-cars> -->
+<div class="cars__container">
+  <div class="toggle">
+    <mat-slide-toggle [(ngModel)]="viewByCategory">View By Category</mat-slide-toggle>
+  </div>
+
+  <div *ngIf="viewByCategory">
+    <app-by-category-cars></app-by-category-cars>
+  </div>
+
+  <div *ngIf="!viewByCategory">
+    <app-all-cars></app-all-cars>
+  </div>
+
+  <!-- <div *ngIf="viewByCategory">
+    <app-all-cars></app-all-cars>
+  </div> -->
+
+</div>

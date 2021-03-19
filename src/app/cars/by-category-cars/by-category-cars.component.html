@@ -1,41 +1,29 @@
 <div class="car-cotainer">
   <div class="category__conatainer">
-    <nav mat-tab-nav-bar [backgroundColor]="background">
-      <a mat-tab-link *ngFor="let category of carsCategories"
-         (click)="activeLink = category; takeCarsByCategory(category)"
-         [active]="activeLink == category"> {{category | titlecase}}
-      </a>
-    </nav>
-    <mat-slide-toggle>View By Category</mat-slide-toggle>
-   </div>
-</div>
-
-<div class="container__info">
-  <ul>
-    <li *ngFor="let car of carsByCategory">
-      <div class="car__info">
-        <span class="brand">Brand: {{car.brand}}</span> 
-        <span class="model">Model: {{car.model}}</span> 
-      </div>
-     
-      <button class="car__button" (click)="selectCar(car)" ><mat-icon>arrow_forward</mat-icon>
-      <p>Detail</p>
-      </button>
-    </li>
-  </ul>
-  <div class="car__img">
-    <img *ngIf="selectedCar != null" [src]="selectedCar.image" [alt]="selectedCar.model">
+    <mat-tab-group>
+      <mat-tab [label]="category | titlecase" *ngFor="let category of carsCategories">
+        <mat-selection-list #cars [multiple]="false">
+          <mat-list-option *ngFor="let car of takeCarsByCategory(category)" (click)="selectCar(car)">
+            <span class="model"><b>{{car.model}}</b></span>
+            <span class="brand">{{car.brand}}</span>
+          </mat-list-option>
+        </mat-selection-list>
+      </mat-tab>
+    </mat-tab-group>
   </div>
-    
-  
+</div>
+<div class="container__info">
+  <div class="car__img" *ngIf="selectedCar">
+    <img [src]="selectedCar.image" [alt]="selectedCar.model">
+  </div>
+
 
   <div class="detail__info" *ngIf="selectedCar != null">
-    <span>Brand: {{selectedCar.brand}}</span> 
-    <span>Model: {{selectedCar.model}}</span>
-    <span>Class: {{selectedCar.class}}</span>
-    <span>Year: {{selectedCar.year}}</span>
-    <span> Color: {{selectedCar.color}}</span>
+    <span><h3>{{selectedCar.model}}</h3></span>
+    <span><h4>Dealers: <b>{{selectedCar.brand}}</b></h4></span>
+    <span><h4>Class: <b>{{selectedCar.class |titlecase}}</b></h4></span>
+    <span><h4>Year: <b>{{selectedCar.year}}</b></h4></span>
+    <span><h4>Color: <b>{{selectedCar.color}}</b></h4></span>
   </div>
 </div>
-
-
+  

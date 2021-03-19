@@ -1,0 +1,14 @@
+.cars__container{
+  display: flex;
+  flex-direction: row;
+  // align-items: center;
+  justify-content: space-between;
+  // background-color: red;
+}
+.toggle{
+  position: absolute;
+  right: 10px;
+  background-color: gold;
+  margin-top: 30px;
+  // top: 50px;
+}

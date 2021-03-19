@@ -16,6 +16,8 @@ export class ByCategoryCarsComponent implements OnInit {
   selectedCar: Car;
   activeLink: string;
   background: ThemePalette = undefined;
+  
+
 
   constructor(public carsService: CarsService) { }
 
@@ -27,7 +29,7 @@ export class ByCategoryCarsComponent implements OnInit {
       },
       err => console.log(err)
     );
-    this.activeLink = this.carsCategories[0];
+    // this.activeLink = this.carsCategories[0];
   }
 
   takeAllCategories(): void {
@@ -36,21 +38,16 @@ export class ByCategoryCarsComponent implements OnInit {
         this.carsCategories.add(car.category);
       }
     });
-    this.carsCategories.add('Other');
+    this.carsCategories.add('other');
   }
 
   selectCar(car: Car): void {
+    
     this.selectedCar = car;
+    console.log(this.selectedCar);
   }
 
-  takeCarsByCategory(category: string): void {
-    this.carsByCategory = this.allCars.filter((car: Car) => {
-      if (category != 'Other') {
-        return car.category == category.toLowerCase();
-      } else {
-        return car.category == undefined;
-      }
-    });
-    this.selectedCar = null;
+  takeCarsByCategory(category: string): any {
+    return  this.allCars.filter((car: Car) => category === "other" ? !car.category : car.category === category);
   }
 }
