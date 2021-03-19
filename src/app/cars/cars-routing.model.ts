@@ -4,6 +4,7 @@ import { CarsComponent } from './cars/cars.component';
 
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'cars', component: CarsComponent }
 ];
 

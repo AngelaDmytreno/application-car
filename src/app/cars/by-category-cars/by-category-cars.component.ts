@@ -14,7 +14,6 @@ export class ByCategoryCarsComponent implements OnInit {
   carsCategories: Set<string> = new Set<string>();
   carsByCategory: Array<Car>;
   selectedCar: Car;
-
   activeLink: string;
   background: ThemePalette = undefined;
 

@@ -6,17 +6,36 @@
          [active]="activeLink == category"> {{category | titlecase}}
       </a>
     </nav>
-    <app-slide-toggle></app-slide-toggle>
+    <mat-slide-toggle>View By Category</mat-slide-toggle>
    </div>
 </div>
 
-<ul>
-  <li *ngFor="let car of carsByCategory">
-    <span>Brand: {{car.brand}} | Model: {{car.model}} | Category: {{car.category}}</span>
-    <button (click)="selectCar(car)">Show</button>
-  </li>
-</ul>
+<div class="container__info">
+  <ul>
+    <li *ngFor="let car of carsByCategory">
+      <div class="car__info">
+        <span class="brand">Brand: {{car.brand}}</span> 
+        <span class="model">Model: {{car.model}}</span> 
+      </div>
+     
+      <button class="car__button" (click)="selectCar(car)" ><mat-icon>arrow_forward</mat-icon>
+      <p>Detail</p>
+      </button>
+    </li>
+  </ul>
+  <div class="car__img">
+    <img *ngIf="selectedCar != null" [src]="selectedCar.image" [alt]="selectedCar.model">
+  </div>
+    
+  
 
-<div *ngIf="selectedCar != null">
-  {{selectedCar.color}}
+  <div class="detail__info" *ngIf="selectedCar != null">
+    <span>Brand: {{selectedCar.brand}}</span> 
+    <span>Model: {{selectedCar.model}}</span>
+    <span>Class: {{selectedCar.class}}</span>
+    <span>Year: {{selectedCar.year}}</span>
+    <span> Color: {{selectedCar.color}}</span>
+  </div>
 </div>
+
+

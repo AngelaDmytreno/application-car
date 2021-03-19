@@ -5,6 +5,7 @@ import { DealersComponent } from './dealers/dealers.component';
 
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'dealers', component: DealersComponent }
 ];
 
