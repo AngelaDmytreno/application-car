@@ -18,7 +18,7 @@ import { MainComponent } from './main/main.component';
 import { HomeModule } from './home/home.module';
 import { DealersModule } from './dealers/dealers.module';
 import { CarsModule } from './cars/cars.module';
-import { TableComponent } from './dealers/table/table.component';
+
 
 
 
@@ -28,7 +28,7 @@ import { TableComponent } from './dealers/table/table.component';
     MenuComponent,
     MenuItemComponent,
     MainComponent,
-    TableComponent
+   
   ],
   imports: [
     BrowserModule,
