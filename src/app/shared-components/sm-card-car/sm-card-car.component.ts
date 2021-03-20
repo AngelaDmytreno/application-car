@@ -8,7 +8,7 @@ import { SmCarCardInfo } from './sm-car-card-info';
 })
 export class SmCardCarComponent implements OnInit {
 
-  @Input('car-item') carItem: SmCarCardInfo;
+  @Input('car-item') carListItem : any;
 
   constructor() { }
   ngOnInit(): void { }

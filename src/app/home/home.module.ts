@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { MycarsComponent } from './my-cars/mycars.component';
 import { CarILikeComponent } from './car-i-like/car-i-like.component';
 import { MyDealersComponent } from './my-dealers/my-dealers.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
 import { MatButtonModule } from '@angular/material/button';
-import { SmCardCarComponent } from '../shared-components/sm-card-car/sm-card-car.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 @NgModule({
