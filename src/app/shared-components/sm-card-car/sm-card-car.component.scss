@@ -2,31 +2,55 @@
   // width: 100vw;
   margin-top: 20px;
 }
-
-
 .example-header-image {
   background-size: cover;
 }
-
-
 .mat-card-header {
   justify-content: space-between;
   margin-left: -16px;
 }
+.mat-icon {
+  color: red;
+  display: none;
+}
+
 .mat-card-image {
 	width: calc(100% + 32px);
 	margin: 0 -16px 16px -16px;
 	max-height: 100px;
 }
-button{
-  padding: 0;
-  border: 0;
-  font: inherit;
-  color: inherit;
-  background-color: transparent;
-  cursor: pointer;
-  margin-right: 20px;
+section {
+  display: table;
 }
+
+.example-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+
+.example-button-row {
+  display: table-cell;
+  width: 490px;
+}
+
+.example-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
 .btn-like{
   color: gold;
 }
@@ -34,19 +58,23 @@ button{
   color: purple;
 }
 .size-sm{
-  // width: 80px;
+  width: 80px;
+  margin-bottom: 5px;
 }
 .size-lg{
   width: 170px;
 }
 .title-sm{
   font-size: 12px;
+  margin-bottom: 5px !important;
 }
 .subtitle-sm{
   font-size: 12px;
+  margin-bottom: 5px;
 }
 .title-lg{
   font-size: 16px;
+  margin-bottom: 12px;
 }
 .subtitle-lg{
   font-size: 14px;

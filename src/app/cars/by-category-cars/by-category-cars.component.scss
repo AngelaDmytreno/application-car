@@ -1,6 +1,7 @@
-.cars__conatainer{
+.car-cotainer{
   width: 100vw;
   height: 100vh;
+
   
 }
 .mat-selection-list{
@@ -20,11 +21,13 @@
 .container__info{
   display: flex;
   width: 60vw;
+  background-color: aqua;
   position: absolute;
   top: 9vw;
   right: 10vw;
   display: flex;
   flex-direction: row; 
+  transition-delay: 2s;
 
 }
 

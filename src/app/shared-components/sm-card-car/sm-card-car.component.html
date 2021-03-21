@@ -4,9 +4,11 @@
     <mat-card-subtitle [ngClass]="cardStyleSubtitle">{{carItem .brand}}</mat-card-subtitle>
     <mat-icon *ngIf="isCardLg" aria-label="Liked icon">favorite</mat-icon>
   </mat-card-header>
-  <img mat-card-image src="{{carItem .image}}" alt="{{carItem.brand}}">
+  <img *ngIf="carItem.image" mat-card-image src="{{carItem .image}}" alt="{{carItem.brand}}">
+  <img  *ngIf="!carItem.image"mat-card-image src="../../../assets/images/defoult.jpg" alt="{{carItem.brand}}">
   <div *ngIf="isCardLg">
-    <button class="btn-like" mat-button >Like</button>
+
+    <button class="btn-like" mat-button>Like</button>
     <button class="btn-details" mat-button>Details</button> 
   </div>
 </mat-card>
