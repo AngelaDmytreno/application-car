@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { DealersComponent } from './dealers/dealers.component';
 import { DealersRoutingModule } from './dealers-routing.module';
 import {MatButtonModule} from '@angular/material/button'; 
-import { TableComponent } from '../dealers/table/table.component'
+import { TableComponent } from '../dealers/table/table.component';
+import {MatTableModule} from '@angular/material/table'; 
+import {MatFormFieldModule} from '@angular/material/form-field'; 
 
 
 
@@ -16,7 +18,9 @@ import { TableComponent } from '../dealers/table/table.component'
   imports: [
     CommonModule,
     DealersRoutingModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatFormFieldModule
   ],
   providers: []
 })

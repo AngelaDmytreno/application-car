@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SmCarCardInfo } from '../../shared-components/sm-card-car/sm-car-card-info';
+import { Car } from 'src/app/car';
 
 @Component({
   selector: 'app-car-i-like',
@@ -8,10 +8,8 @@ import { SmCarCardInfo } from '../../shared-components/sm-card-car/sm-car-card-i
 })
 export class CarILikeComponent implements OnInit {
 
-  carItems: Array<SmCarCardInfo> = [
-    new SmCarCardInfo('Chevrolet','Camaro Z/28', './assets/images/z28-camaro.jpg', 'Camaro Z/28'),
-    new SmCarCardInfo('Pagani', 'Huayra BC', './assets/images/pagani-huayra.jpg', 'Huayra BC'),
-    new SmCarCardInfo('P1', 'Mclaren1', './assets/images/mclaren-p1.jpg', 'Mclaren1'),
+  carItems: Array<Car> = [
+    new Car('8730522046', 'Porsche', 'Boxster S', 1987, 'blue', 'sport','roadster','./assets/images/porsche-boxter.jpg', false, false)
   ];
   
   constructor() { }

@@ -2,25 +2,18 @@
   <div class="all-car__items">
     <form class="example-form">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Filter" value="">
+        <input (keyup)="onKey($event)" matInput placeholder="Filter" value="">
       </mat-form-field>
     </form>
-
   </div>
-
-
-
   <div class="all-car-list__container">
-    <div *ngFor="let carListItem of carListItems | slice:0:8">
-      <!-- <app-md-car-card [md-car-item]="carListItem"></app-md-car-card> -->
-      <app-sm-card-car [car-item]="carListItem"></app-sm-card-car>
+    <div *ngFor="let carItem of selectedCars">
+      <app-sm-card-car [car-item]="carItem" [card-type]="'lg'"></app-sm-card-car>
     </div>
   </div> 
-
-
   <section>
     <div class="example-button-row">
-      <button mat-raised-button color="accent">Load More</button>
+      <button mat-raised-button color="accent" (click)="loadMore()">Load More</button>
     </div>
   </section>
 </div>

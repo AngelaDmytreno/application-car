@@ -16,8 +16,6 @@ export class ByCategoryCarsComponent implements OnInit {
   selectedCar: Car;
   activeLink: string;
   background: ThemePalette = undefined;
-  
-
 
   constructor(public carsService: CarsService) { }
 
@@ -26,10 +24,10 @@ export class ByCategoryCarsComponent implements OnInit {
       res => { 
         this.allCars = res;
         this.takeAllCategories();
+        this.takeCarsByCategory(this.carsCategories[0]);
       },
       err => console.log(err)
     );
-    // this.activeLink = this.carsCategories[0];
   }
 
   takeAllCategories(): void {
@@ -42,12 +40,18 @@ export class ByCategoryCarsComponent implements OnInit {
   }
 
   selectCar(car: Car): void {
-    
     this.selectedCar = car;
     console.log(this.selectedCar);
   }
 
-  takeCarsByCategory(category: string): any {
-    return  this.allCars.filter((car: Car) => category === "other" ? !car.category : car.category === category);
+  tabChange(event: any): void {
+    const cars = this.takeCarsByCategory(event.tab.textLabel.toLowerCase());
+    this.selectedCar = cars[0];
+  }
+
+  takeCarsByCategory(category: string): Array<Car> {
+    // console.log(category);//Почему повторяет много раз категорий? оно что каждый раз ильт делает?
+    this.carsByCategory = this.allCars.filter((car: Car) => category === "other" ? !car.category : car.category === category);
+    return this.carsByCategory;
   }
 }

@@ -11,18 +11,36 @@ import { Car } from '../../shared/entities/car.interface';
 })
 export class AllCarsComponent implements OnInit {
   carListItems: Array<Car> = new Array<Car>();
+  selectedCars: Array<Car> = new Array<Car>();
+
+  loadCount: number = 8;
+
   constructor(public carsService: CarsService) { }
 
   ngOnInit(): void {
     this.carsService.getAllCars().subscribe(
-      res => { 
+      res => {
         this.carListItems = res;
-        console.log(this.carListItems);
-        
+        this.selectedCars = this.carListItems.slice(0, this.loadCount);
       },
       err => console.log(err)
     );
   }
+
+  onKey(event: any) {
+    setTimeout(() => this.filterCars(event.target.value), 2000);
+  }
+
+  filterCars(param): void {
+    console.log(param);
+    // this.selectedCars = 
+  }
+
+  loadMore(): void {
+    this.loadCount = this.loadCount + 8;
+    this.selectedCars = this.carListItems.slice(0, this.loadCount);
+  }
+  
   // disLike(car: Car):void{
   //   car.liked = !car.liked;
   //   this.carsService.updateCar(car).subscribe();
@@ -31,7 +49,5 @@ export class AllCarsComponent implements OnInit {
   // like(car: Car):void{
   //   car.liked = car.liked;
   //   this.carsService.updateCar(car).subscribe();
-  // }
- 
-
+  // }  
 }
