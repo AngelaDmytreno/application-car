@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from '../menu-item/menu-item';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -10,21 +9,13 @@ import { BehaviorSubject } from 'rxjs';
 export class MenuComponent implements OnInit {
 
   menuItems: Array<MenuItem> = [
-    new MenuItem('Home', 'home', true, '', 'Home label'),
-    new MenuItem('Cars', 'directions_car', false, 'cars', 'Cars label'),
-    new MenuItem('Dealers', 'stars', false, 'dealers', 'Dealers label')
+    new MenuItem('Home', 'home', true, '', 'Home label', '/home'),
+    new MenuItem('Cars', 'directions_car', false, 'cars', 'Cars label', '/cars'),
+    new MenuItem('Dealers', 'stars', false, 'dealers', 'Dealers label', '/dealers')
   ];
 
-  constructor() { }
-  ngOnInit(): void { }
+  currentUrl: string;
 
-  onSelected(selectedMenuItem: MenuItem): void {
-    this.menuItems.forEach((menuItem: MenuItem) => {
-      if (menuItem.title === selectedMenuItem.title) {
-        menuItem.isSelected = true;
-      } else {
-        menuItem.isSelected = false;
-      }
-    });
-  }
+  constructor() { }
+  ngOnInit(): void {}
 }

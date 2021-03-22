@@ -3,6 +3,7 @@ export class MenuItem {
               public icon: string,
               public isSelected: boolean,
               public path: string,
-              public ariaLabel: string) {
+              public ariaLabel: string,
+              public url: string) {
   }
 }
