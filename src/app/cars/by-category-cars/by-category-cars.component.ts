@@ -3,6 +3,10 @@ import { ThemePalette } from '@angular/material/core';
 import { Car } from '../../shared/entities/car.interface';
 import { CarsService } from '../../shared/servises/cars.service';
 
+
+
+
+
 @Component({
   selector: 'app-by-category-cars',
   templateUrl: './by-category-cars.component.html',
@@ -16,6 +20,7 @@ export class ByCategoryCarsComponent implements OnInit {
   selectedCar: Car;
   activeLink: string;
   background: ThemePalette = undefined;
+  test: any; //
 
   constructor(public carsService: CarsService) { }
 
