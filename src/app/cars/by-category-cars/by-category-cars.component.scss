@@ -1,14 +1,14 @@
 .car-cotainer{
   width: 100vw;
   height: 100vh;
+}
 
-  
+.mat-tab-group{
+  width: 1250px;
 }
 .mat-selection-list{
-  width: 300px;
-  
+  width: 300px; 
 }
-
 .category__conatainer{
   width: 100vw;
   overflow: hidden;
@@ -16,25 +16,20 @@
   flex-direction: row;
   align-items: center;
   margin-top: 15px;
-
 }
 .container__info{
   display: flex;
   width: 60vw;
-  background-color: aqua;
   position: absolute;
-  top: 9vw;
-  right: 10vw;
+  top: 0vw;
+  right: 5vw;
   display: flex;
   flex-direction: row; 
-  transition-delay: 2s;
-
 }
-
 .car__img{
   width: 500px;
   height: 250px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-right: 20px;
 }
 img{

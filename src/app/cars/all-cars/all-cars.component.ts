@@ -54,7 +54,7 @@ export class AllCarsComponent implements OnInit {
   }
 
   isBrand(brand: string, params: string): boolean {
-    const re = new RegExp(`^${params.toLocaleLowerCase()}`);
+    const re = new RegExp(`${params.toLocaleLowerCase()}`);
     if (brand.toLocaleLowerCase().match(re)) {
       return true;
     } else {
@@ -67,13 +67,5 @@ export class AllCarsComponent implements OnInit {
     this.selectedCars = this.carListItems.slice(0, this.loadCount);
   }
 
-  // disLike(car: Car):void{
-  //   car.liked = !car.liked;
-  //   this.carsService.updateCar(car).subscribe();
-  // }
-
-  // like(car: Car):void{
-  //   car.liked = car.liked;
-  //   this.carsService.updateCar(car).subscribe();
-  // }  
+ 
 }

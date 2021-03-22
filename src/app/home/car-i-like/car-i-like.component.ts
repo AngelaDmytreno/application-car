@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Car } from 'src/app/car';
+import { CarsService } from '../../shared/servises/cars.service';
+import { Car } from '../../shared/entities/car.interface';
 
 @Component({
   selector: 'app-car-i-like',
@@ -8,13 +9,29 @@ import { Car } from 'src/app/car';
 })
 export class CarILikeComponent implements OnInit {
 
-  carItems: Array<Car> = [
-    new Car('8730522046', 'Porsche', 'Boxster S', 1987, 'blue', 'sport','roadster','./assets/images/porsche-boxter.jpg', false, false)
-  ];
-  
-  constructor() { }
+  carItems: Array<Car> = new Array<Car>();
+  allCarListItems: Array<Car> = new Array<Car>();
+
+  constructor(public carsService: CarsService) { }
+
+
 
   ngOnInit(): void {
-    
+    this.carsService.getAllCars().subscribe(
+      res => {
+        this.allCarListItems = res;
+        this.getFavoriteCars();
+        this.carItems = this.getFavoriteCars();
+        console.log(this.carItems);
+      },
+      err => console.log(err)
+    );
+  }
+
+  getFavoriteCars(): any {
+    console.log(this.allCarListItems);
+    return this.allCarListItems.filter(el => el.liked === true);
   }
 }
+
+

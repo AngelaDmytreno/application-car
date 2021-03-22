@@ -1,7 +1,5 @@
 .like__conatiner-column{
-  width: 20vw;
-  background-color: pink;
-
+  width: 22vw;
 }
 .like__item{
   height: 25px;
@@ -10,13 +8,12 @@
 }
 
 .card__container{
-  max-width: 20vw;
+  max-width: 22vw;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 8px;
+  margin-top: 4px;
   justify-content: space-between;
-  background-color: blue;
 
 }
 
