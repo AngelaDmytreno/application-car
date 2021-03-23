@@ -23,6 +23,7 @@ export class TableComponent  implements  OnInit, AfterViewInit{
   dataSource: any;
   displayedColumns: string[] = ['name', 'amountOfCars', 'headquarters', 'country', 'foundedIn', 'edit', 'delet'];
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public dealersService: DealersService) {
     
@@ -35,14 +36,19 @@ export class TableComponent  implements  OnInit, AfterViewInit{
         this.allDealersList = res;
         this.dataSource = new MatTableDataSource(this.allDealersList);
         this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
         
       },
       err => console.log(err)
     );
     
   }
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 
