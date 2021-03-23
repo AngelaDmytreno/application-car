@@ -11,9 +11,9 @@ export class MenuItemComponent implements OnInit {
 
   @Input('menu-item') menuItem: MenuItem;
 
-  visibility: any;
-  lineStyleVisible: any = { 'line-visible': true };
-  lineStyleUnVisible: any = { 'line-unvisible': true };
+  visibility: boolean = false;
+  // lineStyleVisible: any = { 'line-visible': true };
+  // lineStyleUnVisible: any = { 'line-unvisible': true };
 
   constructor(private router: Router) { }
 
@@ -21,9 +21,9 @@ export class MenuItemComponent implements OnInit {
     this.router.events.subscribe((e: RouterEvent) => {
       if (e.url) {
         if (e.url === this.menuItem.url || (e.url === '/' && this.menuItem.url === '/home')) {
-          this.visibility = this.lineStyleVisible;
+          this.visibility = true;
         } else if (e.url !== this.menuItem.url) {
-          this.visibility = this.lineStyleUnVisible;
+          this.visibility = false;
         }
       }
     });

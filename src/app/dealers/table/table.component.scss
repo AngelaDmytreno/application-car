@@ -1,25 +1,29 @@
-table {
-  width: 100%;
+
+.container__input{
+  width: 1150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-td, th {
-  width: 25%;
-}
 .mat-form-field{
   width: 200px;
   font-size: 14px;
 }
 .mat-table{
   width: 1150px;
+  height: 100%;
 }
 
-// th {
-//   border: 1px solid black;
-// }
+.example-button-row {
+  display: table-cell;
+  
+}
 
-// th {
-//   border: 1px solid black;
-// }
+.example-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+
 
 table {
   width: 100%;

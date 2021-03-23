@@ -1,7 +1,15 @@
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input matInput (keyup)="applyFilter($event)"  placeholder="Ex. ium" #input>
-</mat-form-field>
+<div class="container__input">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)"  placeholder="Ex. ium" #input>
+  </mat-form-field>
+  <section>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary">Add dealers</button>
+    </div>
+  </section>
+</div>
+
 <div class="mat-elevation-z8">
 
 

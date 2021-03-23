@@ -7,5 +7,5 @@
     </a>
   </div>
 
-  <div [ngClass]="visibility"></div>
+  <div [ngClass]="{'line-visible': visibility, 'line-unvisible': !visibility}"></div>
 </div>
