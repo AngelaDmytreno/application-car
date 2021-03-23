@@ -2,11 +2,13 @@ table {
   width: 100%;
 }
 
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
 td, th {
   width: 25%;
+}
+.mat-form-field{
+  width: 200px;
+  font-size: 14px;
+}
+.mat-table{
+  width: 1150px;
 }

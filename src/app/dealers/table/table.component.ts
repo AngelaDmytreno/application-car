@@ -3,6 +3,8 @@ import {AfterViewInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
+import { DealersService } from '../../shared/servises/dealers.service';
+import { Dealers } from '../../dealers'
 
 export interface UserData {
   id: string;
