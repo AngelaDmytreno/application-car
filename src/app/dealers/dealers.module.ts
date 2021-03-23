@@ -11,11 +11,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
+import { FormComponent } from '../shared-components/form/form.component';
+
+
+
 
 @NgModule({
   declarations: [
     DealersComponent,
-    TableComponent
+    TableComponent,
+ 
   ],
   exports: [DealersComponent],
   imports: [
@@ -29,6 +35,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatSortModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    SharedComponentsModule,
+    
+  
   ],
   providers: []
 })

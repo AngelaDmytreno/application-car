@@ -6,6 +6,11 @@ import {MatSort} from '@angular/material/sort';
 import { DealersService } from '../../shared/servises/dealers.service'
 import { Dealers } from 'src/app/dealers';
 import {MatTableModule} from '@angular/material/table'; 
+import { SharedComponentsModule } from '../../shared-components/shared-components.module';
+import { FormComponent } from '../../shared-components/form/form.component';
+
+
+
 
 
 
