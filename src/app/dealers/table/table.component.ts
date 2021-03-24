@@ -1,19 +1,15 @@
-import { Component, OnInit, AfterViewInit} from '@angular/core';
-import { ViewChild} from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
-import { DealersService } from '../../shared/servises/dealers.service'
+import { Component, OnInit } from '@angular/core';
+import { ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { DealersService } from '../../shared/servises/dealers.service';
 import { Dealers } from 'src/app/dealers';
-import {MatTableModule} from '@angular/material/table'; 
-import { SharedComponentsModule } from '../../shared-components/shared-components.module';
+// import { MatTableModule } from '@angular/material/table';
+// import { SharedComponentsModule } from '../../shared-components/shared-components.module';
 import { FormComponent } from '../../shared-components/form/form.component';
-
-
-
-
-
-
+import { MatDialog } from '@angular/material/dialog';
+ 
 
 @Component({
   selector: 'app-table',
@@ -22,45 +18,57 @@ import { FormComponent } from '../../shared-components/form/form.component';
 })
 
 
-export class TableComponent  implements  OnInit, AfterViewInit{
+export class TableComponent implements OnInit {
 
   allDealersList: Array<Dealers>;
   dataSource: any;
-  displayedColumns: string[] = ['name', 'amountOfCars', 'headquarters', 'country', 'foundedIn', 'edit', 'delet'];
+
+  displayedColumns: string[] = ['name', 'amountOfCars', 'headquarters', 'country', 'foundedIn', 'edit'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(public dealersService: DealersService) {
-    
-  }
+  constructor(public dealersService: DealersService, public popUp: MatDialog) {}
 
   ngOnInit(): void {
     // this.dealers.Service.insertDealers();
     this.dealersService.getAllDealers().subscribe(
-      res => { 
+      res => {
         this.allDealersList = res;
         this.dataSource = new MatTableDataSource(this.allDealersList);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-        
+
       },
       err => console.log(err)
     );
-    
+
   }
-  ngAfterViewInit(): void {
-    
-  }
+ 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  openRow(row): void {
+    console.log(row);
+  }
 
+  openPopUp(): void {
+    this.popUp.open(FormComponent);
+  }
+
+  // delete(elem): void {
+  //   console.log(elem);
+  //   let element = elem;
+  //   console.log(element.id);
+    
   
- 
-
-
+  //  }
 
 }
 
+// @Component({
+//   selector: 'app-form',
+//   templateUrl: './form.component.html'
+// })
+// export class FormComponent ()

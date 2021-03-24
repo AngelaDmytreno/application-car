@@ -13,6 +13,8 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { FormComponent } from '../shared-components/form/form.component';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 
@@ -35,9 +37,10 @@ import { FormComponent } from '../shared-components/form/form.component';
     MatSortModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    MatButtonModule,
     SharedComponentsModule,
+    MatDialogModule
     
-  
   ],
   providers: []
 })
