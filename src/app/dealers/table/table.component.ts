@@ -57,18 +57,32 @@ export class TableComponent implements OnInit {
     this.popUp.open(FormComponent);
   }
 
-  // delete(elem): void {
-  //   console.log(elem);
-  //   let element = elem;
-  //   console.log(element.id);
+ ;
     
   
-  //  }
+  
+  tableUpdate(): void{
+    this.dealersService.getAllDealers().subscribe(
+      res => {
+        this.allDealersList = res;
+        this.dataSource = new MatTableDataSource(this.allDealersList);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+
+      },
+      err => console.log(err)
+    );
+
+  }
+ 
+  // delete(dealers: Dealers): void{
+  
+  //   this.dealersService.deleteDealers(dealers).subscribe();
+  //   this.tableUpdate();
+  // }
+ 
+  
 
 }
 
-// @Component({
-//   selector: 'app-form',
-//   templateUrl: './form.component.html'
-// })
-// export class FormComponent ()
+

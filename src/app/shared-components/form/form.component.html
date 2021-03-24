@@ -1,46 +1,42 @@
-
 <div class="form__container">
+  <h1 mat-dialog-title>
+    <strong> ADD Dealers</strong>
+  </h1>
+  <div mat-dialog-content>
+    <form>
+      <mat-form-field >
+        <mat-label>Id *</mat-label>
+        <input type="text" matInput placeholder="Id" [(ngModel)]="model.id">
+        <mat-error >
+          Id is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Name *</mat-label>
+        <input type="text" matInput placeholder="Name" [(ngModel)]="model.name">
+        <mat-error *ngIf="controls.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
   
-</div><!-- <p>form works!</p>
-<h1 mat-dialog-title>Add Dealer</h1>
-<div mat-dialog-content>
-  <form class="add-dealer-form">
-    <mat-form-field class="full-width">
-      <mat-label>Id *</mat-label>
-      <input type="text" matInput [formControl]="idNameFormControl" />
-      <mat-error *ngIf="idNameFormControl.hasError('required')">
-        Id is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <mat-label>Name *</mat-label>
-      <input
-        type="text"
-        matInput
-        [formControl]="idNameFormControl"
-        placeholder="Ex. Ford"
-      />
-      <mat-error *ngIf="idNameFormControl.hasError('required')">
-        Name is <strong>required</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <mat-label>Headquarters</mat-label>
-      <input matInput placeholder="Ex. Dearborn, Michigan" />
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <mat-label>Country</mat-label>
-      <input matInput placeholder="Ex. United States" />
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <mat-label>Founded in</mat-label>
-      <input matInput placeholder="Ex. 1903" />
-    </mat-form-field>
-  </form>
+      <mat-form-field >
+        <mat-label>Headquarters</mat-label>
+        <input matInput placeholder="Headquarters" [(ngModel)]="model.headquarters">
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Country</mat-label>
+        <input matInput placeholder="Country" [(ngModel)]="model.country">
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Founded In</mat-label>
+        <input matInput placeholder="Founded In" [(ngModel)]="form.foundedIn">
+      </mat-form-field>
+      </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button class="cancel-btn" (click)="close()">Cancel</button>
+    <button mat-button disabled>Save</button>
+  </div>
+    
+  
 </div>
-<div mat-dialog-actions class="dialog-actions">
-  <button mat-button class="cancel-btn" (click)="close()">Cancel</button>
-  <button mat-button disabled>Save</button>
-</div>
-
- -->

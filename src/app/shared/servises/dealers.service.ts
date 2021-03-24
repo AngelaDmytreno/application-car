@@ -45,4 +45,17 @@ export class DealersService {
   getAllDealers(): any {
     return this.http.get<Array<Dealers>>(`${this.dealersUrl}.json`, httpOptions);
   }
+  //updatw
+  updateDealers (dealers: Dealers): Observable<any> {
+    return this.http.put(this.dealersUrl, dealers, httpOptions); 
+    
+  }
+  // delet
+  // deleteDealers(dealers: Dealers): Observable<any> {
+   
+  //   // const url = `${this.dealersUrl}/${id}`;
+
+  //   // return this.http.delete<Dealers>(url, dealers)
+  //   // return this.http.delete<Dealers>(`${this.dealersUrl}.json`, dealers);
+  // }
 }
