@@ -6,16 +6,18 @@
     <form #dealersForm="ngForm">
       <mat-form-field >
         <mat-label>Id </mat-label>
-        <input  [disabled]="action" name="id" type="text" matInput placeholder="Id" [(ngModel)]="model.id" #id=ngModel required>
+        <input  [disabled]="action" name="id" type="text" matInput placeholder="Id" (keyup)="checkId()" [(ngModel)]="dealer.id" #id=ngModel required  >
         <mat-error>
           <div  *ngIf="id.errors?.required">Id is required</div>
-          <!-- <div *ngIf="name.errors?">This id already exist, plese enter new id</div> -->
-
         </mat-error>
+        <mat-hint *ngIf = "showError">
+          <div>This id already exist, plese enter new id </div>
+        </mat-hint>
       </mat-form-field>
+       
       <mat-form-field >
         <mat-label>Name </mat-label>
-        <input [disabled]="action" name="name" type="text" matInput placeholder="Name" [(ngModel)]="model.name" #name=ngModel required minlength="3"
+        <input [disabled]="action" name="name" type="text" matInput placeholder="Name" [(ngModel)]="dealer.name" #name=ngModel required minlength="3"
         maxlength="8">
         <mat-error>
        
@@ -27,21 +29,21 @@
   
       <mat-form-field >
         <mat-label>Headquarters</mat-label>
-        <input matInput placeholder="Headquarters" >
+        <input name="headquarters" matInput placeholder="Headquarters" [(ngModel)]="dealer.headquarters">
       </mat-form-field>
       <mat-form-field >
         <mat-label>Country</mat-label>
-        <input name="country" matInput placeholder="Country" >
+        <input name="country" matInput placeholder="Country" [(ngModel)]="dealer.country">
       </mat-form-field>
       <mat-form-field >
         <mat-label>Founded In</mat-label>
-        <input  name="founIn" matInput placeholder="Founded In" >
+        <input  name="foundedIn" matInput placeholder="Founded In" [(ngModel)]="dealer.foundedIn" >
       </mat-form-field>
       </form>
   </div>
   <div mat-dialog-actions>
     <button mat-button class="cancel-btn" (click)="onClose()">Cancel</button>
-    <button mat-button [disabled]="!model.id || !model.name" (click)="onSave()" >Save</button>
+    <button mat-button [disabled]="!dealer.id || !dealer.name" (click)="onSave()">Save</button>
   </div>
     
   

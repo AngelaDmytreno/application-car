@@ -1,39 +1,17 @@
-.form__container{
-  width: 200px;
-  display: flex;
- flex-direction: column;
-}
+// .form__container{
+// //   width: 200px;
+// //   display: flex;
+// //  flex-direction: column;
+// }
 input{
   margin-bottom: 15px;
 }
 input.ng-invalid.ng-touched {
   border:  red ;
 }
+.mat-hint{
+color: red;
+}
 input.ng-valid{
   border:  green ;
 }
-// .add-dealer-form {
-//   min-width: 335px;
-//   display: flex;
-//   flex-direction: column;
-// }
-
-// .dialog-actions {
-//   display: flex;
-//   justify-content: flex-end;
-//   margin-top: 25px;
-//   button {
-//     padding: 10px;
-//     background-color: transparent;
-//     border: 1px solid transparent;
-//     border-radius: 5px;
-//     outline: none;
-//     cursor: pointer;
-//   }
-//   button + button {
-//       margin-left: 10px;
-//   }
-//   .cancel-btn:hover {
-//       background-color: rgb(233, 233, 233);
-//   }
-// }

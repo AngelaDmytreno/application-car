@@ -5,11 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { DealersService } from '../../shared/servises/dealers.service';
 import { Dealers } from 'src/app/dealers';
-// import { MatTableModule } from '@angular/material/table';
-// import { SharedComponentsModule } from '../../shared-components/shared-components.module';
 import { FormComponent } from '../../shared-components/form/form.component';
 import { MatDialog } from '@angular/material/dialog';
- 
 
 @Component({
   selector: 'app-table',
@@ -17,17 +14,15 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./table.component.scss']
 })
 
-
 export class TableComponent implements OnInit {
 
   allDealersList: Array<Dealers>;
   dataSource: any;
-
   displayedColumns: string[] = ['name', 'amountOfCars', 'headquarters', 'country', 'foundedIn', 'edit'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(public dealersService: DealersService, public popUp: MatDialog, ) {}
+  constructor(public dealersService: DealersService, public popUp: MatDialog,) { }
 
   ngOnInit(): void {
     // this.dealers.Service.insertDealers();
@@ -37,69 +32,49 @@ export class TableComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.allDealersList);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-
       },
       err => console.log(err)
     );
-
   }
- 
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openRow(row): void {
-    console.log(row);
-  }
-
-  // openPopUp(): void {
-  //   this.popUp.open(FormComponent);
+  // openRow(row): void {
+  //   console.log(row);
   // }
 
   openPopUp(obj = null) {
     const dialogRef = this.popUp.open(FormComponent, {
-      width: '300px',
+      width: '250px',
       data: obj,
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result.event === 'Add') {
-        this.addRowData(result.data);
-        console.log('add new dealer');
-      } else if (result.event === 'Update') {
-        this.updateRowData(result.data);
-        console.log('edit new dealer');
-      }
-    });
+    dialogRef.afterClosed().subscribe((result) => (result.event === 'Add') ? this.addDealer(result.data) : this.chengeDealer(result.data));
   }
-  
-  addRowData(elem): void {
+
+  addDealer(elem): void {
     ///add tring create
   }
-  updateRowData(elem): void{
+  chengeDealer(elem): void {
     //заносит в бд chenge
   }
-  
 
-
-  tableUpdate(): void{
+  tableUpdate(): void {
     this.dealersService.getAllDealers().subscribe(
       res => {
         this.allDealersList = res;
         this.dataSource = new MatTableDataSource(this.allDealersList);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
-
       },
       err => console.log(err)
     );
-
   }
- 
-  delete(dealers: Dealers): void{
-  ;
-  
-    this.dealersService.deleteDealer(dealers).subscribe();
+
+  delete(dealer: Dealers): void {
+    this.dealersService.deleteDealer(dealer).subscribe();
     this.tableUpdate();
   }
 

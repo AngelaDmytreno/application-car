@@ -16,9 +16,6 @@ import { FormComponent } from '../shared-components/form/form.component';
 import {MatDialogModule} from '@angular/material/dialog';
 
 
-
-
-
 @NgModule({
   declarations: [
     DealersComponent,

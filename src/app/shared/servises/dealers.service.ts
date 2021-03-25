@@ -51,14 +51,6 @@ export class DealersService {
     
   }
   // delet
-  // deleteDealers(dealers: Dealers): Observable<any> {
-   
-  //   const url = `${this.dealersUrl}/${id}`;
-
-  //   return this.http.delete<Dealers>(url, dealers)
-  //   // return this.http.delete<Dealers>(`${this.dealersUrl}.json`, dealers);
-  // }
-
   deleteDealer(dealer: Dealers | string): Observable<Dealers> {
     const id: string = typeof dealer === 'string' ? dealer : dealer.id;
     const url: string = `${this.dealersUrl}/${id}`;
