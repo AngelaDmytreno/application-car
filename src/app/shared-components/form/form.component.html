@@ -6,14 +6,14 @@
     <form>
       <mat-form-field >
         <mat-label>Id *</mat-label>
-        <input type="text" matInput placeholder="Id" [(ngModel)]="model.id">
+        <input type="text" matInput placeholder="Id">
         <mat-error >
           Id is <strong>required</strong>
         </mat-error>
       </mat-form-field>
       <mat-form-field >
         <mat-label>Name *</mat-label>
-        <input type="text" matInput placeholder="Name" [(ngModel)]="model.name">
+        <input type="text" matInput placeholder="Name" >
         <mat-error *ngIf="controls.hasError('required')">
           Name is <strong>required</strong>
         </mat-error>
@@ -21,15 +21,15 @@
   
       <mat-form-field >
         <mat-label>Headquarters</mat-label>
-        <input matInput placeholder="Headquarters" [(ngModel)]="model.headquarters">
+        <input matInput placeholder="Headquarters" >
       </mat-form-field>
       <mat-form-field >
         <mat-label>Country</mat-label>
-        <input matInput placeholder="Country" [(ngModel)]="model.country">
+        <input matInput placeholder="Country" >
       </mat-form-field>
       <mat-form-field >
         <mat-label>Founded In</mat-label>
-        <input matInput placeholder="Founded In" [(ngModel)]="form.foundedIn">
+        <input matInput placeholder="Founded In" >
       </mat-form-field>
       </form>
   </div>

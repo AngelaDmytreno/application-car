@@ -76,12 +76,11 @@ export class TableComponent implements OnInit {
   }
  
   // delete(dealers: Dealers): void{
+  //;
   
   //   this.dealersService.deleteDealers(dealers).subscribe();
   //   this.tableUpdate();
   // }
- 
-  
 
 }
 
