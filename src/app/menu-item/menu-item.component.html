@@ -1,11 +1,11 @@
 <div class="menu__item">
   <div class="menu__item-icon">
-    <a class="menu__link" (click)="onNavigate()">
+    <a class="menu__link" routerLink="{{menuItem.url}}" routerLinkActive="active-link">
       <mat-icon aria-label="Trololo" aria-hidden="false">{{menuItem.icon}}</mat-icon>
-      <!-- <mat-icon aria-label="{{menuItem.ariaLabel}}" aria-hidden="false">{{menuItem.icon}}</mat-icon> -->
+      <!-- <mat-icon [atr.aria-label]="menuItem.ariaLabel" aria-hidden="false">{{menuItem.icon}}</mat-icon> -->
       <p>{{menuItem.title}}</p>
     </a>
   </div>
 
-  <div [ngClass]="visibility"></div>
+  <div [ngClass]="{'line-visible': visibility, 'line-unvisible': !visibility}"></div>
 </div>

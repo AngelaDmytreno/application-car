@@ -1,35 +1,32 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Car } from '../entities/car.interface';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarsService {
 
-  carsUrl: string = '/cars';
-  allCars: Array<Car>;
-  carsCategories: Set<string> = new Set<string>();
-
+  private carsUrl: string = '/cars';
+ 
   constructor(private http: HttpClient) { }
+  
 
-  getAllCars(): void {
-    this.http.get<Array<Car>>(this.carsUrl).subscribe(
-      res => { 
-        this.allCars = res;
-        this.takeAllCategories();
-      },
-      err => console.log(err)
-    );
+  getAllCars(): Observable<Array<Car>> {
+    return this.http.get<Array<Car>>(this.carsUrl);
   }
-
-  takeAllCategories(): void {
-    this.allCars.forEach((car: Car )=> {
-      let category: string = 'other';
-      if (car.category != null) {
-        category = car.category;
-      }
-      this.carsCategories.add(category);
-    });
+  updateCars (car: Car): Observable<any> {
+    return this.http.put(this.carsUrl, car, httpOptions); 
+    
   }
+  
 }
+
+

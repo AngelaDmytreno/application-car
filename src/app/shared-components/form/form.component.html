@@ -1,0 +1,42 @@
+<div class="form__container">
+  <h1 mat-dialog-title>
+    <strong> ADD Dealers</strong>
+  </h1>
+  <div mat-dialog-content>
+    <form>
+      <mat-form-field >
+        <mat-label>Id *</mat-label>
+        <input type="text" matInput placeholder="Id">
+        <mat-error >
+          Id is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Name *</mat-label>
+        <input type="text" matInput placeholder="Name" >
+        <mat-error *ngIf="controls.hasError('required')">
+          Name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field >
+        <mat-label>Headquarters</mat-label>
+        <input matInput placeholder="Headquarters" >
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Country</mat-label>
+        <input matInput placeholder="Country" >
+      </mat-form-field>
+      <mat-form-field >
+        <mat-label>Founded In</mat-label>
+        <input matInput placeholder="Founded In" >
+      </mat-form-field>
+      </form>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button class="cancel-btn" (click)="close()">Cancel</button>
+    <button mat-button disabled>Save</button>
+  </div>
+    
+  
+</div>

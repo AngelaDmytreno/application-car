@@ -1,0 +1,19 @@
+<div class="all-car-container">
+  <div class="all-car__items">
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input (keyup)="onKey($event)" matInput placeholder="Filter" value="">
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="all-car-list__container">
+    <div *ngFor="let carItem of selectedCars">
+      <app-sm-card-car [car-item]="carItem" [card-type]="'lg'"></app-sm-card-car>
+    </div>
+  </div> 
+  <section>
+    <div *ngIf="selectedCars.length>=8" class="example-button-row">
+      <button  mat-raised-button color="accent" (click)="loadMore()">Load More</button>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,46 @@
+.car-cotainer{
+  width: 100vw;
+  height: 100vh;
+}
+
+.mat-tab-group{
+  width: 1250px;
+  height: 100vh !important;
+}
+.mat-selection-list{
+  width: 300px; 
+  height: 100vh;
+}
+.category__conatainer{
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 15px;
+}
+.container__info{
+  display: flex;
+  width: 60vw;
+  position: absolute;
+  top: 0vw;
+  right: 5vw;
+  display: flex;
+  flex-direction: row; 
+}
+.car__img{
+  width: 500px;
+  height: 250px;
+  margin-top: 10px;
+  margin-right: 20px;
+}
+img{
+  width: 500px;
+  height: 250px;
+}
+.detail__info{
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  width: 150px;
+}
