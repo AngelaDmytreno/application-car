@@ -27,7 +27,7 @@ export class TableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(public dealersService: DealersService, public popUp: MatDialog) {}
+  constructor(public dealersService: DealersService, public popUp: MatDialog, ) {}
 
   ngOnInit(): void {
     // this.dealers.Service.insertDealers();
@@ -53,14 +53,35 @@ export class TableComponent implements OnInit {
     console.log(row);
   }
 
-  openPopUp(): void {
-    this.popUp.open(FormComponent);
-  }
+  // openPopUp(): void {
+  //   this.popUp.open(FormComponent);
+  // }
 
- ;
-    
+  openPopUp(obj = null) {
+    const dialogRef = this.popUp.open(FormComponent, {
+      width: '300px',
+      data: obj,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.event === 'Add') {
+        this.addRowData(result.data);
+        console.log('add new dealer');
+      } else if (result.event === 'Update') {
+        this.updateRowData(result.data);
+        console.log('edit new dealer');
+      }
+    });
+  }
   
+  addRowData(elem): void {
+    ///add tring create
+  }
+  updateRowData(elem): void{
+    //заносит в бд chenge
+  }
   
+
+
   tableUpdate(): void{
     this.dealersService.getAllDealers().subscribe(
       res => {
@@ -75,12 +96,12 @@ export class TableComponent implements OnInit {
 
   }
  
-  // delete(dealers: Dealers): void{
-  //;
+  delete(dealers: Dealers): void{
+  ;
   
-  //   this.dealersService.deleteDealers(dealers).subscribe();
-  //   this.tableUpdate();
-  // }
+    this.dealersService.deleteDealer(dealers).subscribe();
+    this.tableUpdate();
+  }
 
 }
 

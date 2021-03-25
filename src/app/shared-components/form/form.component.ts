@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
-import { Dealers }  from '../../dealers';
+import { Dealers, initDealer } from '../../dealers';
 
 
 @Component({
@@ -13,18 +13,28 @@ import { Dealers }  from '../../dealers';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
- controls = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  
+  model: Dealers;
+  action:boolean ;
+  localData: any;
+  
+constructor(private popUp: MatDialogRef < FormComponent >, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-model: Dealers = new Dealers('cvb','cvb', null, 'xcv', 2, null, 'xcvb');
+ngOnInit(): void {
+  this.model = initDealer();
+  this.action = !!this.data;
+  this.localData = this.data ? { ...this.data } : initDealer();
+};
 
-  constructor(private popUp: MatDialogRef<FormComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+onClose(): void {
+  this.popUp.close();
+};
 
-  ngOnInit(): void {
-    
-  }
 
-  close(): void {
-    this.popUp.close();
-  }
+
+onSave(): void {
+  console.log('save');
+  this.popUp.close({ event: this.action, data: this.localData });
+};
   
 }

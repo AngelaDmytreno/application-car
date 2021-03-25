@@ -14,7 +14,9 @@
   width: 1150px;
   height: 100%;
 }
-
+td, th{
+width: 15%;
+}
 .example-button-row {
   display: table-cell;
   

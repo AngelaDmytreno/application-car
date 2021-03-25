@@ -39,7 +39,7 @@
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
       <td mat-cell *matCellDef="let element">
-        <button (click)="openRow(element)" mat-icon-button>
+        <button  mat-icon-button (click)="openPopUp(element)">
           <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
         </button>
 

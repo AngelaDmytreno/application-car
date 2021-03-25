@@ -19,6 +19,8 @@ import { HomeModule } from './home/home.module';
 import { DealersModule } from './dealers/dealers.module';
 import { CarsModule } from './cars/cars.module';
 import {MatDialogModule} from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -44,6 +46,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     HomeModule,
     DealersModule,
     CarsModule,
+    FormsModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { apiBase: '/', delay: 200 })
   ],
   providers: [],

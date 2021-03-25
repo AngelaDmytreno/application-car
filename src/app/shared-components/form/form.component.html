@@ -1,22 +1,28 @@
 <div class="form__container">
   <h1 mat-dialog-title>
-    <strong> ADD Dealers</strong>
+    <strong> {{action ? 'Edit' : 'Add'}} Dealers</strong>
   </h1>
   <div mat-dialog-content>
-    <form>
+    <form #dealersForm="ngForm">
       <mat-form-field >
-        <mat-label>Id *</mat-label>
-        <input type="text" matInput placeholder="Id">
-        <mat-error >
-          Id is <strong>required</strong>
+        <mat-label>Id </mat-label>
+        <input  [disabled]="action" name="id" type="text" matInput placeholder="Id" [(ngModel)]="model.id" #id=ngModel required>
+        <mat-error>
+          <div  *ngIf="id.errors?.required">Id is required</div>
+          <!-- <div *ngIf="name.errors?">This id already exist, plese enter new id</div> -->
+
         </mat-error>
       </mat-form-field>
       <mat-form-field >
-        <mat-label>Name *</mat-label>
-        <input type="text" matInput placeholder="Name" >
-        <mat-error *ngIf="controls.hasError('required')">
-          Name is <strong>required</strong>
+        <mat-label>Name </mat-label>
+        <input [disabled]="action" name="name" type="text" matInput placeholder="Name" [(ngModel)]="model.name" #name=ngModel required minlength="3"
+        maxlength="8">
+        <mat-error>
+       
+          <div  *ngIf="name.errors?.required">Name is required</div>
+          <div *ngIf="name.errors?.minlength">Name must be at least 3 characters long</div>
         </mat-error>
+
       </mat-form-field>
   
       <mat-form-field >
@@ -25,18 +31,19 @@
       </mat-form-field>
       <mat-form-field >
         <mat-label>Country</mat-label>
-        <input matInput placeholder="Country" >
+        <input name="country" matInput placeholder="Country" >
       </mat-form-field>
       <mat-form-field >
         <mat-label>Founded In</mat-label>
-        <input matInput placeholder="Founded In" >
+        <input  name="founIn" matInput placeholder="Founded In" >
       </mat-form-field>
       </form>
   </div>
   <div mat-dialog-actions>
-    <button mat-button class="cancel-btn" (click)="close()">Cancel</button>
-    <button mat-button disabled>Save</button>
+    <button mat-button class="cancel-btn" (click)="onClose()">Cancel</button>
+    <button mat-button [disabled]="!model.id || !model.name" (click)="onSave()" >Save</button>
   </div>
     
   
 </div>
+
