@@ -18,6 +18,8 @@ import { MainComponent } from './main/main.component';
 import { HomeModule } from './home/home.module';
 import { DealersModule } from './dealers/dealers.module';
 import { CarsModule } from './cars/cars.module';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 

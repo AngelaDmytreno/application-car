@@ -12,8 +12,8 @@
     </div>
   </div> 
   <section>
-    <div class="example-button-row">
-      <button mat-raised-button color="accent" (click)="loadMore()">Load More</button>
+    <div *ngIf="selectedCars.length>=8" class="example-button-row">
+      <button  mat-raised-button color="accent" (click)="loadMore()">Load More</button>
     </div>
   </section>
 </div>
