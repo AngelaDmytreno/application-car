@@ -17,28 +17,31 @@ export class DealersService {
   private dealersUrl: string = '/dealers';
 
 
+
   
   constructor(private http: HttpClient ){ 
    
   }
 
   //post
-  insertDealers(): void {
-    const dealers: Dealers = {
-      id: 'ad',
-      name: 'name',
-      headquarters: 'headquarters',
-      // amountOfCars: 1,
-      country: 'country',
-      foundedIn: 1,
-      // newRecord: true,
+  insertDealers(dealer: Dealers): Observable<Dealers> {
+    // const dealers: Dealers = {
+    //   id: 'ad',
+    //   name: 'name',
+    //   headquarters: 'headquarters',
+    //   amountOfCars: 1,
+    //   country: 'country',
+    //   foundedIn: 1,
+    //   newRecord: true,
      
-    };
-    this.http.post<Dealers>(`${this.dealersUrl}.json`,dealers, httpOptions ).subscribe(
-      res => {
-        console.log(res);
-      }
-    );
+    // };
+    // this.http.post<Dealers>(`${this.dealersUrl}.json`,dealers, httpOptions ).subscribe(
+    //   res => {
+    //     console.log(res);
+    //   }
+    // );
+    return this.http.post<Dealers>(`${this.dealersUrl}.json`, dealer, httpOptions);
+
   }
 
   //get

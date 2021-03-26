@@ -14,8 +14,6 @@ export class CarILikeComponent implements OnInit {
 
   constructor(public carsService: CarsService) { }
 
-
-
   ngOnInit(): void {
     this.carsService.getAllCars().subscribe(
       res => {

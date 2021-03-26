@@ -21,6 +21,7 @@ export class TableComponent implements OnInit {
   displayedColumns: string[] = ['name', 'amountOfCars', 'headquarters', 'country', 'foundedIn', 'edit'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  passData: Dealers;
 
   constructor(public dealersService: DealersService, public popUp: MatDialog,) { }
 
@@ -51,15 +52,26 @@ export class TableComponent implements OnInit {
       width: '250px',
       data: obj,
     });
-    dialogRef.afterClosed().subscribe((result) => (result.event === 'Add') ? this.addDealer(result.data) : this.chengeDealer(result.data));
+    dialogRef.afterClosed().subscribe((result) => {
+      // (result.event === 'Add') ? this.addDealer(result.data) : this.chengeDealer(result.data);
+      if(result.data.newRecord === true) {
+        this.passData = result.data;
+        this.dealersService.insertDealers(this.passData).subscribe();
+      }else if(result.data.newRecord === false){
+       this.dealersService.updateDealers(this.passData).subscribe();
+      }
+      this.tableUpdate();
+
+    });
   }
 
-  addDealer(elem): void {
-    ///add tring create
-  }
-  chengeDealer(elem): void {
-    //заносит в бд chenge
-  }
+  // addDealer(elem): void {
+  //   ///add tring create
+  // }
+  // chengeDealer(elem): void {
+  //   //заносит в бд chenge
+
+  // }
 
   tableUpdate(): void {
     this.dealersService.getAllDealers().subscribe(

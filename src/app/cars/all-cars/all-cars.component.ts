@@ -11,11 +11,19 @@ import { $ } from 'protractor';
   styleUrls: ['./all-cars.component.scss']
 })
 export class AllCarsComponent implements OnInit {
+  
+  value = 'Clear me';
+
   carListItems: Array<Car> = new Array<Car>();
   selectedCars: Array<Car> = new Array<Car>();
+//   cars:any  = new Array<any>();
+// trimmedCars:any  = new Array<any>();
 
   loadCount: number = 8;
-  searsCars: any;
+
+  searchCars: any;
+  startIndex:any = 0; 
+  endIndex: any = 8;
 
   constructor(public carsService: CarsService) { }
 
@@ -37,10 +45,10 @@ export class AllCarsComponent implements OnInit {
 
   filterCars(param): void {
     console.log(param);
-    this.searsCars = this.carListItems.filter(el => this.isModel(el.model, param) || this.isBrand(el.brand, param) || param === '');
+    this.searchCars = this.carListItems.filter(el => this.isModel(el.model, param) || this.isBrand(el.brand, param) || param === '');
 
-    console.log(this.searsCars);
-    this.selectedCars = this.searsCars;
+    console.log(this.searchCars);
+    this.selectedCars = this.searchCars;
 
   }
 
@@ -63,9 +71,15 @@ export class AllCarsComponent implements OnInit {
   }
 
   loadMore(): void {
-    this.loadCount = this.loadCount + 8;
-    this.selectedCars = this.carListItems.slice(0, this.loadCount);
+  this.startIndex = this.endIndex;
+  this.endIndex += 8;
+  this.selectedCars.push(...this.carListItems.slice(this.startIndex, this.endIndex));
+
+    // this.loadCount = this.loadCount + 8;
+    // this.selectedCars = this.carListItems.slice(0, this.loadCount);
   }
 
- 
+  // this.startIndex = this.endIndex;
+  // this.endIndex += 8;
+  // this.trimmedCars.push(...this.cars.slice(this.startIndex, this.endIndex));
 }
