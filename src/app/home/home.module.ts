@@ -7,6 +7,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
 import { MatButtonModule } from '@angular/material/button';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
+import {MatListModule} from '@angular/material/list'; 
 
 @NgModule({
   declarations: [    
@@ -20,7 +21,9 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
     CommonModule, 
     HomeRoutingModule,
     MatButtonModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    MatListModule,
+    
   ],
   providers: []
 })

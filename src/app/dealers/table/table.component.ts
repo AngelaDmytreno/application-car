@@ -7,6 +7,7 @@ import { DealersService } from '../../shared/servises/dealers.service';
 import { Dealers } from 'src/app/dealers';
 import { FormComponent } from '../../shared-components/form/form.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from "../../shared-components/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: 'app-table',
@@ -23,7 +24,7 @@ export class TableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   passData: Dealers;
 
-  constructor(public dealersService: DealersService, public popUp: MatDialog,) { }
+  constructor(public dealersService: DealersService, public popUp: MatDialog, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     // this.dealers.Service.insertDealers();
@@ -65,13 +66,6 @@ export class TableComponent implements OnInit {
     });
   }
 
-  // addDealer(elem): void {
-  //   ///add tring create
-  // }
-  // chengeDealer(elem): void {
-  //   //заносит в бд chenge
-
-  // }
 
   tableUpdate(): void {
     this.dealersService.getAllDealers().subscribe(
@@ -90,6 +84,20 @@ export class TableComponent implements OnInit {
     this.tableUpdate();
   }
 
+  openDialog(elemnt: Dealers): void {
+    let dealer = elemnt;
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+      data: "Do you confirm the deletion of this data?"
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        console.log('Yes clicked');
+      
+      }
+    });
+
+}
 }
 
 

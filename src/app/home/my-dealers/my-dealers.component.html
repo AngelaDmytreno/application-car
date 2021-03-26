@@ -3,17 +3,22 @@
     <h4>My Dealers</h4>
   </div>
  
- <!-- <mat-selection-list #my-dealers [multiple]="false">
-    <mat-list-option >
-      <!-- <span class="model"><b>{{dealer.model}}</b></span>
-      <span class="brand">{{dealer.brand}}</span> -->
-    <!-- </mat-list-option>
-  </mat-selection-list> --> -->
+<mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let dealer of newDealers">
+      <span class="model"><b>{{dealer.id}}</b></span>
+      <span class="brand">{{dealer.name}}</span> 
+      <div *ngIf="dealer.length === 0"  class="dealers__text"><p>You havent added any dealrs yet</p></div>
+
+    </mat-list-option>
+  </mat-selection-list>  
+  
+  <!-- <ul *ngFor ="let dealer of newDealers">
+    <li >{{dealer.name}}</li>
+  </ul> -->
 
   <!-- <div *ngFor="let newDealer of newDealersList">
 
   </div> -->
-  <div  class="dealers__text"><p>You havent added any dealrs yet</p></div>
-</div>
+  
 
 
