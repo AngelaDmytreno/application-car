@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CarsService } from '../../shared/servises/cars.service';
 import { Car } from '../../shared/entities/car.interface';
 import { Observable, of } from 'rxjs';
-import { $ } from 'protractor';
+
 
 
 @Component({
@@ -12,15 +12,10 @@ import { $ } from 'protractor';
 })
 export class AllCarsComponent implements OnInit {
   
-  value = 'Clear me';
-
+  value = '';
   carListItems: Array<Car> = new Array<Car>();
   selectedCars: Array<Car> = new Array<Car>();
-//   cars:any  = new Array<any>();
-// trimmedCars:any  = new Array<any>();
-
   loadCount: number = 8;
-
   searchCars: any;
   startIndex:any = 0; 
   endIndex: any = 8;
@@ -75,11 +70,11 @@ export class AllCarsComponent implements OnInit {
   this.endIndex += 8;
   this.selectedCars.push(...this.carListItems.slice(this.startIndex, this.endIndex));
 
-    // this.loadCount = this.loadCount + 8;
-    // this.selectedCars = this.carListItems.slice(0, this.loadCount);
+  }
+  
+  nullifyInput(): void {
+    
   }
 
-  // this.startIndex = this.endIndex;
-  // this.endIndex += 8;
-  // this.trimmedCars.push(...this.cars.slice(this.startIndex, this.endIndex));
+ 
 }

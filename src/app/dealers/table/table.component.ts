@@ -23,6 +23,7 @@ export class TableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   passData: Dealers;
+  value = '';
 
   constructor(public dealersService: DealersService, public popUp: MatDialog, public dialog: MatDialog) { }
 

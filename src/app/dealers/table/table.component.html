@@ -1,8 +1,17 @@
 <div class="container__input">
-  <mat-form-field>
+  <!-- <mat-form-field>
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-  </mat-form-field>
+  </mat-form-field> -->
+
+  <mat-form-field class="example-form-field">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filter" #input [(ngModel)]="value" name="filter">
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="" (click)="value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field> 
+
   <section>
     <div class="example-button-row">
       <button mat-raised-button color="primary" (click)="openPopUp()">Add dealers</button>

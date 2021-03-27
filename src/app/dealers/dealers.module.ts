@@ -14,6 +14,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { FormComponent } from '../shared-components/form/form.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatIconModule,
     MatButtonModule,
     SharedComponentsModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule
     
   ],
   providers: []
