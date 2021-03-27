@@ -38,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     SharedComponentsModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    
     
   ],
   providers: []

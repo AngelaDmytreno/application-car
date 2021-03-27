@@ -39,7 +39,6 @@ ngOnInit(): void {
 
 onClose(): void {
   this.popUp.close({ event: this.action, data: this.localData });
-  console.log('test');
 };
 
 checkId():void {

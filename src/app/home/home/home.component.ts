@@ -13,22 +13,13 @@ import { MyDealersComponent } from '../my-dealers/my-dealers.component';
 
 
 export class HomeComponent implements OnInit {
-  
 
-  // @Output() newDealer = new EventEmitter<Dealers>();
-  // @ContentChild(MyDealersComponent)
-  // private myDealer: MyDealersComponent;
-
-  passData: Dealers;
+  createDealer: Dealers;
   newDealersList: Array<Dealers> = new Array<Dealers>();
   
+  constructor(public dealersService: DealersService, public popUp: MatDialog) {}
 
-  constructor(public dealersService: DealersService, public popUp: MatDialog) { 
-  }
-
-  ngOnInit(): void {
-    // console.log(newDealersList);
-  }
+  ngOnInit(): void {}
 
   openPopUp(): void {
     const dialogRef = this.popUp.open(FormComponent, {
@@ -36,12 +27,9 @@ export class HomeComponent implements OnInit {
     });
     
     dialogRef.afterClosed().subscribe((result) => {
-      this.passData = result.data;
-      this.dealersService.insertDealers(this.passData).subscribe();
-      this.newDealersList.push(this.passData);
-      console.log('pss', this.passData);
-      // this.newDealer.emit(this.passData);
-      // this.myDealer.addNewDealer(this.passData);
+      this.createDealer = result.data;
+      this.dealersService.insertDealers(this.createDealer).subscribe();
+      this.newDealersList.push(this.createDealer);
     });
   }
 }

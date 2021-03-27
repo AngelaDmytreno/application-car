@@ -13,11 +13,9 @@ section {
   display: table-cell;
   width: 360px;
 }
-
 .example-button-row .mat-button-base {
   margin: 8px 20px 8px 0;
 }
-//////@at-root
 .like__conatiner-column{
   width: 22vw;
 }
@@ -26,7 +24,6 @@ section {
   border-bottom: 3px solid gray;
   padding-bottom: 10px;
 }
-
 .card__container{
   max-width: 22vw;
   display: flex;
@@ -38,10 +35,8 @@ section {
 .dealers__conatiner-column{
   width: 20vw;
   margin: 0 auto;
-  
   }
   .dealers__item{
-    // width: 250px;
     height: 25px;
     border-bottom: 3px solid gray;
     padding-bottom: 10px;

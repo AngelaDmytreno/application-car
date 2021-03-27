@@ -22,8 +22,8 @@ export class TableComponent implements OnInit {
   displayedColumns: string[] = ['name', 'amountOfCars', 'headquarters', 'country', 'foundedIn', 'edit'];
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  passData: Dealers;
-  value = '';
+  createDealer: Dealers;
+  valueFilter: string = '';
 
   constructor(public dealersService: DealersService, public popUp: MatDialog, public dialog: MatDialog) { }
 
@@ -57,10 +57,10 @@ export class TableComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       // (result.event === 'Add') ? this.addDealer(result.data) : this.chengeDealer(result.data);
       if(result.data.newRecord === true) {
-        this.passData = result.data;
-        this.dealersService.insertDealers(this.passData).subscribe();
+        this.createDealer = result.data;
+        this.dealersService.insertDealers(this.createDealer).subscribe();
       }else if(result.data.newRecord === false){
-       this.dealersService.updateDealers(this.passData).subscribe();
+       this.dealersService.updateDealers(this.createDealer).subscribe();
       }
       this.tableUpdate();
 
@@ -81,8 +81,19 @@ export class TableComponent implements OnInit {
   }
 
   delete(dealer: Dealers): void {
-    this.dealersService.deleteDealer(dealer).subscribe();
-    this.tableUpdate();
+  const confirmDialog= this.dialog.open(ConfirmationDialogComponent, {
+    data: {
+      title: 'Delete?',
+      message: 'Are you shure you want to delite this item: ' +  dealer.name,
+    }
+  });
+  confirmDialog.afterClosed().subscribe((result) => {
+    if(result === true) {
+      this.dealersService.deleteDealer(dealer).subscribe();
+      this.tableUpdate();
+    }
+  })
+    
   }
 
   openDialog(elemnt: Dealers): void {

@@ -3,8 +3,8 @@
     <form class="example-form">
       <mat-form-field class="example-form-field">
         <mat-label></mat-label>
-        <input (keyup)="onKey($event)" matInput placeholder="Filter" type="text" [(ngModel)]="value" name="filter">
-        <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="" (click)="value=''">
+        <input (keyup)="onKey($event)" matInput placeholder="Filter" type="text" [(ngModel)]="valueFilter" name="filter">
+        <button mat-button *ngIf="valueFilter" matSuffix mat-icon-button aria-label="" (click)="valueFilter=''">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field> 
@@ -19,6 +19,6 @@
     <div *ngIf="selectedCars.length>=8" class="example-button-row">
       <button  mat-raised-button color="accent" (click)="loadMore()">Load More</button>
     </div>
-    <div *ngIf="selectedCars.length===0">смичс тмьибть</div>
+    <div *ngIf="selectedCars.length===0"> Car not found.</div>
   </section>
 </div>

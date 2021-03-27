@@ -22,7 +22,7 @@ import { ConfirmationDialogComponent } from "../shared-components/confirmation-d
 
 
 @NgModule({
-  declarations: [SmCardCarComponent, FormComponent],
+  declarations: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent],
   
   exports: [SmCardCarComponent, FormComponent],
   imports: [
@@ -35,7 +35,7 @@ import { ConfirmationDialogComponent } from "../shared-components/confirmation-d
     MatSelectModule,
     MatInputModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
 
   ],
   entryComponents: [

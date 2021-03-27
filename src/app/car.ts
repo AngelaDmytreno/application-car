@@ -1,15 +1,19 @@
-export class Car {
+import { stringify } from "@angular/compiler/src/util";
 
-  constructor(
-    public id: string,
-    public brand: string,
-    public model: string,
-    public year: number,
-    public color: string,
-    public classs: string,
-    public category: string,
-    public image: string,
-    public liked: boolean,
-    public newItem: boolean
-  ) { }
+export interface Car {
+
+    id: string,
+    brand: string,
+    model: string,
+    year: number,
+    color: string,
+    class: string,
+    category: string,
+    image: string,
+    liked: boolean,
+    newItem: boolean
+ 
 }
+export const initCar = (): Car => ( {
+  id:'', brand: '', model: '', year: 0, color: '', class: '',  category: '', image: '', liked: false,  newItem: false
+  });
