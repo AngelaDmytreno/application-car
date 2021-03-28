@@ -11,6 +11,7 @@ export class CarILikeComponent implements OnInit {
 
   carItems: Array<Car> = new Array<Car>();
   allCarListItems: Array<Car> = new Array<Car>();
+  isDataLoading: boolean = true;
 
   constructor(public carsService: CarsService) { }
 
@@ -20,7 +21,7 @@ export class CarILikeComponent implements OnInit {
         this.allCarListItems = res;
         this.getFavoriteCars();
         this.carItems = this.getFavoriteCars();
-        console.log(this.carItems);
+        this.isDataLoading = false;
       },
       err => console.log(err)
     );
