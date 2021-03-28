@@ -6,7 +6,7 @@
     <form #dealersForm="ngForm" class="ng-pristine ng-untouched ng-valid">
       <mat-form-field >
         <mat-label>Id </mat-label>
-        <input  [disabled]="action" [ngModelOptions]="{ standalone: true }" name="id" type="text" matInput placeholder="Id" (keyup)="checkId()" [(ngModel)]="dealer.id" #id=ngModel required  >
+        <input  [disabled]="action"  name="id" type="text" matInput placeholder="Id" (keyup)="checkId()" [(ngModel)]="dealer.id" #id=ngModel required  >
         <mat-error>
           <div  *ngIf="id.errors?.required">Id is required</div>
         </mat-error>
@@ -16,8 +16,8 @@
       </mat-form-field>
       <mat-form-field >
         <mat-label>Name </mat-label>
-        <input  [ngModelOptions]="{ standalone: true }" [disabled]="action" name="name" type="text" matInput placeholder="Name" [(ngModel)]="dealer.name" #name=ngModel required minlength="3"
-        maxlength="8">
+        <input    name="name" type="text" matInput placeholder="Name" [(ngModel)]="dealer.name" #name=ngModel required minlength="3"
+        [(ngModel)]="dealer.name">
         <mat-error>
           <div  *ngIf="name.errors?.required">Name is required</div>
           <div *ngIf="name.errors?.minlength">Name must be at least 3 characters long</div>
