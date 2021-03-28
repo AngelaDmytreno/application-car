@@ -15,7 +15,9 @@ export class MyDealersComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   addNewDealer(dealer: Dealers): void {
     this.newDealersList.push(dealer);

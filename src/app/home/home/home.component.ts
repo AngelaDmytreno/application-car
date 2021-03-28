@@ -19,7 +19,11 @@ export class HomeComponent implements OnInit {
   
   constructor(public dealersService: DealersService, public popUp: MatDialog) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.dealersService.getAllDealers().subscribe((dealers)=>{
+      this.newDealersList = dealers.filter((dealer) => dealer.registration);
+    })
+  }
 
   openPopUp(): void {
     const dialogRef = this.popUp.open(FormComponent, {
@@ -30,6 +34,7 @@ export class HomeComponent implements OnInit {
       this.createDealer = result.data;
       this.dealersService.insertDealers(this.createDealer).subscribe();
       this.newDealersList.push(this.createDealer);
+      this.dealersService.postDealers(this.createDealer);
     });
   }
 }

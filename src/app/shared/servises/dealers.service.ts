@@ -23,6 +23,9 @@ export class DealersService {
   getAllDealers(): any {
     return this.http.get<Array<Dealers>>(`${this.dealersUrl}.json`, httpOptions);
   }
+  postDealers(dealer: Dealers):any {
+    return this.http.post(`${this.dealersUrl}.json`, dealer, httpOptions);
+  }
   updateDealers (dealers: Dealers): Observable<any> {
     return this.http.put(this.dealersUrl, dealers, httpOptions);  
   }

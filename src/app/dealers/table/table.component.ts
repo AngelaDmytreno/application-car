@@ -37,6 +37,7 @@ export class TableComponent implements OnInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
         this.isDataLoading = false;
+        this.tableUpdate();
       },
       err => console.log(err)
     );
@@ -47,9 +48,7 @@ export class TableComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  // openRow(row): void {
-  //   console.log(row);
-  // }
+  
 
   openPopUp(obj = null) {
     const dialogRef = this.popUp.open(FormComponent, {

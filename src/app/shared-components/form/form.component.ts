@@ -51,11 +51,13 @@ onSeve(): void {
   const updatedDealer = {
     ...this.dealer,
     id: this.dealer.id.toUpperCase(),
-    newRecord: true  
+    newRecord: true,
+    registration: this.action ? this.dealer.registration : new Date(),
   };
   this.popUp.close({
     event: 'close',
     data: updatedDealer,
+    
   });
 }
 }
