@@ -39,6 +39,7 @@ import { FormsModule } from '@angular/forms';
     SharedComponentsModule,
     MatDialogModule,
     FormsModule,
+    MatProgressSpinnerModule,
     
     
   ],

@@ -1,5 +1,6 @@
 <div class="container__input">
-  <mat-form-field class="example-form-field">
+  <mat-spinner *ngIf="isDataLoading" class="loading"></mat-spinner>
+  <mat-form-field class="example-form-field" *ngIf="!isDataLoading">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" [(ngModel)]="valueFilter" name="valueFilter">
     <button mat-button *ngIf="valueFilter" matSuffix mat-icon-button aria-label="" (click)="valueFilter=''">
@@ -12,7 +13,7 @@
     </div>
   </section>
 </div>
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8" *ngIf="!isDataLoading">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>

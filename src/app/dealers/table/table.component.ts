@@ -24,6 +24,7 @@ export class TableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   createDealer: Dealers;
   valueFilter: string = '';
+  isDataLoading: boolean = true;
 
   constructor(public dealersService: DealersService, public popUp: MatDialog, public dialog: MatDialog) { }
 
@@ -35,6 +36,7 @@ export class TableComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.allDealersList);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+        this.isDataLoading = false;
       },
       err => console.log(err)
     );

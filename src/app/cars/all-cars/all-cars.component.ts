@@ -16,6 +16,7 @@ export class AllCarsComponent implements OnInit {
   searchCars: any;
   startCard:any = 0; 
   endCard: any = 8;
+  isDataLoading: boolean = true;
 
   constructor(public carsService: CarsService) { }
 
@@ -24,6 +25,7 @@ export class AllCarsComponent implements OnInit {
       res => {
         this.carListItems = res;
         this.selectedCars = this.carListItems.slice(0, this.loadCount);
+        this.isDataLoading = false;
       },
       err => console.log(err)
     );
