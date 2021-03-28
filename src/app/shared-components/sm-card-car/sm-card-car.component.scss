@@ -1,5 +1,4 @@
 .mat-card  {
-  // width: 100vw;
   margin-top: 20px;
 }
 .example-header-image {
@@ -8,13 +7,7 @@
 .mat-card-header {
   justify-content: space-between;
   margin-left: -20px;
-
 }
-// .mat-icon {
-//   color: red;
-//   margin-top: -12px;
-// }
-
 .mat-card-image {
 	width: calc(100% + 32px);
 	margin: 0 -16px 16px -16px;
@@ -23,35 +16,29 @@
 section {
   display: table;
 }
-
 .example-label {
   display: table-cell;
   font-size: 14px;
   margin-left: 8px;
   min-width: 120px;
 }
-
 .example-button-row {
   display: table-cell;
   width: 490px;
 }
-
 .example-button-row .mat-button-base {
   margin: 8px 8px 8px 0;
 }
-
 .example-flex-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
 }
-
 .example-button-container {
   display: flex;
   justify-content: center;
   width: 120px;
 }
-
 .btn-like{
   color: gold;
 }
@@ -62,8 +49,9 @@ section {
   width: 105px;
   margin-bottom: 5px;
 }
-.size-lg{
-  width: 200px;
+
+.sizezzzzzzzzzzzz-lg{
+  width: 170px;
 }
 .title-sm{
   font-size: 11px;
@@ -85,18 +73,19 @@ section {
 .icon-sm{
   color: red;
   margin-top: -12px;
+  
 }
 .icon-lg{
   color: red;
   margin-top: 0px;
 }
 .img-sm{
-width: calc(100% + 32px);
+  width: calc(100% + 32px);
 	margin: 0 -16px 16px -16px;
 	max-height: 60px; 
 }
 .img-lg{
-  max-width: calc(100% + 32px);
+  width: calc(100% + 32px);
 	margin: 0 -16px 16px -16px;
 	max-height: 100px; 
 }
