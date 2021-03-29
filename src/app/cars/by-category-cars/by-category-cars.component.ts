@@ -29,7 +29,7 @@ export class ByCategoryCarsComponent implements OnInit {
         this.isDataLoading = false;
         this.takeAllCategories();
         this.takeCarsByCategory(this.carsCategories[0]);
-       
+      
       },
       err => console.log(err)
     );

@@ -24,11 +24,12 @@ export class TableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   createDealer: Dealers;
   valueFilter: string = '';
-  isDataLoading: boolean = true;
+  isDataLoading: boolean;
 
   constructor(public dealersService: DealersService, public popUp: MatDialog, public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.isDataLoading = true;
     this.dealersService.getAllDealers().subscribe(
       res => {
         this.allDealersList = res;

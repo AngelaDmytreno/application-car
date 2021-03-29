@@ -11,11 +11,12 @@ export class CarILikeComponent implements OnInit {
 
   carItems: Array<Car> = new Array<Car>();
   allCarListItems: Array<Car> = new Array<Car>();
-  isDataLoading: boolean = true;
+  isDataLoading: boolean;
 
   constructor(public carsService: CarsService) { }
 
   ngOnInit(): void {
+    this.isDataLoading = true;
     this.carsService.getAllCars().subscribe(
       res => {
         this.allCarListItems = res;
