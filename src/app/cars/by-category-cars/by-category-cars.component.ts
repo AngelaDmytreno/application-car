@@ -4,9 +4,6 @@ import { Car } from '../../shared/entities/car.interface';
 import { CarsService } from '../../shared/servises/cars.service';
 
 
-
-
-
 @Component({
   selector: 'app-by-category-cars',
   templateUrl: './by-category-cars.component.html',
@@ -20,16 +17,19 @@ export class ByCategoryCarsComponent implements OnInit {
   selectedCar: Car;
   activeLink: string;
   background: ThemePalette = undefined;
-  test: any; //
+  isDataLoading: boolean;
 
   constructor(public carsService: CarsService) { }
 
   ngOnInit(): void {
+    this.isDataLoading = true;
     this.carsService.getAllCars().subscribe(
       res => { 
         this.allCars = res;
+        this.isDataLoading = false;
         this.takeAllCategories();
         this.takeCarsByCategory(this.carsCategories[0]);
+      
       },
       err => console.log(err)
     );
@@ -52,10 +52,10 @@ export class ByCategoryCarsComponent implements OnInit {
   tabChange(event: any): void {
     const cars = this.takeCarsByCategory(event.tab.textLabel.toLowerCase());
     this.selectedCar = cars[0];
+    console.log('test');
   }
 
   takeCarsByCategory(category: string): Array<Car> {
-    // console.log(category);//Почему повторяет много раз категорий? оно что каждый раз ильт делает?
     this.carsByCategory = this.allCars.filter((car: Car) => category === "other" ? !car.category : car.category === category);
     return this.carsByCategory;
   }

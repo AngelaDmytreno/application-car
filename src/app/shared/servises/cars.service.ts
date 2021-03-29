@@ -18,15 +18,12 @@ export class CarsService {
  
   constructor(private http: HttpClient) { }
   
-
   getAllCars(): Observable<Array<Car>> {
     return this.http.get<Array<Car>>(this.carsUrl);
   }
   updateCars (car: Car): Observable<any> {
     return this.http.put(this.carsUrl, car, httpOptions); 
-    
   }
-  
 }
 
 

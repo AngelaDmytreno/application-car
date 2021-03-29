@@ -13,6 +13,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import { SmCardCarComponent } from '../shared-components/sm-card-car/sm-card-car.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+
 
 
 @NgModule({
@@ -34,7 +37,9 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
     CarsRoutingModule,
     MatButtonModule,
     MatInputModule,
-    SharedComponentsModule
+    SharedComponentsModule,
+    MatProgressSpinnerModule,
+   
     
   ]
 })

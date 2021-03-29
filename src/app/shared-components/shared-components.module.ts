@@ -8,20 +8,17 @@ import { FormComponent } from './form/form.component';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
-
-
-
-
-
-  
+import { FormsModule } from '@angular/forms';
+import { ConfirmationDialogComponent } from "../shared-components/confirmation-dialog/confirmation-dialog.component";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 @NgModule({
-  declarations: [SmCardCarComponent, FormComponent],
-  exports: [SmCardCarComponent, FormComponent],
+  declarations: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent],
+  
+  exports: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -32,8 +29,12 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSelectModule,
     MatInputModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
 
+  ],
+  entryComponents: [
+    ConfirmationDialogComponent
   ]
 })
 export class SharedComponentsModule { }

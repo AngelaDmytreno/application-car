@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import {Routes, RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +18,8 @@ import { HomeModule } from './home/home.module';
 import { DealersModule } from './dealers/dealers.module';
 import { CarsModule } from './cars/cars.module';
 import {MatDialogModule} from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -44,7 +45,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     HomeModule,
     DealersModule,
     CarsModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { apiBase: '/', delay: 200 })
+    FormsModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { apiBase: '/', delay: 1000 })
   ],
   providers: [],
   bootstrap: [AppComponent]

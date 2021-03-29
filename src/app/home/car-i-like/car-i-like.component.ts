@@ -11,18 +11,18 @@ export class CarILikeComponent implements OnInit {
 
   carItems: Array<Car> = new Array<Car>();
   allCarListItems: Array<Car> = new Array<Car>();
+  isDataLoading: boolean;
 
   constructor(public carsService: CarsService) { }
 
-
-
   ngOnInit(): void {
+    this.isDataLoading = true;
     this.carsService.getAllCars().subscribe(
       res => {
         this.allCarListItems = res;
         this.getFavoriteCars();
         this.carItems = this.getFavoriteCars();
-        console.log(this.carItems);
+        this.isDataLoading = false;
       },
       err => console.log(err)
     );

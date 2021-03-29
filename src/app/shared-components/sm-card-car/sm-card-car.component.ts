@@ -13,28 +13,28 @@ export class SmCardCarComponent implements OnInit {
   @Input('car-item') carItem: Car;
   @Input('card-type') cardType: string;
 
-  smCardStyleSize: any = { 'size-sm': true };
-  lgCardStyleSize: any = { 'size-lg': true };
+  // smCardStyleSize: any = { 'size-sm': true };
+  // lgCardStyleSize: any = { 'sizezzzzzzzzzzzz-lg': true };
   
-  smCardStyleTitle: any = { 'title-sm': true };
-  lgCardStyleTitle: any = { 'title-lg': true };
+  // smCardStyleTitle: any = { 'title-sm': true };
+  // lgCardStyleTitle: any = { 'title-lg': true };
 
-  smCardStyleSubtittle: any = {'subtitle-sm': true};
-  lgCardStyleSubtittle: any = {'subtitle-lg': true};
+  // smCardStyleSubtittle: any = {'subtitle-sm': true};
+  // lgCardStyleSubtittle: any = {'subtitle-lg': true};
 
-  smCardStyleIcon: any = {'icon-sm': true};
-  lgCardStyleIcon: any = {'icon-lg': true};
+  // smCardStyleIcon: any = {'icon-sm': true};
+  // lgCardStyleIcon: any = {'icon-lg': true};
 
 
-  smCardStyleImg: any = {'img-sm': true};
-  lgCardStyleImg: any = {'img-lg': true};
+  // smCardStyleImg: any = {'img-sm': true};
+  // lgCardStyleImg: any = {'img-lg': true};
 
-  cardStyleSize: any = this.smCardStyleSize;
-  cardStyleTitle: any = this.smCardStyleTitle;
-  cardStyleSubtitle: any = this.smCardStyleSubtittle;
-  cardStyleIcon: any = this.smCardStyleIcon;
+  // cardStyleSize: any = this.smCardStyleSize;
+  // cardStyleTitle: any = this.smCardStyleTitle;
+  // cardStyleSubtitle: any = this.smCardStyleSubtittle;
+  // cardStyleIcon: any = this.smCardStyleIcon;
 
-  cardStyleImg: any = this.smCardStyleImg;
+  // cardStyleImg: any = this.smCardStyleImg;
   isCardLg: boolean = false;
   // carLike: boolean = false;
 addParameter:boolean=false;
@@ -42,19 +42,21 @@ addParameter:boolean=false;
   constructor( public carsService: CarsService) { }
   
   ngOnInit(): void { 
+
+console.log(this.cardType);
     if (this.cardType === 'lg') {
-      this.isCardLg = true
-      this.lgStyle();
+      this.isCardLg = true;
+      // this.lgStyle();
     }
   }
 
-  lgStyle(): void {
-    this.cardStyleSize = this.lgCardStyleSize;
-    this.cardStyleTitle = this.lgCardStyleTitle;
-    this.cardStyleSubtitle = this.lgCardStyleSubtittle;
-    this.cardStyleIcon = this.lgCardStyleIcon;
-    this.cardStyleImg = this.lgCardStyleImg;
-  }
+  // lgStyle(): void {
+  //   this.cardStyleSize = this.lgCardStyleSize;
+  //   this.cardStyleTitle = this.lgCardStyleTitle;
+  //   this.cardStyleSubtitle = this.lgCardStyleSubtittle;
+  //   this.cardStyleIcon = this.lgCardStyleIcon;
+  //   this.cardStyleImg = this.lgCardStyleImg;
+  // }
   // toggleForm() {
   //   this.addParameter = !this.addParameter;
   //   this.carsService.updateCars(carItem).subscribe();

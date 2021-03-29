@@ -12,9 +12,7 @@ export class MenuItemComponent implements OnInit {
   @Input('menu-item') menuItem: MenuItem;
 
   visibility: boolean = false;
-  // lineStyleVisible: any = { 'line-visible': true };
-  // lineStyleUnVisible: any = { 'line-unvisible': true };
-
+  
   constructor(private router: Router) { }
 
   ngOnInit(): void {

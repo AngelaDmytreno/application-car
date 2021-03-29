@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CarsService } from '../../shared/servises/cars.service';
 import { Car } from '../../shared/entities/car.interface';
-import { Observable, of } from 'rxjs';
-import { $ } from 'protractor';
+
 
 
 @Component({
@@ -11,19 +10,25 @@ import { $ } from 'protractor';
   styleUrls: ['./all-cars.component.scss']
 })
 export class AllCarsComponent implements OnInit {
+  
+  valueFilter:string = '';
   carListItems: Array<Car> = new Array<Car>();
   selectedCars: Array<Car> = new Array<Car>();
-
   loadCount: number = 8;
-  searsCars: any;
+  searchCars: any;
+  startCard:any = 0; 
+  endCard: any = 8;
+  isDataLoading: boolean;
 
   constructor(public carsService: CarsService) { }
 
   ngOnInit(): void {
+    this.isDataLoading = true;
     this.carsService.getAllCars().subscribe(
       res => {
         this.carListItems = res;
         this.selectedCars = this.carListItems.slice(0, this.loadCount);
+        this.isDataLoading = false;
       },
       err => console.log(err)
     );
@@ -32,16 +37,12 @@ export class AllCarsComponent implements OnInit {
   onKey(event: any) {
     setTimeout(() =>
       this.filterCars(event.target.value), 2000);
-
   }
 
   filterCars(param): void {
     console.log(param);
-    this.searsCars = this.carListItems.filter(el => this.isModel(el.model, param) || this.isBrand(el.brand, param) || param === '');
-
-    console.log(this.searsCars);
-    this.selectedCars = this.searsCars;
-
+    this.searchCars = this.carListItems.filter(el => this.isModel(el.model, param) || this.isBrand(el.brand, param) || param === '');
+    this.selectedCars = this.searchCars;
   }
 
   isModel(model: string, params: string): boolean {
@@ -63,9 +64,9 @@ export class AllCarsComponent implements OnInit {
   }
 
   loadMore(): void {
-    this.loadCount = this.loadCount + 8;
-    this.selectedCars = this.carListItems.slice(0, this.loadCount);
+  this.startCard = this.endCard;
+  this.endCard += 8;
+  this.selectedCars.push(...this.carListItems.slice(this.startCard, this.endCard));
   }
 
- 
 }

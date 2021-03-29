@@ -1,42 +1,45 @@
-<div class="form__container">
+<div class="form__container" >
   <h1 mat-dialog-title>
-    <strong> ADD Dealers</strong>
+    <strong> {{action ? 'Edit' : 'Add'}} Dealers</strong>
   </h1>
   <div mat-dialog-content>
-    <form>
+    <form #dealersForm="ngForm" class="ng-pristine ng-untouched ng-valid">
       <mat-form-field >
-        <mat-label>Id *</mat-label>
-        <input type="text" matInput placeholder="Id">
-        <mat-error >
-          Id is <strong>required</strong>
+        <mat-label>Id </mat-label>
+        <input  [disabled]="action"  name="id" type="text" matInput placeholder="Id" (keyup)="checkId()" [(ngModel)]="dealer.id" #id=ngModel required  >
+        <mat-error>
+          <div  *ngIf="id.errors?.required">Id is required</div>
         </mat-error>
+        <mat-hint *ngIf = "showError">
+          <div>This id already exist, plese enter new id </div>
+        </mat-hint>
       </mat-form-field>
       <mat-form-field >
-        <mat-label>Name *</mat-label>
-        <input type="text" matInput placeholder="Name" >
-        <mat-error *ngIf="controls.hasError('required')">
-          Name is <strong>required</strong>
+        <mat-label>Name </mat-label>
+        <input   name="name" type="text" matInput placeholder="Name" [(ngModel)]="dealer.name" #name=ngModel required minlength="3"
+        [(ngModel)]="dealer.name">
+        <mat-error>
+          <div  *ngIf="name.errors?.required">Name is required</div>
+          <div *ngIf="name.errors?.minlength">Name must be at least 3 characters long</div>
         </mat-error>
       </mat-form-field>
-  
       <mat-form-field >
         <mat-label>Headquarters</mat-label>
-        <input matInput placeholder="Headquarters" >
+        <input [ngModelOptions]="{ standalone: true }" name="headquarters" matInput placeholder="Headquarters" [(ngModel)]="dealer.headquarters">
       </mat-form-field>
       <mat-form-field >
         <mat-label>Country</mat-label>
-        <input matInput placeholder="Country" >
+        <input [ngModelOptions]="{ standalone: true }" name="country" matInput placeholder="Country" [(ngModel)]="dealer.country">
       </mat-form-field>
       <mat-form-field >
         <mat-label>Founded In</mat-label>
-        <input matInput placeholder="Founded In" >
+        <input [ngModelOptions]="{ standalone: true }" name="foundedIn" matInput placeholder="Founded In" [(ngModel)]="dealer.foundedIn" >
       </mat-form-field>
       </form>
   </div>
   <div mat-dialog-actions>
-    <button mat-button class="cancel-btn" (click)="close()">Cancel</button>
-    <button mat-button disabled>Save</button>
+    <button mat-button class="cancel-btn" (click)="onClose()">Cancel</button>
+    <button mat-button [disabled]="!dealer.id || !dealer.name || showError" (click)="onSeve()">Save</button> 
   </div>
-    
-  
 </div>
+
