@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CarsService } from '../../shared/servises/cars.service';
 import { Car } from '../../shared/entities/car.interface';
 
+
+
 @Component({
   selector: 'app-all-cars',
   templateUrl: './all-cars.component.html',
@@ -16,11 +18,12 @@ export class AllCarsComponent implements OnInit {
   searchCars: any;
   startCard:any = 0; 
   endCard: any = 8;
-  isDataLoading: boolean = true;
+  isDataLoading: boolean;
 
   constructor(public carsService: CarsService) { }
 
   ngOnInit(): void {
+    this.isDataLoading = true;
     this.carsService.getAllCars().subscribe(
       res => {
         this.carListItems = res;

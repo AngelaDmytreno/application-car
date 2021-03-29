@@ -7,7 +7,6 @@
   <img [ngClass]="{'img-lg': isCardLg, 'img-sm': !isCardLg}" *ngIf="carItem.image" mat-card-image src="{{carItem .image}}" alt="{{carItem.brand}}">
   <img [ngClass]="{'img-lg': isCardLg, 'img-sm': !isCardLg}"  *ngIf="!carItem.image"mat-card-image src="../../../assets/images/defoult.jpg" alt="{{carItem.brand}}">
   <div *ngIf="isCardLg">
-
     <button  (click)="like()" class="btn-like" mat-button>Like</button>
     <button class="btn-details" mat-button>Details</button> 
   </div>

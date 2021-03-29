@@ -12,10 +12,10 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class DealersService {
-  
+
   private dealersUrl: string = '/dealers';
 
-  constructor(private http: HttpClient ) {}
+  constructor(private http: HttpClient) { }
 
   insertDealers(dealer: Dealers): Observable<Dealers> {
     return this.http.post<Dealers>(`${this.dealersUrl}.json`, dealer, httpOptions);
@@ -23,11 +23,11 @@ export class DealersService {
   getAllDealers(): any {
     return this.http.get<Array<Dealers>>(`${this.dealersUrl}.json`, httpOptions);
   }
-  postDealers(dealer: Dealers):any {
+  postDealers(dealer: Dealers): any {
     return this.http.post(`${this.dealersUrl}.json`, dealer, httpOptions);
   }
-  updateDealers (dealers: Dealers): Observable<any> {
-    return this.http.put(this.dealersUrl, dealers, httpOptions);  
+  updateDealers(dealers: Dealers): Observable<any> {
+    return this.http.put(this.dealersUrl, dealers, httpOptions);
   }
   deleteDealer(dealer: Dealers | string): Observable<Dealers> {
     const id: string = typeof dealer === 'string' ? dealer : dealer.id;

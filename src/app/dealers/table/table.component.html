@@ -6,7 +6,7 @@
     <button mat-button *ngIf="valueFilter" matSuffix mat-icon-button aria-label="" (click)="valueFilter=''">
       <mat-icon>close</mat-icon>
     </button>
-  </mat-form-field> 
+  </mat-form-field>
   <section>
     <div class="example-button-row">
       <button mat-raised-button color="primary" (click)="openPopUp()">Add dealers</button>
@@ -48,16 +48,14 @@
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <ng-container>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="10">
+          Dealer not found.
+        </td>
+      </tr>
+    </ng-container>
 
-
-<ng-container>
-  <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="10">
-       Dealer  not found.
-    </td>
-  </tr>
-</ng-container>
-     
   </table>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

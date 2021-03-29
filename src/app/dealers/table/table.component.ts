@@ -29,7 +29,6 @@ export class TableComponent implements OnInit {
   constructor(public dealersService: DealersService, public popUp: MatDialog, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    // this.dealers.Service.insertDealers();
     this.dealersService.getAllDealers().subscribe(
       res => {
         this.allDealersList = res;
@@ -48,7 +47,7 @@ export class TableComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  
+
 
   openPopUp(obj = null) {
     const dialogRef = this.popUp.open(FormComponent, {
@@ -56,12 +55,11 @@ export class TableComponent implements OnInit {
       data: obj,
     });
     dialogRef.afterClosed().subscribe((result) => {
-      // (result.event === 'Add') ? this.addDealer(result.data) : this.chengeDealer(result.data);
-      if(result.data.newRecord === true) {
+      if (result.data.newRecord === true) {
         this.createDealer = result.data;
         this.dealersService.insertDealers(this.createDealer).subscribe();
-      }else if(result.data.newRecord === false){
-       this.dealersService.updateDealers(this.createDealer).subscribe();
+      } else if (result.data.newRecord === false) {
+        this.dealersService.updateDealers(this.createDealer).subscribe();
       }
       this.tableUpdate();
 
@@ -82,19 +80,19 @@ export class TableComponent implements OnInit {
   }
 
   delete(dealer: Dealers): void {
-  const confirmDialog= this.dialog.open(ConfirmationDialogComponent, {
-    data: {
-      title: 'Delete?',
-      message: 'Are you shure you want to delite this item: ' +  dealer.name,
-    }
-  });
-  confirmDialog.afterClosed().subscribe((result) => {
-    if(result === true) {
-      this.dealersService.deleteDealer(dealer).subscribe();
-      this.tableUpdate();
-    }
-  })
-    
+    const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        title: 'Delete?',
+        message: 'Are you shure you want to delite this item: ' + dealer.name,
+      }
+    });
+    confirmDialog.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.dealersService.deleteDealer(dealer).subscribe();
+        this.tableUpdate();
+      }
+    })
+
   }
 
   openDialog(elemnt: Dealers): void {
@@ -104,13 +102,12 @@ export class TableComponent implements OnInit {
       data: "Do you confirm the deletion of this data?"
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         console.log('Yes clicked');
-      
       }
     });
 
-}
+  }
 }
 
 

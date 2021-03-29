@@ -1,5 +1,6 @@
-<div class="car-cotainer">
-  <div class="category__conatainer">
+<mat-spinner *ngIf="isDataLoading" class="loading"></mat-spinner>
+<div class="car-cotainer" >
+  <div class="category__conatainer" >
     <mat-tab-group (selectedTabChange)="tabChange($event)">
       <mat-tab  [label]="category | titlecase" *ngFor="let category of carsCategories">
         <mat-selection-list #cars [multiple]="false">
@@ -13,8 +14,6 @@
             <img *ngIf="selectedCar.image" [src]="selectedCar.image" [alt]="selectedCar.model">
             <img *ngIf="!selectedCar.image" src="../../../assets/images/defoult.jpg" [alt]="selectedCar.model">
           </div>
-        
-        
           <div class="detail__info" *ngIf="selectedCar">
             <span><h3>{{selectedCar.model}}</h3></span>
             <span><h4>Dealers: <b>{{selectedCar.brand}}</b></h4></span>

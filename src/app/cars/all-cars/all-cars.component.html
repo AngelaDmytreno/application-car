@@ -17,7 +17,7 @@
     </div>
   </div> 
   <section *ngIf="!isDataLoading">
-    <div *ngIf="selectedCars.length>=8" class="example-button-row">
+    <div *ngIf="selectedCars.length>=8 && selectedCars.length !== carListItems.length" class="example-button-row">
       <button  mat-raised-button color="accent" (click)="loadMore()">Load More</button>
     </div>
     <div *ngIf="selectedCars.length===0"> Car not found.</div>

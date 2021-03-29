@@ -16,7 +16,7 @@
       </mat-form-field>
       <mat-form-field >
         <mat-label>Name </mat-label>
-        <input    name="name" type="text" matInput placeholder="Name" [(ngModel)]="dealer.name" #name=ngModel required minlength="3"
+        <input   name="name" type="text" matInput placeholder="Name" [(ngModel)]="dealer.name" #name=ngModel required minlength="3"
         [(ngModel)]="dealer.name">
         <mat-error>
           <div  *ngIf="name.errors?.required">Name is required</div>

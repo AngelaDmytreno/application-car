@@ -1,11 +1,10 @@
 .car-cotainer{
   width: 100vw;
-  height: 100vh;
+  height: 1000px;
 }
-
 .mat-tab-group{
-  width: 1250px;
-  height: 100vh !important;
+  width: 1270px;
+  height: 100% !important;
 }
 .mat-selection-list{
   width: 300px; 
@@ -43,4 +42,10 @@ img{
   flex-direction: column;
   padding: 15px;
   width: 150px;
+}
+.loading{
+  width: 1200px;
+  height: 1200px;
+  margin-top: 200px;
+  margin-left: 500px;
 }
