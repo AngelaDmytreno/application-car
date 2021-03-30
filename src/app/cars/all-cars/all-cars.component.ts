@@ -11,7 +11,7 @@ import { Car } from '../../shared/entities/car.interface';
 })
 export class AllCarsComponent implements OnInit {
   
-  valueFilter:string = '';
+  valueFilter:string;
   carListItems: Array<Car> = new Array<Car>();
   selectedCars: Array<Car> = new Array<Car>();
   loadCount: number = 8;
@@ -40,9 +40,9 @@ export class AllCarsComponent implements OnInit {
   }
 
   filterCars(param): void {
-    console.log(param);
     this.searchCars = this.carListItems.filter(el => this.isModel(el.model, param) || this.isBrand(el.brand, param) || param === '');
     this.selectedCars = this.searchCars;
+    
   }
 
   isModel(model: string, params: string): boolean {
@@ -67,6 +67,10 @@ export class AllCarsComponent implements OnInit {
   this.startCard = this.endCard;
   this.endCard += 8;
   this.selectedCars.push(...this.carListItems.slice(this.startCard, this.endCard));
+  }
+  resetFilter(): void{
+    this.valueFilter = '';
+    this.selectedCars = this.carListItems.slice(0, this.loadCount);
   }
 
 }

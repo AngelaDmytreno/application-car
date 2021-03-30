@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
       this.createDealer = result.data;
       this.dealersService.insertDealers(this.createDealer).subscribe();
       this.newDealersList.push(this.createDealer);
-      this.dealersService.postDealers(this.createDealer);
+      // this.dealersService.postDealers(this.createDealer);
     });
   }
 }

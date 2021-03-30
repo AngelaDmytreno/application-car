@@ -19,8 +19,7 @@ export class MyDealersComponent implements OnInit {
     
   }
 
-  addNewDealer(dealer: Dealers): void {
-    this.newDealersList.push(dealer);
-    console.log(this.newDealersList);
-  }
+  // addNewDealer(dealer: Dealers): void {
+  //   this.newDealersList.push(dealer);
+  // }
 }
