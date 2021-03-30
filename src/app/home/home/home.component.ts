@@ -31,10 +31,11 @@ export class HomeComponent implements OnInit {
     });
     
     dialogRef.afterClosed().subscribe((result) => {
-      this.createDealer = result.data;
-      this.dealersService.insertDealers(this.createDealer).subscribe();
-      this.newDealersList.push(this.createDealer);
-      // this.dealersService.postDealers(this.createDealer);
+      if(result){
+        this.createDealer = result.data;
+        this.dealersService.insertDealers(this.createDealer).subscribe();
+        this.newDealersList.push(this.createDealer);
+      }
     });
   }
 }

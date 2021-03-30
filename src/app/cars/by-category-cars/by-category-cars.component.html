@@ -1,10 +1,10 @@
 <mat-spinner *ngIf="isDataLoading" class="loading"></mat-spinner>
-<div class="car-cotainer" >
+<div class="car-container" >
   <div class="category__conatainer" >
-    <mat-tab-group (selectedTabChange)="tabChange($event)">
+    <mat-tab-group (selectedTabChange)="tabChange($event)"  >
       <mat-tab  [label]="category | titlecase" *ngFor="let category of carsCategories">
         <mat-selection-list #cars [multiple]="false">
-          <mat-list-option  *ngFor="let car of takeCarsByCategory(category); let i = index" [selected]="car&&i==0" (click)="selectCar(car)">
+          <mat-list-option  *ngFor="let car of takeCarsByCategory(category); let i = index" [selected]="car&&i==0 && firstSelected" (click)="selectCar(car)">
             <span class="model"><b>{{car.model}}</b></span>
             <span class="brand">{{car.brand}}</span>
           </mat-list-option>

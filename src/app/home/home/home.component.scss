@@ -6,9 +6,7 @@
  justify-content: space-between;
  padding: 10px 10px 0px 40px;
 }
-section {
-  display: table;
-}
+
 .example-button-row {
   display: table-cell;
   width: 360px;
@@ -16,33 +14,4 @@ section {
 .example-button-row .mat-button-base {
   margin: 8px 20px 8px 0;
 }
-.like__conatiner-column{
-  width: 22vw;
-}
-.like__item{
-  height: 25px;
-  border-bottom: 3px solid gray;
-  padding-bottom: 10px;
-}
-.card__container{
-  max-width: 22vw;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-top: 4px;
-  justify-content: space-between;
-}
-.dealers__conatiner-column{
-  width: 20vw;
-  margin: 0 auto;
-  }
-  .dealers__item{
-    height: 25px;
-    border-bottom: 3px solid gray;
-    padding-bottom: 10px;
-  }
-  .dealers__text{
-   margin-top: 15px;
-   font-size: 12px;
-  }
 

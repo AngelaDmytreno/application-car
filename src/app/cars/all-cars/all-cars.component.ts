@@ -68,6 +68,7 @@ export class AllCarsComponent implements OnInit {
   this.endCard += 8;
   this.selectedCars.push(...this.carListItems.slice(this.startCard, this.endCard));
   }
+
   resetFilter(): void{
     this.valueFilter = '';
     this.selectedCars = this.carListItems.slice(0, this.loadCount);

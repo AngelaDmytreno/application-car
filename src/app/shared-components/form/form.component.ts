@@ -38,20 +38,17 @@ ngOnInit(): void {
 };
 
 onClose(): void {
-  this.popUp.close({ event: this.action, data: this.localData });
+  this.popUp.close();
 };
 
 checkId():void {
-   if(this.dealersList.find((elem) =>  elem.id === this.dealer.id.toUpperCase())){
-    this.showError = true;
-   }
+  this.showError = !!this.dealersList.find((elem) =>  elem.id === this.dealer.id.toUpperCase());
 }
 
 onSeve(): void {
   const updatedDealer = {
     ...this.dealer,
     id: this.dealer.id.toUpperCase(),
-    newRecord: true,
     registration: this.action ? this.dealer.registration : new Date(),
   };
   this.popUp.close({

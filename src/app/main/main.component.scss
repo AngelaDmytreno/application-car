@@ -2,16 +2,18 @@
   max-width: 100vw;
   max-height: 100hw;
   overflow: hidden;
+  .header__title{
+    color: #fff;
+    font-family: "PlayballRegular";
+    font-size: 40px;
+  }
+  .main{
+    display: flex;
+    flex-direction: row;
+  }
  }
- .main{
-   display: flex;
-   flex-direction: row;
- }
- .example-spacer {
-  flex: 1 1 auto;
-}
-.header__title{
-  color: #fff;
-  font-family: "PlayballRegular";
-  font-size: 40px;
-}
+
+//  .example-spacer {
+//   flex: 1 1 auto;
+// }
+

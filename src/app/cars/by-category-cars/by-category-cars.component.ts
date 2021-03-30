@@ -18,11 +18,13 @@ export class ByCategoryCarsComponent implements OnInit {
   activeLink: string;
   background: ThemePalette = undefined;
   isDataLoading: boolean;
+  firstSelected: any = true;
 
   constructor(public carsService: CarsService) { }
 
   ngOnInit(): void {
     this.isDataLoading = true;
+  
     this.carsService.getAllCars().subscribe(
       res => { 
         this.allCars = res;
@@ -47,12 +49,13 @@ export class ByCategoryCarsComponent implements OnInit {
   selectCar(car: Car): void {
     this.selectedCar = car;
     console.log(this.selectedCar);
+    this.firstSelected = false;
   }
 
   tabChange(event: any): void {
     const cars = this.takeCarsByCategory(event.tab.textLabel.toLowerCase());
     this.selectedCar = cars[0];
-    console.log('test');
+    this.firstSelected = true;
   }
 
   takeCarsByCategory(category: string): Array<Car> {

@@ -9,7 +9,7 @@ import { Dealers } from 'src/app/dealers';
 })
 export class MyDealersComponent implements OnInit {
 
-  newDealersList: Array<Dealers> = new Array<Dealers>();
+
 
   @Input('new-dealers') newDealers: Array<Dealers>;
 
@@ -19,7 +19,4 @@ export class MyDealersComponent implements OnInit {
     
   }
 
-  // addNewDealer(dealer: Dealers): void {
-  //   this.newDealersList.push(dealer);
-  // }
 }
