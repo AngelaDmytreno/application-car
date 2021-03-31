@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
-import { CarsService } from  '../../shared/servises/cars.service';
-import {  } from '../../car';
+import { CarsService } from '../../shared/servises/cars.service';
+import { Car, initCar } from '../../car';
 
 @Component({
   selector: 'app-car-form',
@@ -11,16 +11,19 @@ import {  } from '../../car';
 })
 export class CarFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(public carService: CarsService, private popUp: MatDialogRef<CarFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    popUp.disableClose = true;
+  }
 
   ngOnInit(): void {
   }
-  
-  onClose(){
 
-  }
 
-  onSeve(){
-    
+  onClose(): void {
+    this.popUp.close();
+  };
+
+  onSeve() {
+
   }
 }
