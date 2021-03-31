@@ -36,6 +36,16 @@ export class CarFormComponent implements OnInit {
   };
 
   onSeve() {
+    const updatedDealer = {
+      ...this.car,
+      id: this.car.model.toUpperCase(),
+      newItem: this.action ? true : false,
+    };
+    this.popUp.close({
+      event: 'close',
+      data: updatedDealer,
+      
+    });
 
   }
 }
