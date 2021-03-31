@@ -11,11 +11,23 @@ import { Car, initCar } from '../../car';
 })
 export class CarFormComponent implements OnInit {
 
+  carsList: Array<Car>;
+  car:Car;
+  action:boolean;
+  localData: any;
+
   constructor(public carService: CarsService, private popUp: MatDialogRef<CarFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     popUp.disableClose = true;
   }
 
   ngOnInit(): void {
+    this.carService.getAllCars().subscribe(
+      (res)=>{
+        this.carsList = res;
+      },
+      err => console.log(err)
+    );
+    this.data ? (this.car = {  ...this.data }) && (this.action = true) : (this.car = initCar())
   }
 
 
