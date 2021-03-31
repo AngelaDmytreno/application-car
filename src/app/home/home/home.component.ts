@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DealersService } from '../../shared/servises/dealers.service';
 import { Dealers } from 'src/app/dealers';
 import { MyDealersComponent } from '../my-dealers/my-dealers.component';
+import { CarFormComponent } from '../../shared-components/car-form/car-form.component'
 
 @Component({
   selector: 'app-home',
@@ -35,6 +36,18 @@ export class HomeComponent implements OnInit {
         this.createDealer = result.data;
         this.dealersService.insertDealers(this.createDealer).subscribe();
         this.newDealersList.push(this.createDealer);
+      }
+    });
+  }
+
+  openPopUpCarForm(): void {
+    const dialogRef = this.popUp.open(CarFormComponent, {
+      width: '350px',
+    });
+    
+    dialogRef.afterClosed().subscribe((result) => {
+      if(result){
+       console.log(result);
       }
     });
   }

@@ -13,12 +13,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { ConfirmationDialogComponent } from "../shared-components/confirmation-dialog/confirmation-dialog.component";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CarFormComponent } from './car-form/car-form.component';
 
 
 @NgModule({
-  declarations: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent],
+  declarations: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent],
   
-  exports: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent],
+  exports: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent],
   imports: [
     CommonModule,
     MatCardModule,

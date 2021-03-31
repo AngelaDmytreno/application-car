@@ -11,9 +11,12 @@ export interface Car {
     category: string,
     image: string,
     liked: boolean,
-    newItem: boolean
+    newItem: boolean,
+    description: string,
+    wikilink: string,
  
 }
 export const initCar = (): Car => ( {
-  id:'', brand: '', model: '', year: 0, color: '', class: '',  category: '', image: '', liked: false,  newItem: false
+  id:'', brand: '', model: '', year: 0, color: '', class: '',  category: '', image: '', liked: false,  newItem: false, description: '',
+  wikilink: '',
   });

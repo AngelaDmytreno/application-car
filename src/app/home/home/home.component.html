@@ -4,7 +4,7 @@
   <app-my-dealers [new-dealers]="newDealersList"></app-my-dealers>
   <section>
     <div class="example-button-row">
-      <button mat-raised-button color="accent">Add car</button>
+      <button mat-raised-button color="accent" (click)="openPopUpCarForm()">Add car</button>
       <button mat-raised-button color="primary" (click)="openPopUp()">Add dealers</button>
     </div>
   </section>
