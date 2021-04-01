@@ -22,6 +22,7 @@ export class CarFormComponent implements OnInit {
   action: boolean;
   localData: any;
   myForm: FormGroup;
+  selectedValue: string;
 
   constructor(public carService: CarsService, private popUp: MatDialogRef<CarFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder, public dealerService: DealersService) {
     popUp.disableClose = true;

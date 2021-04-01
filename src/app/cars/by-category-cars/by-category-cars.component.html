@@ -14,13 +14,13 @@
             <img *ngIf="selectedCar.image" [src]="selectedCar.image" [alt]="selectedCar.model">
             <img *ngIf="!selectedCar.image" src="../../../assets/images/defoult.jpg" [alt]="selectedCar.model">
           </div>
-          <div class="detail__info" *ngIf="selectedCar">
-            <span><h3>{{selectedCar.model}}</h3></span>
-            <span><h4>Dealers: <b>{{selectedCar.brand}}</b></h4></span>
-            <span><h4>Class: <b>{{selectedCar.class |titlecase}}</b></h4></span>
-            <span><h4>Year: <b>{{selectedCar.year}}</b></h4></span>
-            <span><h4>Color: <b>{{selectedCar.color}}</b></h4></span>
-          </div>
+          <ul class="detail__info" *ngIf="selectedCar">
+            <li><h3>{{selectedCar.model}}</h3></li>
+            <li><h4>Dealers: <b>{{selectedCar.brand}}</b></h4></li>
+            <li><h4>Class: <b>{{selectedCar.class |titlecase}}</b></h4></li>
+            <li><h4>Year: <b>{{selectedCar.year}}</b></h4></li>
+            <li><h4>Color: <b>{{selectedCar.color}}</b></h4></li>
+          </ul>
         </div>
       </mat-tab>
     </mat-tab-group>

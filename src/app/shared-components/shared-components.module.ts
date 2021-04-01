@@ -17,7 +17,7 @@ import { CarFormComponent } from './car-form/car-form.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { DetailsCarComponent } from './details-car/details-car.component';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete'; 
 
 
 @NgModule({
@@ -40,6 +40,7 @@ import { DetailsCarComponent } from './details-car/details-car.component';
     MatToolbarModule,
     RouterModule,
     MatSelectModule,
+    MatAutocompleteModule
     
 
 

@@ -1,0 +1,25 @@
+.details__container{
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+}
+
+li{
+list-style: none;
+line-height: 2;
+}
+
+.car__img{
+  width: 600px;
+  padding-top: 20px;
+}
+img{
+  width: 600px;
+  object-fit: cover; 
+}
+
+.car__description{
+  padding: 10px;
+  border: 1px solid black;
+  
+}

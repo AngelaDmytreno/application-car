@@ -41,11 +41,14 @@
           height: 250px;
         }
       }
+      li{
+        list-style: none;
+      }
       .detail__info{
         display: flex;
         flex-direction: column;
-        padding: 15px;
-        width: 150px;
+        padding: 5px;
+        width: 200px;
       }
     }
   }

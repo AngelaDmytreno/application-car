@@ -9,7 +9,9 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Car } from '../../car';
-import {  CarsService }  from '../../shared/servises/cars.service'
+import {  CarsService }  from '../../shared/servises/cars.service';
+import { MatDialog } from '@angular/material/dialog';
+import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-details-car',
@@ -18,13 +20,15 @@ import {  CarsService }  from '../../shared/servises/cars.service'
 })
 export class DetailsCarComponent implements OnInit, OnChanges {
     car: Car;
+    isDataLoading: boolean = true;
     constructor(
       private route: ActivatedRoute,
-      private carsService: CarsService
+      private carsService: CarsService,
+      public dialog: MatDialog
     ) {}
-    // tslint:disable-next-line:typedef
+    
     ngOnInit() {
-      // this.getCarById();
+      // this.isDataLoading = true;
       this.route.paramMap
         .pipe(
           switchMap((params: ParamMap) =>
@@ -34,7 +38,21 @@ export class DetailsCarComponent implements OnInit, OnChanges {
         .subscribe((p) => {
           this.car = p;
         });
+        this.isDataLoading = false;
     }
     ngOnChanges(changes: SimpleChanges): void {}
+
+    delete(): void {
+      const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
+        data: {
+          title: 'Delete?',
+          message: 'Are you shure you want to delite this item: ' + this.car.model,
+        }
+      });
+      confirmDialog.afterClosed().subscribe((result) => {
+       
+      })
+  
+    }
 
 }

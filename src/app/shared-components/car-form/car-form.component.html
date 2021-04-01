@@ -5,22 +5,28 @@
    <div class="mat-dialog-content">
      <form [formGroup]="myForm">
         <mat-form-field>
-          <mat-label>Model</mat-label>
+          <mat-label>*Model</mat-label>
           <input  matInput type="text" formControlName="model">
           <mat-error>
             <div >Model is required</div>
           </mat-error>
+
+      
         </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>Dealer</mat-label>
-          <input  matInput type="text" formControlName="dealer">
-          <mat-error>
-            <div>Dealer is required</div>
-          </mat-error>
-          <mat-select >
-            <mat-option *ngFor="let dealer of dealers"> {{dealer.brand}} </mat-option>
-          </mat-select>
+        <mat-form-field class="example-full-width">
+          <mat-label>*Dealer</mat-label>
+          <input type="text"matInput
+                 formControlName="dealer"
+                 [matAutocomplete]="auto">
+                 <mat-error>
+                  <div>Dealer is required</div>
+                </mat-error>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let dealer of dealers" [value]="dealer.id">
+              {{dealer.id}}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
 
         <mat-form-field>

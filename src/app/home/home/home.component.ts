@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
   openPopUpCarForm(): void {
     const dialogRef = this.popUp.open(CarFormComponent, {
       width: '450px',
+    
     });
     
     dialogRef.afterClosed().subscribe((result) => {
