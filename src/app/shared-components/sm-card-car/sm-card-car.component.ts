@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Car } from 'src/app/car';
 import {MatButtonModule} from '@angular/material/button'; 
-import { CarsService } from '../../shared/servises/cars.service'
+import { CarsService } from '../../shared/servises/cars.service';
+import { RouterModule } from '@angular/router';
  
 @Component({
   selector: 'app-sm-card-car',

@@ -15,12 +15,14 @@ import { ConfirmationDialogComponent } from "../shared-components/confirmation-d
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CarFormComponent } from './car-form/car-form.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterModule } from '@angular/router';
+import { DetailsCarComponent } from './details-car/details-car.component';
 
 
 @NgModule({
-  declarations: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent],
+  declarations: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent],
   
-  exports: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent],
+  exports: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -34,12 +36,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     FormsModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    RouterModule
 
 
   ],
   entryComponents: [
-    ConfirmationDialogComponent, CarFormComponent
+    ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent
   ]
 })
 export class SharedComponentsModule { }

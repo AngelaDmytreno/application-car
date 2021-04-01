@@ -24,6 +24,11 @@ export class CarsService {
   updateCars (car: Car): Observable<any> {
     return this.http.put(this.carsUrl, car, httpOptions); 
   }
+
+  getCarById(id: string): Observable<Car> {
+    const url = `${this.carsUrl}/${id}`;
+    return this.http.get<Car>(url);
+  }
 }
 
 

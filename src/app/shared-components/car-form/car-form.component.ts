@@ -52,7 +52,8 @@ export class CarFormComponent implements OnInit {
   onSeve() {
     const updatedDealer = {
       ...this.car,
-      id: this.car.model.toUpperCase(),
+      id: this.car.model.toUpperCase(),//уникальное число  проверка на уникальность, this.dealers: 
+      
       newItem: this.action ? true : false,
       registration: this.action ? this.car.registration : new Date()
     };
