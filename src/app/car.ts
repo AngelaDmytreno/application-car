@@ -14,9 +14,10 @@ export interface Car {
     newItem: boolean;
     description: string;
     wikilink: string;
+    registration?: Date;
  
 }
 export const initCar = (): Car => ( {
   id: null, brand: null, model: null , year: 0, color: null, class: null,  category: null, image: null, liked: false,  newItem: false, description: null,
-  wikilink: null,
+  wikilink: null, registration: null
   });
