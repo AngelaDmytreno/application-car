@@ -3,6 +3,7 @@ import { Car } from 'src/app/car';
 import {MatButtonModule} from '@angular/material/button'; 
 import { CarsService } from '../../shared/servises/cars.service';
 import { RouterModule } from '@angular/router';
+import { Dealers } from 'src/app/dealers';
  
 @Component({
   selector: 'app-sm-card-car',
@@ -13,6 +14,7 @@ export class SmCardCarComponent implements OnInit {
 
   @Input('car-item') carItem: Car;
   @Input('card-type') cardType: string;
+  @Input('dealer-item') dealerItem : Dealers
 
   isCardLg: boolean = false;
   

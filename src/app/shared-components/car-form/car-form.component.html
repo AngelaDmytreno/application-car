@@ -6,15 +6,20 @@
      <form [formGroup]="myForm">
         <mat-form-field>
           <mat-label>Model</mat-label>
-          <input matInput type="text" formControlName="model">
+          <input  matInput type="text" formControlName="model">
+          <mat-error>
+            <div >Model is required</div>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Dealer</mat-label>
-          <!-- <input matInput type="text" formControlName="dealer"> -->
-          <mat-select matInput type="text" formControlName="dealer">
-            <mat-option value="one">First option</mat-option>
-            <mat-option value="two">Second option</mat-option>
+          <input  matInput type="text" formControlName="dealer">
+          <mat-error>
+            <div>Dealer is required</div>
+          </mat-error>
+          <mat-select >
+            <mat-option *ngFor="let dealer of dealers"> {{dealer.brand}} </mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -66,6 +71,6 @@
 
   <div mat-dialog-actions>
     <button mat-button class="cancel-btn" (click)="onClose()">Cancel</button>
-    <button mat-button  (click)="onSeve()">Save</button> 
+    <button mat-button [disabled]="!car.model || !car.brand" (click)="onSeve()">Save</button> 
   </div>
 </div>

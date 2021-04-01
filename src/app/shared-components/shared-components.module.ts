@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router';
 import { DetailsCarComponent } from './details-car/details-car.component';
 
 
+
 @NgModule({
   declarations: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent],
   
@@ -37,7 +38,9 @@ import { DetailsCarComponent } from './details-car/details-car.component';
     MatProgressSpinnerModule,
     ReactiveFormsModule,
     MatToolbarModule,
-    RouterModule
+    RouterModule,
+    MatSelectModule,
+    
 
 
   ],

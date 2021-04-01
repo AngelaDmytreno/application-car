@@ -1,7 +1,10 @@
 .mat-form-field{
   width: 350px;
 }
-
+.mat-dialog-actions{
+  display: flex;
+  justify-content: flex-end;
+}
 .mat-toolbar-single-row {
   height: auto !important;
   background: transparent;
