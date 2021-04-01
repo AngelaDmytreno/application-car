@@ -4,6 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { CarsService } from '../../shared/servises/cars.service';
 import { Car, initCar } from '../../car';
 import { FormGroup, Validators, FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DealersService } from 'src/app/shared/servises/dealers.service';
+import { Dealers, initDealer} from '../../dealers'
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-car-form',
@@ -14,11 +17,12 @@ export class CarFormComponent implements OnInit {
 
   carsList: Array<Car>;
   car:Car;
+  dealers: Array<Dealers>;
   action:boolean;
   localData: any;
   myForm: FormGroup;
 
-  constructor(public carService: CarsService, private popUp: MatDialogRef<CarFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any,  private formBuilder: FormBuilder) {
+  constructor(public carService: CarsService, private popUp: MatDialogRef<CarFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any,  private formBuilder: FormBuilder, public dealerService: DealersService) {
     popUp.disableClose = true;
   }
 
@@ -29,6 +33,7 @@ export class CarFormComponent implements OnInit {
       },
       err => console.log(err)
     );
+    this.dealerService.getAllDealers()
     this.data ? (this.car = {  ...this.data }) && (this.action = true) : (this.car = initCar());
     this.myForm = this.formBuilder.group(
       {model: [null, Validators.required],
