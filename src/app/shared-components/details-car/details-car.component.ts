@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { from } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { finalize, switchMap } from 'rxjs/operators';
 import { Car } from '../../car';
 import {  CarsService }  from '../../shared/servises/cars.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,8 +19,10 @@ import {ConfirmationDialogComponent} from '../confirmation-dialog/confirmation-d
   styleUrls: ['./details-car.component.scss']
 })
 export class DetailsCarComponent implements OnInit, OnChanges {
+
     car: Car;
     isDataLoading: boolean = true;
+
     constructor(
       private route: ActivatedRoute,
       private carsService: CarsService,
@@ -29,17 +31,18 @@ export class DetailsCarComponent implements OnInit, OnChanges {
     ) {}
     
     ngOnInit() {
-      // this.isDataLoading = true;
+      this.isDataLoading = true;
       this.route.paramMap
         .pipe(
           switchMap((params: ParamMap) =>
-            this.carsService.getCarById(params.get('id'))
+            this.carsService.getCarById(params.get('id')).
+            pipe(finalize(()=> (this.isDataLoading = false)))
           )
         )
         .subscribe((p) => {
           this.car = p;
         });
-        this.isDataLoading = false;
+      
     }
     ngOnChanges(changes: SimpleChanges): void {}
 
@@ -53,7 +56,7 @@ export class DetailsCarComponent implements OnInit, OnChanges {
       confirmDialog.afterClosed().subscribe((result) => {
         if (result === true) {
           this.carsService.deleteCarById(car).subscribe();
-          this.carsService.getAllCars();
+          // this.carsService.getAllCars();
           this.changePage();
 
         }

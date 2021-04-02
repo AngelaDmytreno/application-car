@@ -1,5 +1,5 @@
-
-<div class="details__container">
+<mat-spinner *ngIf="isDataLoading" class="loading"></mat-spinner>
+<div class="details__container" *ngIf="!isDataLoading">
  
   <div class="car__img" >
     <img [src]="car?.image" [alt]="car?.id">
