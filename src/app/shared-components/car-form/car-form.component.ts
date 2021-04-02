@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject  } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { CarsService } from '../../shared/servises/cars.service';
 import { Car, initCar } from '../../car';
-import { FormGroup, Validators, FormBuilder, FormControl, FormsModule, ReactiveFormsModule , AbstractControl} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl, FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { DealersService } from 'src/app/shared/servises/dealers.service';
 import { Dealers, initDealer } from '../../dealers'
 import { from, Observable } from 'rxjs';
@@ -26,12 +26,7 @@ export class CarFormComponent implements OnInit {
   selectedValue: string;
   showError: boolean = false;
   dealerChange$: Observable<any>;
- 
 
-
-
-
-  
 
   constructor(public carService: CarsService, private popUp: MatDialogRef<CarFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder, public dealerService: DealersService) {
     popUp.disableClose = true;
@@ -47,26 +42,24 @@ export class CarFormComponent implements OnInit {
 
     this.dealerService.getAllDealers().subscribe((re) => {
       this.dealers = re;
-      console.log('dealers',this.dealers);
+
     },
       err => console.log(err)
     );
-    
-
     this.data ? (this.car = { ...this.data }) && (this.action = true) : (this.car = initCar());
     this.formBuild();
-    this.myForm.controls.dealer.valueChanges.pipe(tap( (value) =>{
+    this.myForm.controls.dealer.valueChanges.pipe(tap((value) => {
       this.showError = value && this.dealers && !this.dealers.find((el) => el.name.toLowerCase() === value.toString().toLowerCase());
-      console.log(value);
+
     })).subscribe();
   }
-  // dealerChange()
-  
-  formBuild(): void{
+
+
+  formBuild(): void {
     this.myForm = this.formBuilder.group(
       {
-        model: [null,[Validators.required]],
-        dealer: [null,[Validators.required]],
+        model: [null, [Validators.required]],
+        dealer: [null, [Validators.required]],
         class: [null],
         year: [null],
         color: [null],
@@ -76,33 +69,50 @@ export class CarFormComponent implements OnInit {
 
       }
     );
-    
+
   }
-  
 
 
   onClose(): void {
     this.popUp.close();
   };
 
- 
-  selectDealer(dealerOption: any): void{
-  //  console.log(dealer);
-  this.myForm.controls.dealer.setValue(dealerOption.option.value.name);
+
+  selectDealer(dealerOption: any): void {
+    this.myForm.controls.dealer.setValue(dealerOption.option.value.name);
+  }
+  
+  randomNumber(): string{
+      let result       = '';
+      let words        = '0123456789';
+      let max_position = words.length - 1;
+          for( let i = 0;  i < 11; ++i ) {
+             let position = Math.floor ( Math.random() * max_position );
+              result = result + words.substring(position, position + 1);
+          }
+      return result;
   }
 
-  unicId(): any{
-    return 
+  unicId(): string{
+    let unicId: string;
+    if (this.car.id != this.randomNumber()){
+     unicId = this.randomNumber();
+    }else{
+      this.randomNumber();
+    }
+    console.log(unicId);
+    return unicId;
+   
   }
 
   onSeve() {
-    const selectedDealer=this.dealers.find((el) => el.name.toLowerCase() === this.myForm.value.dealer.toLowerCase()
+    const selectedDealer = this.dealers.find((el) => el.name.toLowerCase() === this.myForm.value.dealer.toLowerCase()
     );
     console.log(this.myForm.value.dealer);
     const updatedDealer = {
       ...this.myForm.value,
-     
-      id: this.unicId(),//уникальное число  проверка на уникальность, this.dealers: 
+
+      id: this.unicId(),
       brand: selectedDealer.id,
       newItem: this.action ? true : false,
       registration: this.action ? this.car.registration : new Date()
@@ -111,7 +121,7 @@ export class CarFormComponent implements OnInit {
       event: 'close',
       data: updatedDealer,
     });
- console.log(updatedDealer);
+    console.log(updatedDealer);
   }
 
   uploadFileEvt($event): void {
