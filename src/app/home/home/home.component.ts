@@ -5,6 +5,8 @@ import { DealersService } from '../../shared/servises/dealers.service';
 import { Dealers } from 'src/app/dealers';
 import { MyDealersComponent } from '../my-dealers/my-dealers.component';
 import { CarFormComponent } from '../../shared-components/car-form/car-form.component'
+import { Car } from 'src/app/car';
+import { CarsService } from 'src/app/shared/servises/cars.service';
 
 @Component({
   selector: 'app-home',
@@ -17,8 +19,11 @@ export class HomeComponent implements OnInit {
 
   createDealer: Dealers;
   newDealersList: Array<Dealers> = new Array<Dealers>();
+  newCarList: Array<Car> = new Array<Car>();
+  createCar: Car;
+
   
-  constructor(public dealersService: DealersService, public popUp: MatDialog) {}
+  constructor(public dealersService: DealersService, public popUp: MatDialog, public carService: CarsService) {}
 
   ngOnInit(): void {
     this.dealersService.getAllDealers().subscribe((dealers)=>{
@@ -48,7 +53,9 @@ export class HomeComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe((result) => {
       if(result){
-       console.log(result);
+        this.createCar = result.data;
+        this.carService.insertCar(this.createCar).subscribe();
+        this.newCarList.push(this.createCar);
       }
     });
   }

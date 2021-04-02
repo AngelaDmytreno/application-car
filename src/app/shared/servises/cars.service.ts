@@ -37,6 +37,12 @@ export class CarsService {
     return this.http
       .delete<Car>(url, httpOptions);
   }
+ 
+  insertCar(car: Car): Observable<Car> {
+    return this.http.post<Car>(`${this.carsUrl}.json`, car, httpOptions);
+  }
+
+  
 }
 
 

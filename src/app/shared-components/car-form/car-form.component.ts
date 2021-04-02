@@ -109,7 +109,7 @@ export class CarFormComponent implements OnInit {
     const selectedDealer = this.dealers.find((el) => el.name.toLowerCase() === this.myForm.value.dealer.toLowerCase()
     );
     console.log(this.myForm.value.dealer);
-    const updatedDealer = {
+    const updatedCar = {
       ...this.myForm.value,
 
       id: this.unicId(),
@@ -119,9 +119,9 @@ export class CarFormComponent implements OnInit {
     };
     this.popUp.close({
       event: 'close',
-      data: updatedDealer,
+      data: updatedCar,
     });
-    console.log(updatedDealer);
+    console.log(updatedCar);
   }
 
   uploadFileEvt($event): void {
