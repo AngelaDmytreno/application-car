@@ -56,7 +56,7 @@ export class CarFormComponent implements OnInit {
     this.data ? (this.car = { ...this.data }) && (this.action = true) : (this.car = initCar());
     this.formBuild();
     this.myForm.controls.dealer.valueChanges.pipe(tap( (value) =>{
-      this.showError = value && this.dealers ?  !! this.dealers.find((el) => el.name.toLowerCase() !== value.toLowerCase()) :  false;
+      this.showError = value && this.dealers && !this.dealers.find((el) => el.name.toLowerCase() === value.toString().toLowerCase());
       console.log(value);
     })).subscribe();
   }
@@ -85,25 +85,25 @@ export class CarFormComponent implements OnInit {
     this.popUp.close();
   };
 
-  checkId():void {
-    this.showError = !! this.dealers.find((el) => el.name.toLowerCase() !== this.myForm.value.dealer.toLowerCase());
-    console.log(this.myForm.value.dealer);
-  }
+ 
   selectDealer(dealerOption: any): void{
   //  console.log(dealer);
-  this.myForm.patchValue({
-    dealer: dealerOption.option.value.name
-  });
+  this.myForm.controls.dealer.setValue(dealerOption.option.value.name);
   }
 
   unicId(): any{
     return 
   }
+
   onSeve() {
+    const selectedDealer=this.dealers.find((el) => el.name.toLowerCase() === this.myForm.value.dealer.toLowerCase()
+    );
+    console.log(this.myForm.value.dealer);
     const updatedDealer = {
-      ...this.car,
+      ...this.myForm.value,
+     
       id: this.unicId(),//уникальное число  проверка на уникальность, this.dealers: 
-      brand: this.dealer.id,
+      brand: selectedDealer.id,
       newItem: this.action ? true : false,
       registration: this.action ? this.car.registration : new Date()
     };
@@ -111,7 +111,7 @@ export class CarFormComponent implements OnInit {
       event: 'close',
       data: updatedDealer,
     });
-
+ console.log(updatedDealer);
   }
 
   uploadFileEvt($event): void {

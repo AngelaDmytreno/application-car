@@ -88,6 +88,6 @@
 
   <div mat-dialog-actions>
     <button mat-button class="cancel-btn" (click)="onClose()">Cancel</button>
-    <button mat-button [disabled]="!car.model || !dealer.id || showError" (click)="onSeve()">Save</button>
+    <button mat-button [disabled]=" showError" (click)="onSeve()">Save</button>
   </div>
 </div>

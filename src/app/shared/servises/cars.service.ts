@@ -29,6 +29,14 @@ export class CarsService {
     const url = `${this.carsUrl}/${id}`;
     return this.http.get<Car>(url);
   }
+
+  deleteCarById(car: Car | string): Observable<Car> {
+    const id: string = typeof car === 'string' ? car : car.id;
+    const url: string = `${this.carsUrl}/${id}`;
+    console.log('url: ', url);
+    return this.http
+      .delete<Car>(url, httpOptions);
+  }
 }
 
 

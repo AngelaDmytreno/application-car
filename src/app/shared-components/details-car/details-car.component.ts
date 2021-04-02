@@ -5,7 +5,7 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Car } from '../../car';
@@ -24,7 +24,8 @@ export class DetailsCarComponent implements OnInit, OnChanges {
     constructor(
       private route: ActivatedRoute,
       private carsService: CarsService,
-      public dialog: MatDialog
+      public dialog: MatDialog,
+      private router: Router
     ) {}
     
     ngOnInit() {
@@ -42,7 +43,7 @@ export class DetailsCarComponent implements OnInit, OnChanges {
     }
     ngOnChanges(changes: SimpleChanges): void {}
 
-    delete(): void {
+    delete(car: Car): void {
       const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
         data: {
           title: 'Delete?',
@@ -50,9 +51,19 @@ export class DetailsCarComponent implements OnInit, OnChanges {
         }
       });
       confirmDialog.afterClosed().subscribe((result) => {
+        if (result === true) {
+          this.carsService.deleteCarById(car).subscribe();
+          this.carsService.getAllCars();
+          this.changePage();
+
+        }
        
       })
   
     }
+
+   changePage():void{
+   this.router.navigate(['/cars']);
+   }  
 
 }
