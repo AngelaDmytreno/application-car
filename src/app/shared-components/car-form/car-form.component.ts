@@ -1,12 +1,13 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject  } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { CarsService } from '../../shared/servises/cars.service';
 import { Car, initCar } from '../../car';
-import { FormGroup, Validators, FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl, FormsModule, ReactiveFormsModule , AbstractControl} from '@angular/forms';
 import { DealersService } from 'src/app/shared/servises/dealers.service';
 import { Dealers, initDealer } from '../../dealers'
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-car-form',
@@ -23,6 +24,14 @@ export class CarFormComponent implements OnInit {
   localData: any;
   myForm: FormGroup;
   selectedValue: string;
+  showError: boolean = false;
+  dealerChange$: Observable<any>;
+ 
+
+
+
+
+  
 
   constructor(public carService: CarsService, private popUp: MatDialogRef<CarFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder, public dealerService: DealersService) {
     popUp.disableClose = true;
@@ -45,25 +54,48 @@ export class CarFormComponent implements OnInit {
     
 
     this.data ? (this.car = { ...this.data }) && (this.action = true) : (this.car = initCar());
+    this.formBuild();
+    this.myForm.controls.dealer.valueChanges.pipe(tap( (value) =>{
+      this.showError = value && this.dealers ?  !! this.dealers.find((el) => el.name.toLowerCase() !== value.toLowerCase()) :  false;
+      console.log(value);
+    })).subscribe();
+  }
+  // dealerChange()
+  
+  formBuild(): void{
     this.myForm = this.formBuilder.group(
       {
-        model: [null, Validators.required],
-        dealer: [null, Validators.required],
+        model: [null,[Validators.required]],
+        dealer: [null,[Validators.required]],
         class: [null],
         year: [null],
         color: [null],
-        wikilink: [null],
+        wikilink: [null, [Validators.pattern(/^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/)]], //Validators.pattern()
         description: [null],
         image: [null],
 
       }
     );
+    
   }
+  
 
 
   onClose(): void {
     this.popUp.close();
   };
+
+  checkId():void {
+    this.showError = !! this.dealers.find((el) => el.name.toLowerCase() !== this.myForm.value.dealer.toLowerCase());
+    console.log(this.myForm.value.dealer);
+  }
+  selectDealer(dealerOption: any): void{
+  //  console.log(dealer);
+  this.myForm.patchValue({
+    dealer: dealerOption.option.value.name
+  });
+  }
+
   unicId(): any{
     return 
   }
