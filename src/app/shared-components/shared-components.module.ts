@@ -9,7 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule   } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { ConfirmationDialogComponent } from "../shared-components/confirmation-dialog/confirmation-dialog.component";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -24,7 +24,7 @@ import { EditCarComponent } from './edit-car/edit-car.component';
 @NgModule({
   declarations: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent, EditCarComponent],
   
-  exports: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent],
+  exports: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent, EditCarComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -46,6 +46,7 @@ import { EditCarComponent } from './edit-car/edit-car.component';
 
 
   ],
+ 
   entryComponents: [
     ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent
   ]

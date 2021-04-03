@@ -21,8 +21,9 @@ export class CarsService {
   getAllCars(): Observable<Array<Car>> {
     return this.http.get<Array<Car>>(this.carsUrl);
   }
-  updateCars (car: Car): Observable<any> {
-    return this.http.put(this.carsUrl, car, httpOptions); 
+  updateCars (car: Car): Observable<Car> {
+    console.log(car);
+    return this.http.put<Car>(`${this.carsUrl}.json`, car, httpOptions);
   }
 
   getCarById(id: string): Observable<Car> {
@@ -42,6 +43,7 @@ export class CarsService {
     return this.http.post<Car>(`${this.carsUrl}.json`, car, httpOptions);
   }
 
+ 
   
 }
 
