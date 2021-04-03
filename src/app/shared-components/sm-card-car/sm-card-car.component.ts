@@ -4,6 +4,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { CarsService } from '../../shared/servises/cars.service';
 import { RouterModule } from '@angular/router';
 import { Dealers } from 'src/app/dealers';
+import { DealersService } from 'src/app/shared/servises/dealers.service';
  
 @Component({
   selector: 'app-sm-card-car',
@@ -14,13 +15,13 @@ export class SmCardCarComponent implements OnInit {
 
   @Input('car-item') carItem: Car;
   @Input('card-type') cardType: string;
-  @Input('dealer-item') dealerItem : Dealers
+  @Input('brand') brand: string;
 
   isCardLg: boolean = false;
   
   addParameter:boolean=false;
 
-  constructor( public carsService: CarsService) { }
+  constructor(public carsService: CarsService, public dealerService: DealersService) { }
   
   ngOnInit(): void { 
     if (this.cardType === 'lg') {

@@ -26,7 +26,7 @@ export class CarFormComponent implements OnInit {
   selectedValue: string;
   showError: boolean = false;
   dealerChange$: Observable<any>;
-
+  selectedImagePath: string;
 
   constructor(public carService: CarsService, private popUp: MatDialogRef<CarFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder, public dealerService: DealersService) {
     popUp.disableClose = true;
@@ -66,7 +66,6 @@ export class CarFormComponent implements OnInit {
         wikilink: [null, [Validators.pattern(/^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/)]], //Validators.pattern()
         description: [null],
         image: [null],
-
       }
     );
 
@@ -77,45 +76,46 @@ export class CarFormComponent implements OnInit {
     this.popUp.close();
   };
 
-
   selectDealer(dealerOption: any): void {
     this.myForm.controls.dealer.setValue(dealerOption.option.value.name);
   }
-  
-  randomNumber(): string{
-      let result       = '';
-      let words        = '0123456789';
-      let max_position = words.length - 1;
-          for( let i = 0;  i < 11; ++i ) {
-             let position = Math.floor ( Math.random() * max_position );
-              result = result + words.substring(position, position + 1);
-          }
-      return result;
+
+  randomNumber(): string {
+    let result = '';
+    let words = '0123456789';
+    let max_position = words.length - 1;
+    for (let i = 0; i < 11; ++i) {
+      let position = Math.floor(Math.random() * max_position);
+      result = result + words.substring(position, position + 1);
+    }
+    return result;
   }
 
-  unicId(): string{
+  unicId(): string {
     let unicId: string;
-    if (this.car.id != this.randomNumber()){
-     unicId = this.randomNumber();
-    }else{
+    if (this.car.id != this.randomNumber()) {
+      unicId = this.randomNumber();
+    } else {
       this.randomNumber();
     }
     console.log(unicId);
     return unicId;
-   
   }
 
   onSeve() {
     const selectedDealer = this.dealers.find((el) => el.name.toLowerCase() === this.myForm.value.dealer.toLowerCase()
     );
     console.log(this.myForm.value.dealer);
+
+
     const updatedCar = {
       ...this.myForm.value,
 
       id: this.unicId(),
       brand: selectedDealer.id,
       newItem: this.action ? true : false,
-      registration: this.action ? this.car.registration : new Date()
+      registration: this.action ? this.car.registration : new Date(),
+      image: this.selectedImagePath
     };
     this.popUp.close({
       event: 'close',
@@ -124,7 +124,9 @@ export class CarFormComponent implements OnInit {
     console.log(updatedCar);
   }
 
-  uploadFileEvt($event): void {
-    console.log($event);
+  uploadFileEvt(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.selectedImagePath = "./assets/images/" + event.target.files[0].name;
+    }
   }
 }

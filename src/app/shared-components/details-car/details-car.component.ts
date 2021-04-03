@@ -22,6 +22,7 @@ export class DetailsCarComponent implements OnInit, OnChanges {
 
     car: Car;
     isDataLoading: boolean = true;
+    id: string
 
     constructor(
       private route: ActivatedRoute,
@@ -34,15 +35,15 @@ export class DetailsCarComponent implements OnInit, OnChanges {
       this.isDataLoading = true;
       this.route.paramMap
         .pipe(
-          switchMap((params: ParamMap) =>
-            this.carsService.getCarById(params.get('id')).
-            pipe(finalize(()=> (this.isDataLoading = false)))
+          switchMap((params: ParamMap) =>  {
+            this.id = params.get('id');
+            return this.carsService.getCarById(params.get('id')).
+            pipe(finalize(()=> (this.isDataLoading = false)));
+          }
           )
-        )
-        .subscribe((p) => {
+        ).subscribe((p) => {
           this.car = p;
         });
-      
     }
     ngOnChanges(changes: SimpleChanges): void {}
 
@@ -68,5 +69,9 @@ export class DetailsCarComponent implements OnInit, OnChanges {
    changePage():void{
    this.router.navigate(['/cars']);
    }  
+
+   onEdit(): void {
+    this.router.navigate([`/cars/${this.id}/edit`]);
+   }
 
 }

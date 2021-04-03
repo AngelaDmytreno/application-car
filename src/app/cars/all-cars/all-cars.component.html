@@ -13,7 +13,7 @@
   </div>
   <div class="all-car__list-container"  *ngIf="!isDataLoading">
     <div *ngFor="let carItem of selectedCars">
-      <app-sm-card-car [car-item]="carItem"  [card-type]="'lg'"></app-sm-card-car>
+      <app-sm-card-car [car-item]="carItem" [brand]="getBrandName(carItem.brand)"  [card-type]="'lg'"></app-sm-card-car>
     </div>
   </div> 
   <section *ngIf="!isDataLoading">

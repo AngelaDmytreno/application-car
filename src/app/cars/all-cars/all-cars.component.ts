@@ -41,6 +41,11 @@ export class AllCarsComponent implements OnInit {
     );
   }
 
+  getBrandName(brand: string): string {
+    const dealer = this.dealersList.find((dealer: Dealers) => dealer.id === brand);
+    return dealer.name;
+  }
+
   onKey(event: any) {
     setTimeout(() => this.filterCars(event.target.value), 2000);
   }
