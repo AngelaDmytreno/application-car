@@ -73,5 +73,9 @@ export class DetailsCarComponent implements OnInit, OnChanges {
    onEdit(): void {
     this.router.navigate([`/cars/${this.id}/edit`]);
    }
+   
 
+   goBack(){
+    this.router.navigate([`/cars`]);
+   }
 }

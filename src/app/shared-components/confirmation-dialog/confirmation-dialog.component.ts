@@ -13,11 +13,11 @@ export class ConfirmationDialogComponent implements OnInit {
 
   constructor(public dealersService: DealersService,
     public dialogRef: MatDialogRef<ConfirmationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { 
-      dialogRef.disableClose = true;
-    }
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+    dialogRef.disableClose = true;
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  
+
 }

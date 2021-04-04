@@ -5,13 +5,15 @@
  flex-direction: row;
  justify-content: space-between;
  padding: 10px 10px 0px 40px;
-}
-
-.example-button-row {
+ .example-button-row {
   display: table-cell;
   width: 360px;
 }
 .example-button-row .mat-button-base {
   margin: 8px 20px 8px 0;
 }
+}
+
+
+
 

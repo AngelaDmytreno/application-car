@@ -1,50 +1,52 @@
 .mat-card  {
+  
   margin-top: 20px;
+  .mat-card-header {
+    justify-content: space-between;
+    margin-left: -20px;
+    .example-header-image {
+      background-size: cover;
+    }
+    .mat-card-image {
+      width: calc(100% + 32px);
+      margin: 0 -16px 16px -16px;
+      max-height: 100px; 
+    }
+  }
+  .btn-like{
+    color: gold;
+  }
+  .btn-details{
+    color: purple;
+  }
+  
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  .example-button-row {
+    display: table-cell;
+    width: 490px;
+  }
+  .example-button-row .mat-button-base {
+    margin: 8px 8px 8px 0;
+  }
+  .example-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 120px;
+  }
+  
 }
-.example-header-image {
-  background-size: cover;
-}
-.mat-card-header {
-  justify-content: space-between;
-  margin-left: -20px;
-}
-.mat-card-image {
-	width: calc(100% + 32px);
-	margin: 0 -16px 16px -16px;
-	max-height: 100px; 
-}
-section {
-  display: table;
-}
-.example-label {
-  display: table-cell;
-  font-size: 14px;
-  margin-left: 8px;
-  min-width: 120px;
-}
-.example-button-row {
-  display: table-cell;
-  width: 490px;
-}
-.example-button-row .mat-button-base {
-  margin: 8px 8px 8px 0;
-}
-.example-flex-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-.example-button-container {
-  display: flex;
-  justify-content: center;
-  width: 120px;
-}
-.btn-like{
-  color: gold;
-}
-.btn-details{
-  color: purple;
-}
+
+
 .sizes-sm{
   width: 90px;
   margin-bottom: 5px;
@@ -82,13 +84,17 @@ section {
 }
 .img-sm{
   width: calc(100% + 32px);
-	margin: 0 -16px 16px -16px;
-	max-height: 60px; 
+  margin: 0 -16px 16px -16px;
+  max-height: 60px; 
   object-fit: cover;
 }
 .img-lg{
   width: calc(100% + 32px);
-	margin: 0 -16px 16px -16px;
-	max-height: 100px; 
+  margin: 0 -16px 16px -16px;
+  max-height: 100px; 
   object-fit: cover;
 }
+
+
+
+

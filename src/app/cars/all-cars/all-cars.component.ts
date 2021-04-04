@@ -10,25 +10,25 @@ import { DealersService } from 'src/app/shared/servises/dealers.service';
   styleUrls: ['./all-cars.component.scss']
 })
 export class AllCarsComponent implements OnInit {
-  
-  valueFilter:string;
+
+  valueFilter: string;
   carListItems: Array<Car> = new Array<Car>();
   selectedCars: Array<Car> = new Array<Car>();
   loadCount: number = 8;
-  startCard: number = 0; 
+  startCard: number = 0;
   endCard: number = 8;
   isDataLoading: boolean;
-  useFilter:boolean;
-  dealersList:Array<Dealers>
+  useFilter: boolean;
+  dealersList: Array<Dealers>
 
   constructor(public carsService: CarsService, public dealerService: DealersService) { }
 
   ngOnInit(): void {
     this.isDataLoading = true;
     this.dealerService.getAllDealers().subscribe(
-      (re)=>{
+      (re) => {
         this.dealersList = re;
-      },err => console.log(err)
+      }, err => console.log(err)
 
     )
     this.carsService.getAllCars().subscribe(
@@ -43,11 +43,11 @@ export class AllCarsComponent implements OnInit {
 
   getBrandName(brand: string): string {
     const dealer = this.dealersList.find((dealer: Dealers) => dealer.id === brand);
-    if(dealer){
+    if (dealer) {
       return dealer.name;
     } else {
       return "";
-    } 
+    }
   }
 
   onKey(event: any) {
@@ -72,16 +72,16 @@ export class AllCarsComponent implements OnInit {
   }
 
   loadMore(): void {
-      this.startCard = this.endCard;
-      this.endCard += 8;
-      this.selectedCars.push(...this.carListItems.slice(this.startCard, this.endCard));
+    this.startCard = this.endCard;
+    this.endCard += 8;
+    this.selectedCars.push(...this.carListItems.slice(this.startCard, this.endCard));
   }
 
   isShowLoadButton(): boolean {
     return this.selectedCars.length >= 8 && this.selectedCars.length !== this.carListItems.length;
   }
 
-  resetFilter(): void{
+  resetFilter(): void {
     this.resetStartEnd();
     this.valueFilter = '';
     this.selectedCars = this.carListItems.slice(0, this.loadCount);

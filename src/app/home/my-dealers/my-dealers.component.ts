@@ -16,7 +16,7 @@ export class MyDealersComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
 
 }

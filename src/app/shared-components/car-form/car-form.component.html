@@ -11,14 +11,11 @@
                             myForm.get('model').touched">
           Model is required
         </mat-error>
-
-
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
         <mat-label>*Dealer</mat-label>
-        <input type="text" matInput #dealer  formControlName="dealer"
-          [matAutocomplete]="auto">
+        <input type="text" matInput #dealer formControlName="dealer" [matAutocomplete]="auto">
         <mat-error *ngIf="myForm.get('dealer').hasError('required') && 
                             myForm.get('dealer').touched">
           Dealer is required
@@ -81,8 +78,6 @@
             multiple="multiple" accept="image/*" />
         </div>
       </mat-form-field>
-
-
     </form>
   </div>
 

@@ -8,11 +8,8 @@ import {
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { from } from 'rxjs';
 import { finalize, switchMap } from 'rxjs/operators';
-
-
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { CarFormComponent } from '../car-form/car-form.component';
-
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { CarsService } from '../../shared/servises/cars.service';
@@ -37,7 +34,6 @@ export class EditCarComponent implements OnInit {
   isDataLoading: boolean = true;
   id: string;
   carsList: Array<Car>;
-
   dealers: Array<Dealers>;
   dealer: Dealers;
   action: boolean;
@@ -53,7 +49,8 @@ export class EditCarComponent implements OnInit {
     private carsService: CarsService,
     public dialog: MatDialog,
     private router: Router,
-    private formBuilder: FormBuilder, public dealerService: DealersService
+    private formBuilder: FormBuilder,
+    public dealerService: DealersService
   ) { }
 
   ngOnInit(): void {
@@ -69,6 +66,10 @@ export class EditCarComponent implements OnInit {
       ).subscribe((p) => {
         this.car = p;
         this.formBuild();
+        this.myForm.controls.dealer.valueChanges.pipe(tap((value) => {
+          this.showError = value && this.dealers && !this.dealers.find((el) => el.name.toLowerCase() === value.toString().toLowerCase());
+
+        })).subscribe();
       });
 
     this.carsService.getAllCars().subscribe(
@@ -80,13 +81,10 @@ export class EditCarComponent implements OnInit {
 
     this.dealerService.getAllDealers().subscribe((re) => {
       this.dealers = re;
-
     },
       err => console.log(err)
     );
-    // this.myForm.controls.dealer.valueChanges.pipe(tap((value) => {
-    //   this.showError = value && this.dealers && !this.dealers.find((el) => el.name.toLowerCase() === value.toString().toLowerCase());
-    // })).subscribe();
+
   }
 
   formBuild(): void {
@@ -100,7 +98,7 @@ export class EditCarComponent implements OnInit {
         color: [this.car.color],
         wikilink: [this.car.wikilink, [Validators.pattern(/^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/)]], //Validators.pattern()
         description: [this.car.description],
-        image: [null],
+        image: [this.car.image],
       }
     );
 
@@ -110,11 +108,11 @@ export class EditCarComponent implements OnInit {
   }
   onSeve(): void {
     const updatedCar: Car = this.myForm.value;
-    
     this.carsService.updateCars(updatedCar).subscribe(
-     (res) => console.log(res),
-     (err) => console.log(err)
+      (res) => console.log(res),
+      (err) => console.log(err)
     );
+    this.onClose();
   }
 
   selectDealer(dealerOption: any): void {
