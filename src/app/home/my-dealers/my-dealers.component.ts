@@ -9,18 +9,14 @@ import { Dealers } from 'src/app/dealers';
 })
 export class MyDealersComponent implements OnInit {
 
-  newDealersList: Array<Dealers> = new Array<Dealers>();
+
 
   @Input('new-dealers') newDealers: Array<Dealers>;
 
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
 
-  addNewDealer(dealer: Dealers): void {
-    this.newDealersList.push(dealer);
-    console.log(this.newDealersList);
-  }
 }

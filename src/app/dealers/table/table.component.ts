@@ -48,22 +48,19 @@ export class TableComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-
-
   openPopUp(obj = null) {
     const dialogRef = this.popUp.open(FormComponent, {
       width: '250px',
       data: obj,
     });
     dialogRef.afterClosed().subscribe((result) => {
+      this.createDealer = result.data;
       if (result.data.newRecord === true) {
-        this.createDealer = result.data;
         this.dealersService.insertDealers(this.createDealer).subscribe();
       } else if (result.data.newRecord === false) {
         this.dealersService.updateDealers(this.createDealer).subscribe();
       }
       this.tableUpdate();
-
     });
   }
 

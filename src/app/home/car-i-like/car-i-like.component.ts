@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CarsService } from '../../shared/servises/cars.service';
 import { Car } from '../../shared/entities/car.interface';
+import { Dealers } from 'src/app/dealers';
+import { DealersService } from 'src/app/shared/servises/dealers.service';
 
 @Component({
   selector: 'app-car-i-like',
@@ -12,8 +14,10 @@ export class CarILikeComponent implements OnInit {
   carItems: Array<Car> = new Array<Car>();
   allCarListItems: Array<Car> = new Array<Car>();
   isDataLoading: boolean;
+  allDealersList: Array<Dealers> = new Array<Dealers>();
 
-  constructor(public carsService: CarsService) { }
+
+  constructor(public carsService: CarsService, public dealerService: DealersService) { }
 
   ngOnInit(): void {
     this.isDataLoading = true;
@@ -26,6 +30,22 @@ export class CarILikeComponent implements OnInit {
       },
       err => console.log(err)
     );
+
+    this.dealerService.getAllDealers().subscribe(
+      res => {
+        this.allDealersList = res;
+      },
+      err => console.log(err)
+    );
+  }
+
+  getBrandName(brand: string): string {
+    const dealer = this.allDealersList.find((dealer: Dealers) => dealer.id === brand);
+    if (dealer) {
+      return dealer.name;
+    } else {
+      return "";
+    }
   }
 
   getFavoriteCars(): any {

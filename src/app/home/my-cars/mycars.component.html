@@ -2,7 +2,18 @@
   <div class="mycar__item">
     <h4>My cars</h4>
   </div>
-  <div class="mycar__text">
+
+  <mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let car of newCars">
+      <span class="name"><b>{{car.model}}</b></span>
+      <div class="info">
+        <span class="country">{{car.brand}}</span>
+        <span class="registration">{{car.registration | date:'d/M/YYYY' }}</span>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+
+  <div *ngIf="newCars.length === 0" class="mycar__text">
     <p>You havent added any cars yet</p>
   </div>
 </div>

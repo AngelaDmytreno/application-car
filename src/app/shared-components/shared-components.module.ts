@@ -9,16 +9,22 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
+import { MatDialogModule   } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { ConfirmationDialogComponent } from "../shared-components/confirmation-dialog/confirmation-dialog.component";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CarFormComponent } from './car-form/car-form.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterModule } from '@angular/router';
+import { DetailsCarComponent } from './details-car/details-car.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { EditCarComponent } from './edit-car/edit-car.component'; 
 
 
 @NgModule({
-  declarations: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent],
+  declarations: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent, EditCarComponent],
   
-  exports: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent],
+  exports: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent, EditCarComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -30,11 +36,19 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule,
     MatDialogModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ReactiveFormsModule,
+    MatToolbarModule,
+    RouterModule,
+    MatSelectModule,
+    MatAutocompleteModule
+    
+
 
   ],
+ 
   entryComponents: [
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent
   ]
 })
 export class SharedComponentsModule { }

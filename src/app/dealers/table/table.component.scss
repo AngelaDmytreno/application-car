@@ -1,33 +1,28 @@
-
 .container__input{
   width: 1150px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  
-}
-.mat-form-field{
-  width: 200px;
-  font-size: 14px;
+  .loading{
+    margin-top: 200px;
+    margin-left: 500px;
+  }
+  .mat-form-field{
+    width: 200px;
+    font-size: 14px;
+  }
+  .example-button-row {
+    display: table-cell;
+  }
+  .example-button-row .mat-button-base {
+    margin: 8px 8px 8px 0;
+  } 
 }
 .mat-table{
   width: 1150px;
   height: 100%;
-}
-td, th{
-width: 15%;
-}
-.example-button-row {
-  display: table-cell;
-}
-.example-button-row .mat-button-base {
-  margin: 8px 8px 8px 0;
-}
-table {
-  width: 100%;
-}
-.loading{
-margin-top: 200px;
-margin-left: 500px;
+  td, th{
+    width: 15%;
+  }
 }
 

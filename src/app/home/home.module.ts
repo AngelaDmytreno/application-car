@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { MatButtonModule } from '@angular/material/button';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import {MatListModule} from '@angular/material/list'; 
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
@@ -24,7 +25,9 @@ import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/
     MatButtonModule,
     SharedComponentsModule,
     MatListModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    FormsModule,
+    ReactiveFormsModule,
     
   ],
   providers: []

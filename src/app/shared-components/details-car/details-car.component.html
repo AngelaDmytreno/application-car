@@ -1,0 +1,30 @@
+<mat-spinner *ngIf="isDataLoading" class="loading"></mat-spinner>
+<div class="details__container" *ngIf="!isDataLoading">
+ 
+  <div class="car__img" >
+    <img [src]="car?.image" [alt]="car?.id">
+    <img *ngIf="car?.image == undefined" src="../../../assets/images/defoult.jpg" [alt]="car?.id">
+  </div>
+
+  <div class="car__info">
+    
+    <ul>
+      <li><h4>{{car?.model}}</h4> </li>
+      <li>Dealers: <b>{{car?.brand}}</b></li>
+      <li>Class: <b>{{car?.class |titlecase}}</b></li>
+      <li>Year: <b>{{car?.year}}</b></li>
+      <li>Color: <b>{{car?.color}}</b></li>
+      <li class="car__site">Site: <b><a href="{{car?.wikilink}}" target="blank">{{car?.wikilink}}</a></b></li>
+      <li class="car__description">{{car?.description}}</li>
+    </ul>
+  </div>
+  <button mat-icon-button (click)="onEdit()">
+    <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+  </button>
+  <button  mat-icon-button (click)="delete(car)">
+    <mat-icon aria-hidden="false" aria-label="Example home icon"  >delete</mat-icon>
+  </button>
+  <button  mat-icon-button (click)="goBack()">
+    <mat-icon aria-hidden="false" aria-label="Example home icon"  >replay</mat-icon>
+  </button>
+</div>

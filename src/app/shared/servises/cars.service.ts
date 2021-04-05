@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Car } from '../entities/car.interface';
+import { Car } from '../../car'
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -21,9 +21,30 @@ export class CarsService {
   getAllCars(): Observable<Array<Car>> {
     return this.http.get<Array<Car>>(this.carsUrl);
   }
-  updateCars (car: Car): Observable<any> {
-    return this.http.put(this.carsUrl, car, httpOptions); 
+  updateCars (car: Car): Observable<Car> {
+    console.log(car);
+    return this.http.put<Car>(`${this.carsUrl}.json`, car, httpOptions);
   }
+
+  getCarById(id: string): Observable<Car> {
+    const url = `${this.carsUrl}/${id}`;
+    return this.http.get<Car>(url);
+  }
+
+  deleteCarById(car: Car | string): Observable<Car> {
+    const id: string = typeof car === 'string' ? car : car.id;
+    const url: string = `${this.carsUrl}/${id}`;
+    console.log('url: ', url);
+    return this.http
+      .delete<Car>(url, httpOptions);
+  }
+ 
+  insertCar(car: Car): Observable<Car> {
+    return this.http.post<Car>(`${this.carsUrl}.json`, car, httpOptions);
+  }
+
+ 
+  
 }
 
 

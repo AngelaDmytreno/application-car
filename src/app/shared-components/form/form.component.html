@@ -33,13 +33,13 @@
       </mat-form-field>
       <mat-form-field >
         <mat-label>Founded In</mat-label>
-        <input [ngModelOptions]="{ standalone: true }" name="foundedIn" matInput placeholder="Founded In" [(ngModel)]="dealer.foundedIn" >
+        <input type="" [ngModelOptions]="{ standalone: true }" name="foundedIn" matInput placeholder="Founded In" [(ngModel)]="dealer.foundedIn" >
       </mat-form-field>
       </form>
   </div>
   <div mat-dialog-actions>
     <button mat-button class="cancel-btn" (click)="onClose()">Cancel</button>
-    <button mat-button [disabled]="!dealer.id || !dealer.name || showError" (click)="onSeve()">Save</button> 
+    <button mat-button [disabled]="!dealer.id || !dealer.name || showError || dealer.name.length < 3 " (click)="onSeve()">Save</button> 
   </div>
 </div>
 

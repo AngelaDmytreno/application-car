@@ -2,6 +2,7 @@
   <div class="dealers__item">
     <h4>My Dealers</h4>
   </div>
+
   <mat-selection-list [multiple]="false">
     <mat-list-option *ngFor="let dealer of newDealers">
       <span class="name"><b>{{dealer.name}}</b></span>
@@ -9,9 +10,9 @@
         <span class="country">{{dealer.country}}</span>
         <span class="registration">{{dealer.registration | date:'d/M/YYYY' }}</span>
       </div>
-      
-      <div *ngIf="dealer.length === 0" class="dealers__text">
-        <p>You havent added any dealrs yet</p>
-      </div>
     </mat-list-option>
   </mat-selection-list>
+
+  <div *ngIf="newDealers.length === 0" class="dealers__text">
+    You havent added any dealrs yet
+  </div>
