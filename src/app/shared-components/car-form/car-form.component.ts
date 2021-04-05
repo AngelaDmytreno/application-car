@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Injector} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { CarsService } from '../../shared/servises/cars.service';
@@ -28,8 +28,25 @@ export class CarFormComponent implements OnInit {
   dealerChange$: Observable<any>;
   selectedImagePath: string;
 
-  constructor(public carService: CarsService, private popUp: MatDialogRef<CarFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder, public dealerService: DealersService) {
-    popUp.disableClose = true;
+  
+ 
+
+  // constructor(
+  //   public carService: CarsService, private popUp: MatDialogRef<CarFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder, public dealerService: DealersService
+  //   ) {
+  //   popUp.disableClose = true;
+  // }
+
+  private popUp = null;
+  private data;
+  constructor(
+    private injector: Injector,
+    public carService: CarsService,
+    private formBuilder: FormBuilder,
+    public dealerService: DealersService
+  ) {
+    this.popUp = this.injector.get(MatDialogRef, null);
+    this.data = this.injector.get(MAT_DIALOG_DATA, null);
   }
 
   ngOnInit(): void {
@@ -71,7 +88,7 @@ export class CarFormComponent implements OnInit {
 
   }
 
-
+  
   onClose(): void {
     this.popUp.close();
   };
