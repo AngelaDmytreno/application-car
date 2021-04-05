@@ -7,6 +7,7 @@
   display: flex;
   justify-content: space-between;
   padding: 40px;
+  
   .car__img{
     width: 600px;
     height: 400px;
@@ -20,6 +21,9 @@
   .car__info{
     width: 350px;
     margin-left: 20px;
+    .mat-dialog-content{
+      max-height: 80vh;
+    }
     .mat-form-field{
       width: 350px;
       .mat-hint{
