@@ -3,6 +3,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Car } from 'src/app/car';
 import { CarFormComponent, FormDataOutput} from '../car-form/car-form.component';
 import { CarsService } from '../../shared/servises/cars.service';
+import { DealersService } from 'src/app/shared/servises/dealers.service';
+import { Dealers } from 'src/app/dealers';
 
 @Component({
   selector: 'app-dialog-car-form',
@@ -14,7 +16,8 @@ export class DialogCarFormComponent implements OnInit {
 
    cars: Array<Car>;
   
-  constructor(private popUp: MatDialogRef<DialogCarFormComponent>) { }
+  constructor(private popUp: MatDialogRef<DialogCarFormComponent>, 
+    private carsService: CarsService, private dealerService: DealersService) { }
 
   ngOnInit(): void {
     
@@ -33,13 +36,29 @@ export class DialogCarFormComponent implements OnInit {
       this.onClose();
     }
   }
+
   onSave(data: Car): void{
+    console.log("trololo");
     const newCar: Car = {
       ...data,
       // id:  this.unicId()
-
     };
+    
     this.popUp.close({event : 'close', data: newCar})
+
+    if (!data) {
+      return
+    }
+    console.log("trololo");
+
+    this.carsService.insertCar(data).subscribe(() => {
+      this.dealerService.getDealerById(newCar.brand).subscribe((dealer: Dealers) => {
+        this.dealerService.updateDealers({
+          ...dealer,
+          amountOfCars: dealer.amountOfCars + 1,
+        }).subscribe();
+      });
+    });
   }
    
   onClose(): void{

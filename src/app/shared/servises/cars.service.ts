@@ -17,14 +17,14 @@ const httpOptions = {
 export class CarsService {
 
   private carsUrl: string = '/cars';
- 
-  constructor(private http: HttpClient, private dealersService: DealersService ) { }
-  
+
+  constructor(private http: HttpClient, private dealersService: DealersService) { }
+
   getAllCars(): Observable<Array<Car>> {
     return this.http.get<Array<Car>>(this.carsUrl);
   }
-  updateCars (car: Car): Observable<Car> {
-    console.log(car);
+
+  updateCars(car: Car): Observable<Car> {
     return this.http.put<Car>(`${this.carsUrl}.json`, car, httpOptions);
   }
 
@@ -40,31 +40,42 @@ export class CarsService {
     const url: string = `${this.carsUrl}/${car.id}`;
     return this.http.delete<Car>(url, httpOptions).pipe(
       switchMap(() => this.dealersService.getDealerById(car.brand)),
-    switchMap((dealer: Dealers) =>
-      this.dealersService.updateDealers({
-        ...dealer,
-        amountOfCars: dealer.amountOfCars - 1,
-      })
-    )
-    
-    );
-  }
- 
-  insertCar(car: Car): Observable<Car> {
-    return this.http.post<Car>(`${this.carsUrl}.json`, car, httpOptions).pipe(
-      switchMap(() => this.dealersService.getDealerById(car.brand)),
-    switchMap((dealer: Dealers) =>
-      this.dealersService.updateDealers({
-        ...dealer,
-        amountOfCars: dealer.amountOfCars + 1,
-      })
-    )
-    
+      switchMap((dealer: Dealers) =>
+        this.dealersService.updateDealers({
+          ...dealer,
+          amountOfCars: dealer.amountOfCars - 1,
+        })
+      )
+
     );
   }
 
- 
-  
+  insertCar(car: Car): Observable<Car> {
+    return this.http.post<Car>(`${this.carsUrl}.json`, car, httpOptions).pipe(
+      switchMap(() => this.dealersService.getDealerById(car.brand)),
+      switchMap((dealer: Dealers) =>
+        this.dealersService.updateDealers({
+          ...dealer,
+          amountOfCars: dealer.amountOfCars++,
+        })
+      )
+
+    );
+  }
+
+  // addCar(car: CarItem): Observable<void> {
+  //   return this.http.post<CarItem>(this.carsUrl, car, this.httpOptions).pipe(
+  //     switchMap(() => this.dealersService.getDealerById(car.brand)),
+  //     switchMap((dealer: DealerItem) =>
+  //       this.dealersService.updateDealer({
+  //         ...dealer,
+  //         amountOfCars: dealer.amountOfCars + 1,
+  //       })
+  //     ),
+  //     catchError(this.handleError<CarItem>('addCar'))
+  //   );
+  // }
+
 }
 
 
