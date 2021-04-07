@@ -25,7 +25,7 @@
         <mat-option [value]="null" seleced disabled>
           CHOOSE A DEALER
         </mat-option>
-        <mat-option *ngFor="let dealer of dealers" [value]="dealer">
+        <mat-option *ngFor="let dealer of dealers$ | async" [value]="dealer">
           {{dealer.id}}
         </mat-option>
       </mat-autocomplete>

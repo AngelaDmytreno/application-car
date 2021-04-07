@@ -7,10 +7,9 @@
   </div>
 
   <div class="car__info"*ngIf="!isEdit">
-    
     <ul>
-      <li><h4>{{car?.model}}</h4> </li>
-      <li>Dealers: <b>{{car?.brand}}</b></li>
+      <li><h4>{{car.model}}</h4> </li>
+      <li>Dealers: <b>{{car.brand}}</b></li>
       <li>Class: <b>{{car?.class |titlecase}}</b></li>
       <li>Year: <b>{{car?.year}}</b></li>
       <li>Color: <b>{{car?.color}}</b></li>
@@ -30,9 +29,8 @@
     </button>
   </div>
 
-  <section>
-    <app-car-form  *ngIf="isEdit" [carItem] ="car"></app-car-form>
-    <!-- vs jhnbfjkmyui -->
+  <section *ngIf="isEdit">
+    <app-car-form   [carItem] ="car" (formData)="formData($event)"></app-car-form>
   </section>
  
   
