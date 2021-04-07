@@ -18,13 +18,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { DetailsCarComponent } from './details-car/details-car.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { EditCarComponent } from './edit-car/edit-car.component'; 
+import { EditCarComponent } from './edit-car/edit-car.component';
+import { DialogCarFormComponent } from './dialog-car-form/dialog-car-form.component'; 
 
 
 @NgModule({
-  declarations: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent, EditCarComponent],
+  declarations: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent, EditCarComponent, DialogCarFormComponent],
   
-  exports: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent, EditCarComponent],
+  exports: [SmCardCarComponent, FormComponent, ConfirmationDialogComponent, CarFormComponent, DetailsCarComponent, EditCarComponent, DialogCarFormComponent],
   imports: [
     CommonModule,
     MatCardModule,

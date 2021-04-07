@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Injector, Input, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { CarsService } from '../../shared/servises/cars.service';
@@ -7,14 +7,16 @@ import { FormGroup, Validators, FormBuilder, FormControl, FormsModule, ReactiveF
 import { DealersService } from 'src/app/shared/servises/dealers.service';
 import { Dealers, initDealer } from '../../dealers'
 import { from, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { debounceTime, takeWhile, tap } from 'rxjs/operators';
+
+export interface FormDataOutput { action: 'cancel' | 'save'; data: Car }
 
 @Component({
   selector: 'app-car-form',
   templateUrl: './car-form.component.html',
   styleUrls: ['./car-form.component.scss']
 })
-export class CarFormComponent implements OnInit {
+export class CarFormComponent implements OnInit, OnDestroy {
 
   carsList: Array<Car>;
   car: Car;
@@ -26,13 +28,32 @@ export class CarFormComponent implements OnInit {
   selectedValue: string;
   showError: boolean = false;
   dealerChange$: Observable<any>;
-  selectedImagePath: string;
+  // selectedImagePath: string;
 
-  constructor(public carService: CarsService, private popUp: MatDialogRef<CarFormComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private formBuilder: FormBuilder, public dealerService: DealersService) {
-    popUp.disableClose = true;
+  @Output() formData: EventEmitter<FormDataOutput> = new EventEmitter<FormDataOutput>();
+
+  @Input() carItem: Car = null;
+
+  dealers$: Observable<Array<Dealers>>;
+  isAlive: boolean = true;
+
+
+
+
+
+
+  
+  constructor(
+  
+    public carService: CarsService,
+    private formBuilder: FormBuilder,
+    public dealerService: DealersService
+  ) {
+    
   }
 
   ngOnInit(): void {
+
     this.carService.getAllCars().subscribe(
       (res) => {
         this.carsList = res;
@@ -40,32 +61,38 @@ export class CarFormComponent implements OnInit {
       err => console.log(err)
     );
 
-    this.dealerService.getAllDealers().subscribe((re) => {
-      this.dealers = re;
+    this.getAllDealers();
 
-    },
-      err => console.log(err)
-    );
-    this.data ? (this.car = { ...this.data }) && (this.action = true) : (this.car = initCar());
-    this.formBuild();
-    this.myForm.controls.dealer.valueChanges.pipe(tap((value) => {
-      this.showError = value && this.dealers && !this.dealers.find((el) => el.name.toLowerCase() === value.toString().toLowerCase());
+    this.formBuild(this.carItem);
+    this.myForm.controls.dealer.valueChanges.pipe(
+      takeWhile(() => this.isAlive), debounceTime(400),
+      tap((value) => {
+        this.showError = value && this.dealers && !this.dealers.find((el) => el.name.toLowerCase() === value.toString().toLowerCase());
 
-    })).subscribe();
+      })).subscribe();
   }
 
+  ngOnDestroy(): void {
+    this.isAlive = false;
+  }
 
-  formBuild(): void {
+  getAllDealers(): void {
+    this.dealers$ = this.dealerService.getAllDealers().pipe(tap((dealers: Array<Dealers>) => {
+      this.dealers = dealers;
+    }))
+  }
+  formBuild(carItem: Car): void {
     this.myForm = this.formBuilder.group(
       {
-        model: [null, [Validators.required]],
-        dealer: [null, [Validators.required]],
-        class: [null],
-        year: [null],
-        color: [null],
-        wikilink: [null, [Validators.pattern(/^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/)]], //Validators.pattern()
-        description: [null],
-        image: [null],
+
+        model: [this.carItem ? this.carItem.model : null, [Validators.required]],
+        dealer: [this.carItem ? this.carItem.brand : null, [Validators.required]],
+        class: [this.carItem ? this.carItem.class : null],
+        year: [this.carItem ? this.carItem.year : null],
+        color: [this.carItem ? this.carItem.color : null],
+        wikilink: [this.carItem ? this.carItem.wikilink : null, [Validators.pattern(/^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/)]], //Validators.pattern()
+        description: [this.carItem ? this.carItem.description : null],
+        image: [this.carItem ? this.carItem.image : null],
       }
     );
 
@@ -73,7 +100,7 @@ export class CarFormComponent implements OnInit {
 
 
   onClose(): void {
-    this.popUp.close();
+    this.emmitFormData('cancel');
   };
 
   selectDealer(dealerOption: any): void {
@@ -93,40 +120,43 @@ export class CarFormComponent implements OnInit {
 
   unicId(): string {
     let unicId: string;
-    if (this.car.id != this.randomNumber()) {
+   this.carsList.forEach((el)=>{
+     if(el.id !== this.randomNumber()){
       unicId = this.randomNumber();
-    } else {
+     }
+     else {
       this.randomNumber();
-    }
-    console.log(unicId);
+     }
+   })
+  
+   
+    console.log('unic', unicId);
     return unicId;
   }
 
-  onSeve() {
-    const selectedDealer = this.dealers.find((el) => el.name.toLowerCase() === this.myForm.value.dealer.toLowerCase()
+  emmitFormData(action: 'cancel' | 'save'): void {
+    const selectedDealer = this.dealers.find((el) => el.name.toLowerCase() === (this.myForm.value.dealer || '').toLowerCase()
     );
-    console.log(this.myForm.value.dealer);
+    
 
-
-    const updatedCar = {
-      ...this.myForm.value,
-
-      id: this.unicId(),
-      brand: selectedDealer.id,
-      newItem: this.action ? true : false,
-      registration: this.action ? this.car.registration : new Date(),
-      image: this.selectedImagePath
-    };
-    this.popUp.close({
-      event: 'close',
-      data: updatedCar,
+    this.formData.emit({
+      action: action, 
+      data: 
+      action ==='cancel' ? null : {
+        ...this.myForm.getRawValue(),
+        brand: selectedDealer ? selectedDealer.name : null ,
+        id:this.carItem ? this.carItem.id : this.unicId(),
+        newItem: this.carItem ? false : true,
+        registration: this.carItem  ? this.carItem.registration : new Date(),
+      
+      } 
+      
     });
-    console.log(updatedCar);
+  
+  }
+  onSave(): void {
+    this.emmitFormData('save');
   }
 
-  uploadFileEvt(event: any): void {
-    if (event.target.files && event.target.files[0]) {
-      this.selectedImagePath = "./assets/images/" + event.target.files[0].name;
-    }
-  }
+
 }

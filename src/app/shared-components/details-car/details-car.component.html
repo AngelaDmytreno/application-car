@@ -6,11 +6,10 @@
     <img *ngIf="car?.image == undefined" src="../../../assets/images/defoult.jpg" [alt]="car?.id">
   </div>
 
-  <div class="car__info">
-    
+  <div class="car__info"*ngIf="!isEdit">
     <ul>
-      <li><h4>{{car?.model}}</h4> </li>
-      <li>Dealers: <b>{{car?.brand}}</b></li>
+      <li><h4>{{car.model}}</h4> </li>
+      <li>Dealers: <b>{{car.brand}}</b></li>
       <li>Class: <b>{{car?.class |titlecase}}</b></li>
       <li>Year: <b>{{car?.year}}</b></li>
       <li>Color: <b>{{car?.color}}</b></li>
@@ -18,13 +17,21 @@
       <li class="car__description">{{car?.description}}</li>
     </ul>
   </div>
-  <button mat-icon-button (click)="onEdit()">
-    <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
-  </button>
-  <button  mat-icon-button (click)="delete(car)">
-    <mat-icon aria-hidden="false" aria-label="Example home icon"  >delete</mat-icon>
-  </button>
-  <button  mat-icon-button (click)="goBack()">
-    <mat-icon aria-hidden="false" aria-label="Example home icon"  >replay</mat-icon>
-  </button>
+  <div class="car__controls" *ngIf="!isEdit">
+    <button mat-icon-button (click)="onEdit()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
+    </button>
+    <button  mat-icon-button (click)="delete(car)">
+      <mat-icon aria-hidden="false" aria-label="Example home icon"  >delete</mat-icon>
+    </button>
+    <button  mat-icon-button (click)="goBack()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon"  >replay</mat-icon>
+    </button>
+  </div>
+
+  <section *ngIf="isEdit">
+    <app-car-form   [carItem] ="car" (formData)="formData($event)"></app-car-form>
+  </section>
+ 
+  
 </div>

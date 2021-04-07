@@ -2,7 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Car } from '../../car'
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, tap, switchMap } from 'rxjs/operators';
+import { DealersService } from './dealers.service';
+import { Dealers } from 'src/app/dealers';
 
 
 const httpOptions = {
@@ -15,14 +17,14 @@ const httpOptions = {
 export class CarsService {
 
   private carsUrl: string = '/cars';
- 
-  constructor(private http: HttpClient) { }
-  
+
+  constructor(private http: HttpClient, private dealersService: DealersService) { }
+
   getAllCars(): Observable<Array<Car>> {
     return this.http.get<Array<Car>>(this.carsUrl);
   }
-  updateCars (car: Car): Observable<Car> {
-    console.log(car);
+
+  updateCars(car: Car): Observable<Car> {
     return this.http.put<Car>(`${this.carsUrl}.json`, car, httpOptions);
   }
 
@@ -30,21 +32,50 @@ export class CarsService {
     const url = `${this.carsUrl}/${id}`;
     return this.http.get<Car>(url);
   }
+  // deleteCarById(car: Car | string): Observable<Car> {
+  deleteCarById(car: Car): Observable<Car> {
+    // const id: string = typeof car === 'string' ? car : car.id;
+    // const url: string = `${this.carsUrl}/${id}`;
+    // console.log('url: ', url);
+    const url: string = `${this.carsUrl}/${car.id}`;
+    return this.http.delete<Car>(url, httpOptions).pipe(
+      switchMap(() => this.dealersService.getDealerById(car.brand)),
+      switchMap((dealer: Dealers) =>
+        this.dealersService.updateDealers({
+          ...dealer,
+          amountOfCars: dealer.amountOfCars - 1,
+        })
+      )
 
-  deleteCarById(car: Car | string): Observable<Car> {
-    const id: string = typeof car === 'string' ? car : car.id;
-    const url: string = `${this.carsUrl}/${id}`;
-    console.log('url: ', url);
-    return this.http
-      .delete<Car>(url, httpOptions);
+    );
   }
- 
+
   insertCar(car: Car): Observable<Car> {
-    return this.http.post<Car>(`${this.carsUrl}.json`, car, httpOptions);
+    return this.http.post<Car>(`${this.carsUrl}.json`, car, httpOptions).pipe(
+      switchMap(() => this.dealersService.getDealerById(car.brand)),
+      switchMap((dealer: Dealers) =>
+        this.dealersService.updateDealers({
+          ...dealer,
+          amountOfCars: dealer.amountOfCars++,
+        })
+      )
+
+    );
   }
 
- 
-  
+  // addCar(car: CarItem): Observable<void> {
+  //   return this.http.post<CarItem>(this.carsUrl, car, this.httpOptions).pipe(
+  //     switchMap(() => this.dealersService.getDealerById(car.brand)),
+  //     switchMap((dealer: DealerItem) =>
+  //       this.dealersService.updateDealer({
+  //         ...dealer,
+  //         amountOfCars: dealer.amountOfCars + 1,
+  //       })
+  //     ),
+  //     catchError(this.handleError<CarItem>('addCar'))
+  //   );
+  // }
+
 }
 
 
