@@ -23,8 +23,12 @@ export class DealersService {
   getAllDealers(): any {
     return this.http.get<Array<Dealers>>(`${this.dealersUrl}.json`, httpOptions);
   }
-
-
+  
+ 
+    getDealerById(id: string): Observable<Dealers> {
+      const url = `${this.dealersUrl}/${id}`;
+      return this.http.get<Dealers>(url);
+    }
   
   updateDealers(dealers: Dealers): Observable<any> {
     console.log(dealers);

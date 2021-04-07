@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit} from '@angular/core';
 import { FormComponent } from '../../shared-components/form/form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DealersService } from '../../shared/servises/dealers.service';
@@ -29,6 +29,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.dealersService.getAllDealers().subscribe((dealers)=>{
       this.newDealersList = dealers.filter((dealer) => dealer.registration);
+    });
+    
+    this.carService.getAllCars().subscribe((cars)=>{
+      this.newCarList = cars.filter((car)=> car.registration);
     })
   }
 
@@ -48,8 +52,8 @@ export class HomeComponent implements OnInit {
 
   openPopUpCarForm(): void {
     const dialogRef = this.popUp.open(DialogCarFormComponent, {
-      width: '410px',
-      height: '700px'
+      width: '440px',
+      height: '880px'
     
     });
     

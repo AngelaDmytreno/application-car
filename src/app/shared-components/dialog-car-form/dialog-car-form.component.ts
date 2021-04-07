@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Car } from 'src/app/car';
 import { CarFormComponent, FormDataOutput} from '../car-form/car-form.component';
+import { CarsService } from '../../shared/servises/cars.service';
 
 @Component({
   selector: 'app-dialog-car-form',
@@ -12,10 +13,11 @@ export class DialogCarFormComponent implements OnInit {
   
 
    cars: Array<Car>;
-
+  
   constructor(private popUp: MatDialogRef<DialogCarFormComponent>) { }
 
   ngOnInit(): void {
+    
   }
 
   formData(data: FormDataOutput): void{
@@ -34,7 +36,7 @@ export class DialogCarFormComponent implements OnInit {
   onSave(data: Car): void{
     const newCar: Car = {
       ...data,
-      id:  this.unicId()
+      // id:  this.unicId()
 
     };
     this.popUp.close({event : 'close', data: newCar})
@@ -43,25 +45,35 @@ export class DialogCarFormComponent implements OnInit {
   onClose(): void{
     this.popUp.close();
   }
-  randomNumber(): string {
-    let result = '';
-    let words = '0123456789';
-    let max_position = words.length - 1;
-    for (let i = 0; i < 10; ++i) {
-      let position = Math.floor(Math.random() * max_position);
-      result = result + words.substring(position, position + 1);
-    }
-    return result;
-  }
 
-  unicId(): string {
-    let unicId: string = '';
-    // if (this.car.id != this.randomNumber()) {// сравнить с массивом  carItem 
-    //   unicId = this.randomNumber();
-    // } else {
-    //   this.randomNumber();
-    // }
-    console.log(unicId);
-    return unicId;
-  }
+  // randomNumber(): string {
+  //   let result = '';
+  //   let words = '0123456789';
+  //   let max_position = words.length - 1;
+  //   for (let i = 0; i < 10; ++i) {
+  //     let position = Math.floor(Math.random() * max_position);
+  //     result = result + words.substring(position, position + 1);
+  //   }
+  //   return result;
+  // }
+
+  // unicId(): string {
+  //   let unicId: string;
+  //  this.carsList.forEach((el)=>{
+  //    if(el.id !== this.randomNumber()){
+  //     unicId = this.randomNumber();
+  //    }
+  //    else {
+  //     this.randomNumber();
+  //    }
+  //  })
+  
+   
+  //   console.log('unic', unicId);
+  //   return unicId;
+  // }
+
+
+
+  
 }

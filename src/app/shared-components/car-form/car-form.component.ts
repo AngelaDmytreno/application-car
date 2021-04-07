@@ -28,7 +28,7 @@ export class CarFormComponent implements OnInit, OnDestroy {
   selectedValue: string;
   showError: boolean = false;
   dealerChange$: Observable<any>;
-  selectedImagePath: string;
+  // selectedImagePath: string;
 
   @Output() formData: EventEmitter<FormDataOutput> = new EventEmitter<FormDataOutput>();
 
@@ -42,16 +42,14 @@ export class CarFormComponent implements OnInit, OnDestroy {
 
 
 
-  // private popUp = null;
-  // private data;
+  
   constructor(
-    // private injector: Injector,
-    public carService: CarsService,//
+  
+    public carService: CarsService,
     private formBuilder: FormBuilder,
     public dealerService: DealersService
   ) {
-    // this.popUp = this.injector.get(MatDialogRef, null);
-    // this.data = this.injector.get(MAT_DIALOG_DATA, null);
+    
   }
 
   ngOnInit(): void {
@@ -121,14 +119,18 @@ export class CarFormComponent implements OnInit, OnDestroy {
   }
 
   unicId(): string {
-    let unicId: string = '';
+    let unicId: string;
+   this.carsList.forEach((el)=>{
+     if(el.id !== this.randomNumber()){
+      unicId = this.randomNumber();
+     }
+     else {
+      this.randomNumber();
+     }
+   })
   
-    // if (this.car.id != this.randomNumber()) {// сравнить с массивом  carItem 
-    //   unicId = this.randomNumber();
-    // } else {
-    //   this.randomNumber();
-    // }
-    console.log(unicId);
+   
+    console.log('unic', unicId);
     return unicId;
   }
 
@@ -142,23 +144,18 @@ export class CarFormComponent implements OnInit, OnDestroy {
       data: 
       action ==='cancel' ? null : {
         ...this.myForm.getRawValue(),
-
-        id: this.unicId(),
-        brand: selectedDealer ? selectedDealer.id : null ,
+        brand: selectedDealer ? selectedDealer.name : null ,
+        id:this.carItem ? this.carItem.id : this.unicId(),
         newItem: this.carItem ? false : true,
         registration: this.carItem  ? this.carItem.registration : new Date(),
       
       } 
       
     });
-   
-
+  
   }
-
   onSave(): void {
-    console.log('test11');
     this.emmitFormData('save');
-    
   }
 
 

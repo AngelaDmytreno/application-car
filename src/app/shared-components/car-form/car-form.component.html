@@ -23,10 +23,10 @@
       </mat-hint>
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectDealer($event)">
         <mat-option [value]="null" seleced disabled>
-          CHOOSE A DEALER
+          Chose a dealer
         </mat-option>
         <mat-option *ngFor="let dealer of dealers$ | async" [value]="dealer">
-          {{dealer.id}}
+          {{dealer.name}}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
@@ -58,7 +58,7 @@
       <mat-label>Description</mat-label>
       <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field >
       <mat-label>Image</mat-label>
       <div>
         <input matInput type="text" formControlName="image" />
