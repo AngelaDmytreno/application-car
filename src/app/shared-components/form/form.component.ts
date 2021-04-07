@@ -20,7 +20,7 @@ export class FormComponent implements OnInit {
   showError: boolean = false;
   dealersList: Array<Dealers>;
   
-constructor(public dealersService: DealersService, private popUp: MatDialogRef < FormComponent >, @Inject(MAT_DIALOG_DATA) public data: any) {
+constructor(public dealersService: DealersService, private popUp: MatDialogRef <FormComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
   popUp.disableClose = true;
  }
 

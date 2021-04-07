@@ -7,6 +7,7 @@ import { MyDealersComponent } from '../my-dealers/my-dealers.component';
 import { CarFormComponent } from '../../shared-components/car-form/car-form.component'
 import { Car } from 'src/app/car';
 import { CarsService } from 'src/app/shared/servises/cars.service';
+import { DialogCarFormComponent } from 'src/app/shared-components/dialog-car-form/dialog-car-form.component';
 
 @Component({
   selector: 'app-home',
@@ -46,9 +47,9 @@ export class HomeComponent implements OnInit {
   }
 
   openPopUpCarForm(): void {
-    const dialogRef = this.popUp.open(CarFormComponent, {
-      width: '400px',
-      height: '670px'
+    const dialogRef = this.popUp.open(DialogCarFormComponent, {
+      width: '410px',
+      height: '700px'
     
     });
     

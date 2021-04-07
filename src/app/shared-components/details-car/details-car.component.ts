@@ -66,7 +66,7 @@ export class DetailsCarComponent implements OnInit, OnChanges {
           )
         ).subscribe((p) => {
           this.car = p;
-          this.formBuild();
+          
           
         });
     }
@@ -91,21 +91,7 @@ export class DetailsCarComponent implements OnInit, OnChanges {
   
     }
 
-    formBuild(): void {
-      this.myForm = this.formBuilder.group(
-        {
-          id: [this.car.id],
-          model: [this.car.model, [Validators.required]],
-          dealer: [this.car.brand, [Validators.required]],
-          class: [this.car.class],
-          year: [this.car.year],
-          color: [this.car.color],
-          wikilink: [this.car.wikilink, [Validators.pattern(/^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/)]], //Validators.pattern()
-          description: [this.car.description],
-          image: [this.car.image],
-        }
-      );
-    }
+    
 
 
 
@@ -116,8 +102,9 @@ export class DetailsCarComponent implements OnInit, OnChanges {
    }  
 
    onEdit(): void {
-    this.location.replaceState(`/cars/${this.id}/edit`);
     this.isEdit = true;
+    this.router.navigate(['/cars',`${this.id}`,'edit']);
+   
    }
    
 

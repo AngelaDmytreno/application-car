@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Injector} from '@angular/core';
+import { Component, OnInit, Inject, Injector, Input} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { CarsService } from '../../shared/servises/cars.service';
@@ -28,6 +28,8 @@ export class CarFormComponent implements OnInit {
   dealerChange$: Observable<any>;
   selectedImagePath: string;
 
+  @Input() carItem: Car;
+
   
  
 
@@ -50,6 +52,7 @@ export class CarFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('inittest');
     this.carService.getAllCars().subscribe(
       (res) => {
         this.carsList = res;
@@ -63,7 +66,7 @@ export class CarFormComponent implements OnInit {
     },
       err => console.log(err)
     );
-    this.data ? (this.car = { ...this.data }) && (this.action = true) : (this.car = initCar());
+
     this.formBuild();
     this.myForm.controls.dealer.valueChanges.pipe(tap((value) => {
       this.showError = value && this.dealers && !this.dealers.find((el) => el.name.toLowerCase() === value.toString().toLowerCase());
@@ -75,14 +78,15 @@ export class CarFormComponent implements OnInit {
   formBuild(): void {
     this.myForm = this.formBuilder.group(
       {
-        model: [null, [Validators.required]],
-        dealer: [null, [Validators.required]],
-        class: [null],
-        year: [null],
-        color: [null],
-        wikilink: [null, [Validators.pattern(/^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/)]], //Validators.pattern()
-        description: [null],
-        image: [null],
+
+        model: [this.carItem ? this.carItem.model : null, [Validators.required]],
+        dealer: [this.carItem ? this.carItem.brand : null, [Validators.required]],
+        class: [this.carItem ? this.carItem.class :null],
+        year: [this.carItem ? this.carItem.year : null],
+        color: [this.carItem ? this.carItem.color : null],
+        wikilink: [this.carItem ? this.carItem.wikilink : null, [Validators.pattern(/^((ftp|http|https):\/\/)?(www\.)?([A-Za-zА-Яа-я0-9]{1}[A-Za-zА-Яа-я0-9\-]*\.?)*\.{1}[A-Za-zА-Яа-я0-9-]{2,8}(\/([\w#!:.?+=&%@!\-\/])*)?/)]], //Validators.pattern()
+        description: [this.carItem ? this.carItem.description :null],
+        image: [this.carItem ? this.carItem.image : null],
       }
     );
 
@@ -109,17 +113,18 @@ export class CarFormComponent implements OnInit {
   }
 
   unicId(): string {
-    let unicId: string;
-    if (this.car.id != this.randomNumber()) {
-      unicId = this.randomNumber();
-    } else {
-      this.randomNumber();
-    }
+    let unicId: string ='';
+    // if (this.car.id != this.randomNumber()) {// сравнить с массивом  carItem 
+    //   unicId = this.randomNumber();
+    // } else {
+    //   this.randomNumber();
+    // }
     console.log(unicId);
     return unicId;
   }
 
-  onSeve() {
+  onSave():void {
+    console.log('save');
     const selectedDealer = this.dealers.find((el) => el.name.toLowerCase() === this.myForm.value.dealer.toLowerCase()
     );
     console.log(this.myForm.value.dealer);
@@ -132,7 +137,7 @@ export class CarFormComponent implements OnInit {
       brand: selectedDealer.id,
       newItem: this.action ? true : false,
       registration: this.action ? this.car.registration : new Date(),
-      image: this.selectedImagePath
+     
     };
     this.popUp.close({
       event: 'close',
@@ -141,9 +146,5 @@ export class CarFormComponent implements OnInit {
     console.log(updatedCar);
   }
 
-  uploadFileEvt(event: any): void {
-    if (event.target.files && event.target.files[0]) {
-      this.selectedImagePath = "./assets/images/" + event.target.files[0].name;
-    }
-  }
+
 }

@@ -30,8 +30,8 @@
     </button>
   </div>
 
-  <section *ngIf="isEdit">
-    <app-car-form></app-car-form>
+  <section>
+    <app-car-form  *ngIf="isEdit" [carItem] ="car"></app-car-form>
     <!-- vs jhnbfjkmyui -->
   </section>
  
