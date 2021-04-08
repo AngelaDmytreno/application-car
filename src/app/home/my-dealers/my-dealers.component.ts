@@ -12,6 +12,7 @@ export class MyDealersComponent implements OnInit {
 
 
   @Input('new-dealers') newDealers: Array<Dealers>;
+  @Input() isLoadingDealer: boolean;
 
   constructor() { }
 

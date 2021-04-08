@@ -41,7 +41,6 @@ export class DialogCarFormComponent implements OnInit {
     console.log("trololo");
     const newCar: Car = {
       ...data,
-      // id:  this.unicId()
     };
     
     this.popUp.close({event : 'close', data: newCar})
@@ -49,7 +48,7 @@ export class DialogCarFormComponent implements OnInit {
     if (!data) {
       return
     }
-    console.log("trololo");
+  
 
     this.carsService.insertCar(data).subscribe(() => {
       this.dealerService.getDealerById(newCar.brand).subscribe((dealer: Dealers) => {
@@ -65,34 +64,4 @@ export class DialogCarFormComponent implements OnInit {
     this.popUp.close();
   }
 
-  // randomNumber(): string {
-  //   let result = '';
-  //   let words = '0123456789';
-  //   let max_position = words.length - 1;
-  //   for (let i = 0; i < 10; ++i) {
-  //     let position = Math.floor(Math.random() * max_position);
-  //     result = result + words.substring(position, position + 1);
-  //   }
-  //   return result;
-  // }
-
-  // unicId(): string {
-  //   let unicId: string;
-  //  this.carsList.forEach((el)=>{
-  //    if(el.id !== this.randomNumber()){
-  //     unicId = this.randomNumber();
-  //    }
-  //    else {
-  //     this.randomNumber();
-  //    }
-  //  })
-  
-   
-  //   console.log('unic', unicId);
-  //   return unicId;
-  // }
-
-
-
-  
 }

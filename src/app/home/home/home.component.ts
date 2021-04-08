@@ -23,19 +23,23 @@ export class HomeComponent implements OnInit {
   newCarList: Array<Car> = new Array<Car>();
   createCar: Car;
   isMyCarLoading: boolean;
+  isMyDealerloading: boolean;
 
   
   constructor(public dealersService: DealersService, public popUp: MatDialog, public carService: CarsService) {}
 
   ngOnInit(): void {
     this.isMyCarLoading = true;
+    this.isMyDealerloading = true;
     this.dealersService.getAllDealers().subscribe((dealers)=>{
       this.newDealersList = dealers.filter((dealer) => dealer.newRecord);
+      this.isMyDealerloading = false;
     });
     
     this.carService.getAllCars().subscribe((cars)=>{
       this.newCarList = cars.filter((car)=> car.newItem);
       this.isMyCarLoading = false;
+     
     });
    
   }

@@ -44,8 +44,6 @@ export class DetailsCarComponent implements OnInit, OnChanges {
     private carsService: CarsService,
     public dialog: MatDialog,
     private router: Router,
-    // private location: Location,
-    // private formBuilder: FormBuilder,
     public dealerService: DealersService
   ) {
   }
@@ -60,31 +58,24 @@ export class DetailsCarComponent implements OnInit, OnChanges {
       .pipe(
         switchMap((params: ParamMap) => {
           this.id = params.get('id');
-
           return this.carsService.getCarById(params.get('id')).
             pipe(finalize(() => (this.isDataLoading = false)));
-
         }
         )
       ).subscribe((p) => {
         this.car = p;
-        console.log(this.car);
       });
   }
-
-
 
   ngOnChanges(changes: SimpleChanges): void { }
 
   onEdit(): void {
-    console.log('edit');
     this.isEdit = true;
     this.router.navigate(['/cars', `${this.id}`, 'edit']);
   }
 
-
   formData(data: FormDataOutput): void {
-    console.log('data', data);
+    
     if (!data) {
       return;
     }
@@ -95,7 +86,6 @@ export class DetailsCarComponent implements OnInit, OnChanges {
       this.onClose();
     }
   }
-
   onClose(): void {
     this.router.navigate(['/cars', `${this.id}`]);
   }
@@ -105,12 +95,10 @@ export class DetailsCarComponent implements OnInit, OnChanges {
     if (!data) {
       return
     }
-    console.log("trololo");
-
+   
     this.carsService.updateCars(data).subscribe(() => {
       this.car = data;
       this.router.navigate(['/cars', `${this.id}`]);
-      console.log(this.car);
     });
   }
 
@@ -124,32 +112,13 @@ export class DetailsCarComponent implements OnInit, OnChanges {
     confirmDialog.afterClosed().subscribe((result) => {
       if (result === true) {
         this.carsService.deleteCarById(car).subscribe();
-        // this.carsService.getAllCars();
         this.changePage();
       }
-
     })
-
   }
-
-
-
-
-
-
 
   changePage(): void {
     this.router.navigate(['/cars']);
   }
 
-  //  onEdit(): void {
-  //   this.isEdit = true;
-  //   this.router.navigate(['/cars',`${this.id}`,'edit']);
-
-  //  }
-
-
-  goBack() {
-    this.router.navigate([`/cars`]);
-  }
 }

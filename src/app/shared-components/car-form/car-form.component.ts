@@ -128,9 +128,6 @@ export class CarFormComponent implements OnInit, OnDestroy {
       this.randomNumber();
      }
    })
-  
-   
-    console.log('unic', unicId);
     return unicId;
   }
 
@@ -148,15 +145,11 @@ export class CarFormComponent implements OnInit, OnDestroy {
         id:this.carItem ? this.carItem.id : this.unicId(),
         newItem: this.carItem && !this.carItem.newItem ? false : true,
         registration: this.carItem  ? this.carItem.registration : new Date(),
-      
       } 
-      
     });
   
   }
   onSave(): void {
     this.emmitFormData('save');
   }
-
-
 }

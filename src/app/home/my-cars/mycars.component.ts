@@ -9,8 +9,8 @@ import { Car } from 'src/app/car';
 export class MycarsComponent implements OnInit {
   
   @Input('new-cars') newCars: Array<Car>;
-  isDataLoading: boolean;
-  @Input() isLodadinCar: boolean;
+ 
+  @Input() isLoadingCar: boolean;
 
   constructor() { }
 

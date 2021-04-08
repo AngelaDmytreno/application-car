@@ -27,12 +27,10 @@ export class DealersService {
  
     getDealerById(id: string): Observable<Dealers> {
       const url = `${this.dealersUrl}/${id.toUpperCase()}`;
-      console.log('url', url);
       return this.http.get<Dealers>(url);
     }
   
   updateDealers(dealers: Dealers): Observable<any> {
-    console.log(dealers);
     return this.http.put(`${this.dealersUrl}.json`, dealers, httpOptions);
   }
 
@@ -40,7 +38,6 @@ export class DealersService {
   deleteDealer(dealer: Dealers | string): Observable<Dealers> {
     const id: string = typeof dealer === 'string' ? dealer : dealer.id;
     const url: string = `${this.dealersUrl}/${id}`;
-    console.log('url: ', url);
     return this.http
       .delete<Dealers>(url, httpOptions);
   }

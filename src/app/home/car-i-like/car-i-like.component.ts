@@ -50,7 +50,6 @@ export class CarILikeComponent implements OnInit {
   }
 
   getFavoriteCars(): any {
-    console.log(this.allCarListItems);
     return this.allCarListItems.filter(el => el.liked === true);
   }
 }

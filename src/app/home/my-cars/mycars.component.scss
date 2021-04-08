@@ -1,6 +1,10 @@
 .mycar__conatiner-column{
   width: 20vw;
   margin: 0 auto;
+  .loading{
+    margin-top: 20px;
+    margin-left: 50px;
+  }
   .mycar__item{
     height: 25px;
     border-bottom: 3px solid gray;

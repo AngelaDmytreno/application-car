@@ -2,8 +2,8 @@
   <div class="mycar__item">
     <h4>My cars</h4>
   </div>
-  <mat-spinner *ngIf="isLodadinCar" class="loading"></mat-spinner>
-  <mat-selection-list [multiple]="false" *ngIf="!isLodadinCar">
+  <mat-spinner *ngIf="isLoadingCar" class="loading"></mat-spinner>
+  <mat-selection-list [multiple]="false" *ngIf="!isLoadingCar">
     <mat-list-option *ngFor="let car of newCars">
       <span class="name"><b>{{car.model}}</b></span>
       <div class="info">
@@ -13,7 +13,7 @@
     </mat-list-option>
   </mat-selection-list>
 
-  <div *ngIf="newCars.length === 0 && !isLodadinCar" class="mycar__text">
+  <div *ngIf="newCars.length === 0 && !isLoadingCar" class="mycar__text">
     <p>You havent added any cars yet</p>
   </div>
 </div>
