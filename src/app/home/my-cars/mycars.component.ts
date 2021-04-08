@@ -10,6 +10,7 @@ export class MycarsComponent implements OnInit {
   
   @Input('new-cars') newCars: Array<Car>;
   isDataLoading: boolean;
+  @Input() isLodadinCar: boolean;
 
   constructor() { }
 

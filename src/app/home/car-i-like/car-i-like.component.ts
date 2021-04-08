@@ -15,6 +15,7 @@ export class CarILikeComponent implements OnInit {
   allCarListItems: Array<Car> = new Array<Car>();
   isDataLoading: boolean;
   allDealersList: Array<Dealers> = new Array<Dealers>();
+  
 
 
   constructor(public carsService: CarsService, public dealerService: DealersService) { }

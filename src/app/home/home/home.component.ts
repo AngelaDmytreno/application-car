@@ -22,18 +22,22 @@ export class HomeComponent implements OnInit {
   newDealersList: Array<Dealers> = new Array<Dealers>();
   newCarList: Array<Car> = new Array<Car>();
   createCar: Car;
+  isMyCarLoading: boolean;
 
   
   constructor(public dealersService: DealersService, public popUp: MatDialog, public carService: CarsService) {}
 
   ngOnInit(): void {
+    this.isMyCarLoading = true;
     this.dealersService.getAllDealers().subscribe((dealers)=>{
       this.newDealersList = dealers.filter((dealer) => dealer.newRecord);
     });
     
     this.carService.getAllCars().subscribe((cars)=>{
       this.newCarList = cars.filter((car)=> car.newItem);
-    })
+      this.isMyCarLoading = false;
+    });
+   
   }
 
   openPopUp(): void {
