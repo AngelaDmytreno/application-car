@@ -8,6 +8,8 @@ import { Dealers } from 'src/app/dealers';
 import { FormComponent } from '../../shared-components/form/form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from "../../shared-components/confirmation-dialog/confirmation-dialog.component";
+import { CarsService } from 'src/app/shared/servises/cars.service';
+import { Car } from 'src/app/car';
 
 @Component({
   selector: 'app-table',
@@ -25,8 +27,9 @@ export class TableComponent implements OnInit {
   createDealer: Dealers;
   valueFilter: string = '';
   isDataLoading: boolean;
+  carsList: Array<Car>;
 
-  constructor(public dealersService: DealersService, public popUp: MatDialog, public dialog: MatDialog) { }
+  constructor(public dealersService: DealersService, public popUp: MatDialog, public dialog: MatDialog, public carService: CarsService) { }
 
   ngOnInit(): void {
     this.isDataLoading = true;
@@ -87,7 +90,7 @@ export class TableComponent implements OnInit {
     confirmDialog.afterClosed().subscribe((result) => {
       if (result === true) {
         this.dealersService.deleteDealer(dealer).subscribe();
-        this.tableUpdate();
+        this.tableUpdate(); 
       }
     })
 

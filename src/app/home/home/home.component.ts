@@ -28,11 +28,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.dealersService.getAllDealers().subscribe((dealers)=>{
-      this.newDealersList = dealers.filter((dealer) => dealer.registration);
+      this.newDealersList = dealers.filter((dealer) => dealer.newRecord);
     });
     
     this.carService.getAllCars().subscribe((cars)=>{
-      this.newCarList = cars.filter((car)=> car.registration);
+      this.newCarList = cars.filter((car)=> car.newItem);
     })
   }
 
