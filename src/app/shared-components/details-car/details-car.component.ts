@@ -7,7 +7,7 @@ import { CarsService } from '../../shared/servises/cars.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Location } from '@angular/common';
-import { CarFormComponent, FormDataOutput } from '../car-form/car-form.component';
+import { CarFormComponent} from '../car-form/car-form.component';
 import { tap } from 'rxjs/operators';
 import { FormGroup, Validators, FormBuilder, FormControl, FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { Dealers } from 'src/app/dealers';
@@ -74,18 +74,10 @@ export class DetailsCarComponent implements OnInit, OnChanges {
     this.router.navigate(['/cars', `${this.id}`, 'edit']);
   }
 
-  formData(data: FormDataOutput): void {
-    
-    if (!data) {
-      return;
-    }
-    if (data.action === 'save') {
-      this.onSave(data.data);
-    }
-    else if (data.action === 'cancel') {
-      this.onClose();
-    }
+  saveCarData(data: Car): void {
+    this.onSave(data);
   }
+
   onClose(): void {
     this.router.navigate(['/cars', `${this.id}`]);
   }

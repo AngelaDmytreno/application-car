@@ -9,7 +9,7 @@ import { Dealers, initDealer } from '../../dealers'
 import { from, Observable } from 'rxjs';
 import { debounceTime, takeWhile, tap } from 'rxjs/operators';
 
-export interface FormDataOutput { action: 'cancel' | 'save'; data: Car }
+
 
 @Component({
   selector: 'app-car-form',
@@ -28,9 +28,10 @@ export class CarFormComponent implements OnInit, OnDestroy {
   selectedValue: string;
   showError: boolean = false;
   dealerChange$: Observable<any>;
-  // selectedImagePath: string;
+  
 
-  @Output() formData: EventEmitter<FormDataOutput> = new EventEmitter<FormDataOutput>();
+  @Output() saveCarData: EventEmitter<Car> = new EventEmitter<Car>();
+  @Output() cancelCar: EventEmitter<any> = new EventEmitter();
 
   @Input() carItem: Car = null;
 
@@ -99,9 +100,7 @@ export class CarFormComponent implements OnInit, OnDestroy {
   }
 
 
-  onClose(): void {
-    this.emmitFormData('cancel');
-  };
+  
 
   selectDealer(dealerOption: any): void {
     this.myForm.controls.dealer.setValue(dealerOption.option.value.name);
@@ -131,25 +130,18 @@ export class CarFormComponent implements OnInit, OnDestroy {
     return unicId;
   }
 
-  emmitFormData(action: 'cancel' | 'save'): void {
+  onSave(): void {
     const selectedDealer = this.dealers.find((el) => el.name.toLowerCase() === (this.myForm.value.dealer || '').toLowerCase()
     );
-    
+    const updatedCar = {
+      ...this.myForm.getRawValue(),
+      brand: selectedDealer ? selectedDealer.name : null ,
+      id:this.carItem ? this.carItem.id : this.unicId(),
+      newItem: this.carItem ? this.carItem.newItem  : true,
+      registration: this.carItem  ? this.carItem.registration : new Date(), 
+    };
+    this.saveCarData.emit(updatedCar);
+  }
+ 
 
-    this.formData.emit({
-      action: action, 
-      data: 
-      action ==='cancel' ? null : {
-        ...this.myForm.getRawValue(),
-        brand: selectedDealer ? selectedDealer.name : null ,
-        id:this.carItem ? this.carItem.id : this.unicId(),
-        newItem: this.carItem && !this.carItem.newItem ? false : true,
-        registration: this.carItem  ? this.carItem.registration : new Date(),
-      } 
-    });
-  
-  }
-  onSave(): void {
-    this.emmitFormData('save');
-  }
 }
