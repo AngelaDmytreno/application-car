@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from "../../shared-components/confirmation-dialog/confirmation-dialog.component";
 import { CarsService } from 'src/app/shared/servises/cars.service';
 import { Car } from 'src/app/car';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-table',
@@ -28,12 +29,15 @@ export class TableComponent implements OnInit {
   valueFilter: string = '';
   isDataLoading: boolean;
   carsList: Array<Car>;
+  isAlive: boolean;
 
   constructor(public dealersService: DealersService, public popUp: MatDialog, public dialog: MatDialog, public carService: CarsService) { }
 
   ngOnInit(): void {
     this.isDataLoading = true;
-    this.dealersService.getAllDealers().subscribe(
+    this.dealersService.getAllDealers()
+    .pipe(takeWhile(()=>(this.isAlive = true)))
+    .subscribe(
       res => {
         this.allDealersList = res;
         this.dataSource = new MatTableDataSource(this.allDealersList);
@@ -45,7 +49,11 @@ export class TableComponent implements OnInit {
       err => console.log(err)
     );
   }
+  
 
+  ngOnDestroy(): void {
+    this.isAlive = false;
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -56,12 +64,18 @@ export class TableComponent implements OnInit {
       width: '250px',
       data: obj,
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed()
+    .pipe(takeWhile(()=>(this.isAlive = true)))
+    .subscribe((result) => {
       this.createDealer = result.data;
       if (result.data.newRecord === true) {
-        this.dealersService.insertDealers(this.createDealer).subscribe();
+        this.dealersService.insertDealers(this.createDealer)
+        .pipe(takeWhile(()=>(this.isAlive = true)))
+        .subscribe();
       } else if (result.data.newRecord === false) {
-        this.dealersService.updateDealers(this.createDealer).subscribe();
+        this.dealersService.updateDealers(this.createDealer)
+        .pipe(takeWhile(()=>(this.isAlive = true)))
+        .subscribe();
       }
       this.tableUpdate();
     });
@@ -69,7 +83,9 @@ export class TableComponent implements OnInit {
 
 
   tableUpdate(): void {
-    this.dealersService.getAllDealers().subscribe(
+    this.dealersService.getAllDealers()
+    .pipe(takeWhile(()=>(this.isAlive = true)))
+    .subscribe(
       res => {
         this.allDealersList = res;
         this.dataSource = new MatTableDataSource(this.allDealersList);
@@ -89,7 +105,9 @@ export class TableComponent implements OnInit {
     });
     confirmDialog.afterClosed().subscribe((result) => {
       if (result === true) {
-        this.dealersService.deleteDealer(dealer).subscribe();
+        this.dealersService.deleteDealer(dealer)
+        .pipe(takeWhile(()=>(this.isAlive = true)))
+        .subscribe();
         this.tableUpdate(); 
       }
     })
@@ -102,7 +120,9 @@ export class TableComponent implements OnInit {
       width: '350px',
       data: "Do you confirm the deletion of this data?"
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed()
+    .pipe(takeWhile(()=>(this.isAlive = true)))
+    .subscribe(result => {
       if (result) {
         console.log('Yes clicked');
       }

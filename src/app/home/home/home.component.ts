@@ -8,6 +8,7 @@ import { CarFormComponent } from '../../shared-components/car-form/car-form.comp
 import { Car } from 'src/app/car';
 import { CarsService } from 'src/app/shared/servises/cars.service';
 import { DialogCarFormComponent } from 'src/app/shared-components/dialog-car-form/dialog-car-form.component';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,8 @@ export class HomeComponent implements OnInit {
   createCar: Car;
   isMyCarLoading: boolean;
   isMyDealerloading: boolean;
+  isAlive: boolean;
+
 
   
   constructor(public dealersService: DealersService, public popUp: MatDialog, public carService: CarsService) {}
@@ -31,12 +34,16 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.isMyCarLoading = true;
     this.isMyDealerloading = true;
-    this.dealersService.getAllDealers().subscribe((dealers)=>{
+    this.dealersService.getAllDealers()
+    .pipe(takeWhile(()=>(this.isAlive = true)))
+    .subscribe((dealers)=>{
       this.newDealersList = dealers.filter((dealer) => dealer.newRecord);
       this.isMyDealerloading = false;
     });
     
-    this.carService.getAllCars().subscribe((cars)=>{
+    this.carService.getAllCars()
+    .pipe(takeWhile(()=>(this.isAlive = true)))
+    .subscribe((cars)=>{
       this.newCarList = cars.filter((car)=> car.newItem);
       this.isMyCarLoading = false;
      
@@ -44,15 +51,22 @@ export class HomeComponent implements OnInit {
    
   }
 
+  ngOnDestroy(): void {
+    this.isAlive = false;
+  }
   openPopUp(): void {
     const dialogRef = this.popUp.open(FormComponent, {
       width: '250px',
     });
     
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed()
+    .pipe(takeWhile(()=>(this.isAlive = true)))
+    .subscribe((result) => {
       if(result){
         this.createDealer = result.data;
-        this.dealersService.insertDealers(this.createDealer).subscribe();
+        this.dealersService.insertDealers(this.createDealer)
+        .pipe(takeWhile(()=>(this.isAlive = true)))
+        .subscribe();
         this.newDealersList.push(this.createDealer);
       }
     });
@@ -68,7 +82,9 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if(result){
         this.createCar = result.data;
-        this.carService.insertCar(this.createCar).subscribe();
+        this.carService.insertCar(this.createCar)
+        .pipe(takeWhile(()=>(this.isAlive = true)))
+        .subscribe();
         this.newCarList.push(this.createCar);
       }
     });

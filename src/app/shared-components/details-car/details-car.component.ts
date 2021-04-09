@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { from } from 'rxjs';
-import { finalize, switchMap } from 'rxjs/operators';
+import { finalize, switchMap, takeWhile } from 'rxjs/operators';
 import { Car } from '../../car';
 import { CarsService } from '../../shared/servises/cars.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -36,6 +36,7 @@ export class DetailsCarComponent implements OnInit, OnChanges {
   action: boolean;
   localData: any;
   selectedValue: string;
+  isAlive: boolean;
 
 
 
@@ -51,7 +52,9 @@ export class DetailsCarComponent implements OnInit, OnChanges {
   ngOnInit() {
 
     this.isDataLoading = true;
-    this.route.data.subscribe((res) => {
+    this.route.data
+    .pipe(takeWhile(()=>(this.isAlive = true)))
+    .subscribe((res) => {
       this.isEdit = res.isEdit;
     })
     this.route.paramMap
@@ -62,13 +65,17 @@ export class DetailsCarComponent implements OnInit, OnChanges {
             pipe(finalize(() => (this.isDataLoading = false)));
         }
         )
-      ).subscribe((p) => {
+      )
+      .pipe(takeWhile(()=>(this.isAlive = true)))
+      .subscribe((p) => {
         this.car = p;
       });
   }
 
   ngOnChanges(changes: SimpleChanges): void { }
-
+  ngOnDestroy(): void {
+    this.isAlive = false;
+  }
   onEdit(): void {
     this.isEdit = true;
     this.router.navigate(['/cars', `${this.id}`, 'edit']);
@@ -88,7 +95,9 @@ export class DetailsCarComponent implements OnInit, OnChanges {
       return
     }
    
-    this.carsService.updateCars(data).subscribe(() => {
+    this.carsService.updateCars(data)
+    .pipe(takeWhile(()=>(this.isAlive = true)))
+    .subscribe(() => {
       this.car = data;
       this.router.navigate(['/cars', `${this.id}`]);
     });
@@ -101,9 +110,13 @@ export class DetailsCarComponent implements OnInit, OnChanges {
         message: 'Are you shure you want to delite this item: ' + this.car.model,
       }
     });
-    confirmDialog.afterClosed().subscribe((result) => {
+    confirmDialog.afterClosed()
+    .pipe(takeWhile(()=>(this.isAlive = true)))
+    .subscribe((result) => {
       if (result === true) {
-        this.carsService.deleteCarById(car).subscribe();
+        this.carsService.deleteCarById(car)
+        .pipe(takeWhile(()=>(this.isAlive = true)))
+        .subscribe();
         this.changePage();
       }
     })

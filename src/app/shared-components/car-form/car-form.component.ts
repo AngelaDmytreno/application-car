@@ -28,6 +28,8 @@ export class CarFormComponent implements OnInit, OnDestroy {
   selectedValue: string;
   showError: boolean = false;
   dealerChange$: Observable<any>;
+  dealers$: Observable<Array<Dealers>>;
+  isAlive: boolean = true;
   
 
   @Output() saveCarData: EventEmitter<Car> = new EventEmitter<Car>();
@@ -35,8 +37,7 @@ export class CarFormComponent implements OnInit, OnDestroy {
 
   @Input() carItem: Car = null;
 
-  dealers$: Observable<Array<Dealers>>;
-  isAlive: boolean = true;
+  
 
 
 

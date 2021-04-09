@@ -3,6 +3,7 @@ import { CarsService } from '../../shared/servises/cars.service';
 import { Car } from '../../shared/entities/car.interface';
 import { Dealers } from 'src/app/dealers';
 import { DealersService } from 'src/app/shared/servises/dealers.service';
+import { takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-all-cars',
@@ -19,19 +20,24 @@ export class AllCarsComponent implements OnInit {
   endCard: number = 8;
   isDataLoading: boolean;
   useFilter: boolean;
-  dealersList: Array<Dealers>
+  dealersList: Array<Dealers>;
+  isAlive: boolean = true;
 
   constructor(public carsService: CarsService, public dealerService: DealersService) { }
 
   ngOnInit(): void {
     this.isDataLoading = true;
-    this.dealerService.getAllDealers().subscribe(
+    this.dealerService.getAllDealers()
+    .pipe(takeWhile(()=>(this.isAlive = true)))
+    .subscribe(
       (re) => {
         this.dealersList = re;
       }, err => console.log(err)
 
     )
-    this.carsService.getAllCars().subscribe(
+    this.carsService.getAllCars()
+    .pipe(takeWhile(()=>(this.isAlive = true)))
+    .subscribe(
       res => {
         this.carListItems = res;
         this.selectedCars = this.carListItems.slice(0, this.loadCount);
@@ -39,6 +45,10 @@ export class AllCarsComponent implements OnInit {
       },
       err => console.log(err)
     );
+  }
+
+  ngOnDestroy(): void {
+    this.isAlive = false;
   }
 
   getBrandName(brand: string): string {

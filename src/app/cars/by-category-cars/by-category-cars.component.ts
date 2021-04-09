@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { takeWhile } from 'rxjs/operators';
 import { Car } from '../../shared/entities/car.interface';
 import { CarsService } from '../../shared/servises/cars.service';
 
@@ -19,13 +20,16 @@ export class ByCategoryCarsComponent implements OnInit {
   background: ThemePalette = undefined;
   isDataLoading: boolean;
   firstSelected: any = true;
+  isAlive: boolean = true;
 
   constructor(public carsService: CarsService) { }
 
   ngOnInit(): void {
     this.isDataLoading = true;
   
-    this.carsService.getAllCars().subscribe(
+    this.carsService.getAllCars()
+    .pipe(takeWhile(()=>(this.isAlive = true)))
+    .subscribe(
       res => { 
         this.allCars = res;
         this.isDataLoading = false;
@@ -37,6 +41,9 @@ export class ByCategoryCarsComponent implements OnInit {
     );
   }
 
+  ngOnDestroy(): void {
+    this.isAlive = false;
+  }
   takeAllCategories(): void {
     this.allCars.forEach((car: Car )=> {
       if (car.category != null) {

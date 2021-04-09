@@ -5,6 +5,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { Dealers, initDealer } from '../../dealers';
+import { takeWhile } from 'rxjs/operators';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class FormComponent implements OnInit {
   localData: any;
   showError: boolean = false;
   dealersList: Array<Dealers>;
+  isAlive: boolean;
   
 constructor(public dealersService: DealersService, private popUp: MatDialogRef <FormComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
   popUp.disableClose = true;
@@ -28,15 +30,20 @@ ngOnInit(): void {
   this.dealer = initDealer();
   this.action = !!this.data;
   this.localData = this.data ? { ...this.data } : initDealer();
-  this.dealersService.getAllDealers().subscribe(
+  this.dealersService.getAllDealers()
+  .pipe(takeWhile(()=>(this.isAlive = true)))
+  .subscribe(
     (res) => {
       this.dealersList = res;
     },
     err => console.log(err)
   );
   this.data ? (this.dealer = {  ...this.data }) && (this.action = true) : (this.dealer = initDealer())
-};
+}
 
+ngOnDestroy(): void {
+  this.isAlive = false;
+}
 onClose(): void {
   this.popUp.close();
 };
