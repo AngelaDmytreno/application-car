@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Dealers } from 'src/app/dealers';
 import { Observable, of } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CarsService } from './cars.service';
+import { Car } from 'src/app/car';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -38,6 +40,17 @@ export class DealersService {
   deleteDealer(dealer: Dealers | string): Observable<Dealers> {
     const id: string = typeof dealer === 'string' ? dealer : dealer.id;
     const url: string = `${this.dealersUrl}/${id}`;
+
+    this.http.get<Array<Car>>('/cars').subscribe((cars: Array<Car>) => {
+      const dealerCars = cars.filter((car: Car) => car.brand === id);
+      dealerCars.forEach((car: Car) => {
+        const carUrl: string = `/cars/${car.id}`;
+        this.http.delete<Car>(carUrl, httpOptions).subscribe(
+          (car: Car) => console.log(car),
+          err => console.log(err)
+          );
+      });
+    });
     return this.http
       .delete<Dealers>(url, httpOptions);
   }
