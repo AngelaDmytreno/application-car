@@ -1,45 +1,46 @@
 <mat-spinner *ngIf="isDataLoading" class="loading"></mat-spinner>
 <div class="details__container" *ngIf="!isDataLoading">
- 
-  <div class="car__img" >
+
+  <div class="car__img">
     <img [src]="car?.image" [alt]="car?.id">
-    <img *ngIf="car?.image == undefined" src="../../../assets/images/defoult.jpg" >
+    <img *ngIf="car?.image == undefined" src="../../../assets/images/defoult.jpg">
   </div>
 
-  <div class="car__info"*ngIf="!isEdit">
+  <div class="car__info" *ngIf="!isEdit">
     <ul>
-      <li ><h4>{{car?.model}}</h4> </li>
-      <li>Dealers: <b>{{car.brand}}</b></li>
+      <li>
+        <h4>{{car?.model}}</h4>
+      </li>
+      <li>Dealers: <b>{{getBrandName(car?.brand)}}</b></li>
       <li *ngIf="car?.class">Class: <b>{{car?.class |titlecase}}</b></li>
       <li *ngIf="!car?.class"></li>
       <li *ngIf="car?.year">Year: <b>{{car?.year}}</b></li>
       <li *ngIf="!car?.year"></li>
       <li *ngIf="car?.color">Color: <b>{{car?.color}}</b></li>
       <li *ngIf="!car?.color"></li>
-      <li *ngIf="car?.wikilink" class="car__site">Site: <b><a href="{{car?.wikilink}}" target="blank">{{car?.wikilink}}</a></b></li>
+      <li *ngIf="car?.wikilink" class="car__site">Site: <b><a href="{{car?.wikilink}}"
+            target="blank">{{car?.wikilink}}</a></b></li>
       <li *ngIf="!car?.wikilink" class="car__site"></li>
       <li *ngIf="car?.description" class="car__description">{{car?.description}}</li>
-      <li *ngIf="!car?.description" ></li>
+      <li *ngIf="!car?.description"></li>
     </ul>
   </div>
   <div class="car__controls" *ngIf="!isEdit">
     <button mat-icon-button (click)="onEdit()">
       <mat-icon aria-hidden="false" aria-label="Example home icon">edit</mat-icon>
     </button>
-    <button  mat-icon-button (click)="delete(car)">
-      <mat-icon aria-hidden="false" aria-label="Example home icon" >delete</mat-icon>
+    <button mat-icon-button (click)="delete(car)">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">delete</mat-icon>
     </button>
-    <button  mat-icon-button (click)="changePage()">
-      <mat-icon aria-hidden="false" aria-label="Example home icon" >replay</mat-icon>
+    <button mat-icon-button (click)="changePage()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">replay</mat-icon>
     </button>
   </div>
 
   <section *ngIf="isEdit">
-    <app-car-form   [carItem] ="car" 
-    (saveCarData)="saveCarData($event)"
-    (cancelCar)="onClose()">
-  </app-car-form>
+    <app-car-form [carItem]="car" (saveCarData)="saveCarData($event)" (cancelCar)="onClose()">
+    </app-car-form>
   </section>
- 
-  
+
+
 </div>

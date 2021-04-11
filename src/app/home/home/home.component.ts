@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit} from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormComponent } from '../../shared-components/form/form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DealersService } from '../../shared/servises/dealers.service';
@@ -28,27 +28,27 @@ export class HomeComponent implements OnInit {
   isAlive: boolean;
 
 
-  
-  constructor(public dealersService: DealersService, public popUp: MatDialog, public carService: CarsService) {}
+
+  constructor(public dealersService: DealersService, public popUp: MatDialog, public carService: CarsService) { }
 
   ngOnInit(): void {
     this.isMyCarLoading = true;
     this.isMyDealerloading = true;
     this.dealersService.getAllDealers()
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe((dealers)=>{
-      this.newDealersList = dealers.filter((dealer) => dealer.newRecord);
-      this.isMyDealerloading = false;
-    });
-    
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe((dealers) => {
+        this.newDealersList = dealers.filter((dealer) => dealer.newRecord);
+        this.isMyDealerloading = false;
+      });
+
     this.carService.getAllCars()
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe((cars)=>{
-      this.newCarList = cars.filter((car)=> car.newItem);
-      this.isMyCarLoading = false;
-     
-    });
-   
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe((cars) => {
+        this.newCarList = cars.filter((car) => car.newItem);
+        this.isMyCarLoading = false;
+
+      });
+
   }
 
   ngOnDestroy(): void {
@@ -58,33 +58,33 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.popUp.open(FormComponent, {
       width: '250px',
     });
-    
+
     dialogRef.afterClosed()
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe((result) => {
-      if(result){
-        this.createDealer = result.data;
-        this.dealersService.insertDealers(this.createDealer)
-        .pipe(takeWhile(()=>(this.isAlive = true)))
-        .subscribe();
-        this.newDealersList.push(this.createDealer);
-      }
-    });
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe((result) => {
+        if (result) {
+          this.createDealer = result.data;
+          this.dealersService.insertDealers(this.createDealer)
+            .pipe(takeWhile(() => (this.isAlive = true)))
+            .subscribe();
+          this.newDealersList.push(this.createDealer);
+        }
+      });
   }
 
   openPopUpCarForm(): void {
     const dialogRef = this.popUp.open(DialogCarFormComponent, {
       width: '440px',
-      height: '880px'
-    
+      height: '680px'
+
     });
-    
+
     dialogRef.afterClosed().subscribe((result) => {
-      if(result){
+      if (result) {
         this.createCar = result.data;
         this.carService.insertCar(this.createCar)
-        .pipe(takeWhile(()=>(this.isAlive = true)))
-        .subscribe();
+          .pipe(takeWhile(() => (this.isAlive = true)))
+          .subscribe();
         this.newCarList.push(this.createCar);
       }
     });

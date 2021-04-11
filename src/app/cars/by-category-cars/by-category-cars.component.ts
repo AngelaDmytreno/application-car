@@ -26,26 +26,26 @@ export class ByCategoryCarsComponent implements OnInit {
 
   ngOnInit(): void {
     this.isDataLoading = true;
-  
+
     this.carsService.getAllCars()
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe(
-      res => { 
-        this.allCars = res;
-        this.isDataLoading = false;
-        this.takeAllCategories();
-        this.takeCarsByCategory(this.carsCategories[0]);
-      
-      },
-      err => console.log(err)
-    );
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe(
+        res => {
+          this.allCars = res;
+          this.isDataLoading = false;
+          this.takeAllCategories();
+          this.takeCarsByCategory(this.carsCategories[0]);
+
+        },
+        err => console.log(err)
+      );
   }
 
   ngOnDestroy(): void {
     this.isAlive = false;
   }
   takeAllCategories(): void {
-    this.allCars.forEach((car: Car )=> {
+    this.allCars.forEach((car: Car) => {
       if (car.category != null) {
         this.carsCategories.add(car.category);
       }

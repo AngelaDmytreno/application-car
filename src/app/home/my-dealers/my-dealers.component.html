@@ -3,7 +3,7 @@
     <h4>My Dealers</h4>
   </div>
   <mat-spinner *ngIf="isLoadingDealer" class="loading"></mat-spinner>
-  <mat-selection-list [multiple]="false"  *ngIf="!isLoadingDealer">
+  <mat-selection-list [multiple]="false" *ngIf="!isLoadingDealer">
     <mat-list-option *ngFor="let dealer of newDealers">
       <span class="name"><b>{{dealer.name}}</b></span>
       <div class="info">

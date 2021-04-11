@@ -18,7 +18,7 @@ export class CarILikeComponent implements OnInit {
   allDealersList: Array<Dealers> = new Array<Dealers>();
   isAlive: boolean;
 
-  
+
 
 
   constructor(public carsService: CarsService, public dealerService: DealersService) { }
@@ -26,26 +26,26 @@ export class CarILikeComponent implements OnInit {
   ngOnInit(): void {
     this.isDataLoading = true;
     this.carsService.getAllCars()
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe(
-      res => {
-        this.allCarListItems = res;
-        this.getFavoriteCars();
-        this.carItems = this.getFavoriteCars();
-        this.isDataLoading = false;
-      },
-      err => console.log(err)
-    );
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe(
+        res => {
+          this.allCarListItems = res;
+          this.getFavoriteCars();
+          this.carItems = this.getFavoriteCars();
+          this.isDataLoading = false;
+        },
+        err => console.log(err)
+      );
 
-    this.dealerService.getAllDealers().pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe(
-      res => {
-        this.allDealersList = res;
-      },
-      err => console.log(err)
-    );
+    this.dealerService.getAllDealers().pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe(
+        res => {
+          this.allDealersList = res;
+        },
+        err => console.log(err)
+      );
   }
-  
+
   ngOnDestroy(): void {
     this.isAlive = false;
   }

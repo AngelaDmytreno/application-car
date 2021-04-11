@@ -14,54 +14,54 @@ import { takeWhile } from 'rxjs/operators';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  
+
   dealer: Dealers;
-  action:boolean;
+  action: boolean;
   localData: any;
   showError: boolean = false;
   dealersList: Array<Dealers>;
   isAlive: boolean;
-  
-constructor(public dealersService: DealersService, private popUp: MatDialogRef <FormComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-  popUp.disableClose = true;
- }
 
-ngOnInit(): void {
-  this.dealer = initDealer();
-  this.action = !!this.data;
-  this.localData = this.data ? { ...this.data } : initDealer();
-  this.dealersService.getAllDealers()
-  .pipe(takeWhile(()=>(this.isAlive = true)))
-  .subscribe(
-    (res) => {
-      this.dealersList = res;
-    },
-    err => console.log(err)
-  );
-  this.data ? (this.dealer = {  ...this.data }) && (this.action = true) : (this.dealer = initDealer())
-}
+  constructor(public dealersService: DealersService, private popUp: MatDialogRef<FormComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    popUp.disableClose = true;
+  }
 
-ngOnDestroy(): void {
-  this.isAlive = false;
-}
-onClose(): void {
-  this.popUp.close();
-};
+  ngOnInit(): void {
+    this.dealer = initDealer();
+    this.action = !!this.data;
+    this.localData = this.data ? { ...this.data } : initDealer();
+    this.dealersService.getAllDealers()
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe(
+        (res) => {
+          this.dealersList = res;
+        },
+        err => console.log(err)
+      );
+    this.data ? (this.dealer = { ...this.data }) && (this.action = true) : (this.dealer = initDealer())
+  }
 
-checkId():void {
-  this.showError = !!this.dealersList.find((elem) =>  elem.id === this.dealer.id.toUpperCase());
-}
-
-onSeve(): void {
-  const updatedDealer = {
-    ...this.dealer,
-    id: this.dealer.id.toUpperCase(),
-    registration: this.action ? this.dealer.registration : new Date(),
+  ngOnDestroy(): void {
+    this.isAlive = false;
+  }
+  onClose(): void {
+    this.popUp.close();
   };
-  this.popUp.close({
-    event: 'close',
-    data: updatedDealer,
-    
-  });
-}
+
+  checkId(): void {
+    this.showError = !!this.dealersList.find((elem) => elem.id === this.dealer.id.toUpperCase());
+  }
+
+  onSeve(): void {
+    const updatedDealer = {
+      ...this.dealer,
+      id: this.dealer.id.toUpperCase(),
+      registration: this.action ? this.dealer.registration : new Date(),
+    };
+    this.popUp.close({
+      event: 'close',
+      data: updatedDealer,
+
+    });
+  }
 }

@@ -36,20 +36,20 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
     this.isDataLoading = true;
     this.dealersService.getAllDealers()
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe(
-      res => {
-        this.allDealersList = res;
-        this.dataSource = new MatTableDataSource(this.allDealersList);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-        this.isDataLoading = false;
-        this.tableUpdate();
-      },
-      err => console.log(err)
-    );
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe(
+        res => {
+          this.allDealersList = res;
+          this.dataSource = new MatTableDataSource(this.allDealersList);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+          this.isDataLoading = false;
+          this.tableUpdate();
+        },
+        err => console.log(err)
+      );
   }
-  
+
 
   ngOnDestroy(): void {
     this.isAlive = false;
@@ -65,35 +65,35 @@ export class TableComponent implements OnInit {
       data: obj,
     });
     dialogRef.afterClosed()
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe((result) => {
-      this.createDealer = result.data;
-      if (result.data.newRecord === true) {
-        this.dealersService.insertDealers(this.createDealer)
-        .pipe(takeWhile(()=>(this.isAlive = true)))
-        .subscribe();
-      } else if (result.data.newRecord === false) {
-        this.dealersService.updateDealers(this.createDealer)
-        .pipe(takeWhile(()=>(this.isAlive = true)))
-        .subscribe();
-      }
-      this.tableUpdate();
-    });
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe((result) => {
+        this.createDealer = result.data;
+        if (result.data.newRecord === true) {
+          this.dealersService.insertDealers(this.createDealer)
+            .pipe(takeWhile(() => (this.isAlive = true)))
+            .subscribe();
+        } else if (result.data.newRecord === false) {
+          this.dealersService.updateDealers(this.createDealer)
+            .pipe(takeWhile(() => (this.isAlive = true)))
+            .subscribe();
+        }
+        this.tableUpdate();
+      });
   }
 
 
   tableUpdate(): void {
     this.dealersService.getAllDealers()
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe(
-      res => {
-        this.allDealersList = res;
-        this.dataSource = new MatTableDataSource(this.allDealersList);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      },
-      err => console.log(err)
-    );
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe(
+        res => {
+          this.allDealersList = res;
+          this.dataSource = new MatTableDataSource(this.allDealersList);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+        },
+        err => console.log(err)
+      );
   }
 
   delete(dealer: Dealers): void {
@@ -106,9 +106,9 @@ export class TableComponent implements OnInit {
     confirmDialog.afterClosed().subscribe((result) => {
       if (result === true) {
         this.dealersService.deleteDealer(dealer)
-        .pipe(takeWhile(()=>(this.isAlive = true)))
-        .subscribe();
-        this.tableUpdate(); 
+          .pipe(takeWhile(() => (this.isAlive = true)))
+          .subscribe();
+        this.tableUpdate();
       }
     })
 
@@ -121,12 +121,12 @@ export class TableComponent implements OnInit {
       data: "Do you confirm the deletion of this data?"
     });
     dialogRef.afterClosed()
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe(result => {
-      if (result) {
-        console.log('Yes clicked');
-      }
-    });
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe(result => {
+        if (result) {
+          console.log('Yes clicked');
+        }
+      });
   }
 }
 

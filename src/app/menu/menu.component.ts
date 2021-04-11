@@ -17,5 +17,5 @@ export class MenuComponent implements OnInit {
   currentUrl: string;
 
   constructor() { }
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

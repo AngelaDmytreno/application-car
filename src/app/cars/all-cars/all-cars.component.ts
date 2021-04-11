@@ -28,23 +28,23 @@ export class AllCarsComponent implements OnInit {
   ngOnInit(): void {
     this.isDataLoading = true;
     this.dealerService.getAllDealers()
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe(
-      (re) => {
-        this.dealersList = re;
-      }, err => console.log(err)
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe(
+        (re) => {
+          this.dealersList = re;
+        }, err => console.log(err)
 
-    )
+      )
     this.carsService.getAllCars()
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe(
-      res => {
-        this.carListItems = res;
-        this.selectedCars = this.carListItems.slice(0, this.loadCount);
-        this.isDataLoading = false;
-      },
-      err => console.log(err)
-    );
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe(
+        res => {
+          this.carListItems = res;
+          this.selectedCars = this.carListItems.slice(0, this.loadCount);
+          this.isDataLoading = false;
+        },
+        err => console.log(err)
+      );
   }
 
   ngOnDestroy(): void {

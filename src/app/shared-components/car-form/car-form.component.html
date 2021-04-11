@@ -1,69 +1,68 @@
-
-  <form [formGroup]="myForm">
-    <mat-form-field>
-      <mat-label>*Model</mat-label>
-      <input matInput type="text" formControlName="model" name="model">
-      <mat-error *ngIf="myForm.get('model').hasError('required') &&
+<form [formGroup]="myForm">
+  <mat-form-field>
+    <mat-label>*Model</mat-label>
+    <input matInput type="text" formControlName="model" name="model">
+    <mat-error *ngIf="myForm.get('model').hasError('required') &&
                           myForm.get('model').touched">
-        Model is required
-      </mat-error>
-    </mat-form-field>
+      Model is required
+    </mat-error>
+  </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>*Dealer</mat-label>
-      <input type="text" matInput #dealer formControlName="dealer" [matAutocomplete]="auto">
-      <mat-error *ngIf="myForm.get('dealer').hasError('required') && 
+  <mat-form-field class="example-full-width">
+    <mat-label>*Dealer</mat-label>
+    <input type="text" matInput #dealer formControlName="dealer" [matAutocomplete]="auto">
+    <mat-error *ngIf="myForm.get('dealer').hasError('required') && 
                           myForm.get('dealer').touched">
-        Dealer is required
-      </mat-error>
-      <mat-hint *ngIf="showError">
-        <div>You have to use dealer wich already exist in dealers</div>
-      </mat-hint>
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectDealer($event)">
-        <mat-option [value]="null" seleced disabled>
-          Chose a dealer
-        </mat-option>
-        <mat-option *ngFor="let dealer of dealers$ | async" [value]="dealer">
-          {{dealer.name}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+      Dealer is required
+    </mat-error>
+    <mat-hint *ngIf="showError">
+      <div>You have to use dealer wich already exist in dealers</div>
+    </mat-hint>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectDealer($event)">
+      <mat-option [value]="null" seleced disabled>
+        Chose a dealer
+      </mat-option>
+      <mat-option *ngFor="let dealer of dealers$ | async" [value]="dealer">
+        {{dealer.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Class</mat-label>
-      <input matInput type="text" formControlName="class">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Year</mat-label>
-      <input matInput type="text" formControlName="year">
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>Class</mat-label>
+    <input matInput type="text" formControlName="class">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Year</mat-label>
+    <input matInput type="text" formControlName="year">
+  </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Color</mat-label>
-      <input matInput type="text" formControlName="color">
-    </mat-form-field>
+  <mat-form-field>
+    <mat-label>Color</mat-label>
+    <input matInput type="text" formControlName="color">
+  </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Site</mat-label>
-      <input matInput type="text" formControlName="wikilink">
-      <mat-error *ngIf="myForm.get('wikilink').hasError('pattern') && 
+  <mat-form-field>
+    <mat-label>Site</mat-label>
+    <input matInput type="text" formControlName="wikilink">
+    <mat-error *ngIf="myForm.get('wikilink').hasError('pattern') && 
         myForm.get('wikilink').touched">
-        Enter the correct website address
-      </mat-error>
-    </mat-form-field>
+      Enter the correct website address
+    </mat-error>
+  </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Description</mat-label>
-      <textarea matInput formControlName="description"></textarea>
-    </mat-form-field>
-    <mat-form-field >
-      <mat-label>Image</mat-label>
-      <div>
-        <input matInput type="text" formControlName="image" />
-      </div>
-    </mat-form-field>
-    <div mat-dialog-actions>
-      <button mat-button class="cancel-btn" (click)="cancelCar.emit()">Cancel</button>
-      <button mat-button [disabled]="showError || myForm.invalid" (click)="onSave()">Save</button>
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Image</mat-label>
+    <div>
+      <input matInput type="text" formControlName="image" />
     </div>
-  </form>
+  </mat-form-field>
+  <div mat-dialog-actions>
+    <button mat-button class="cancel-btn" (click)="cancelCar.emit()">Cancel</button>
+    <button mat-button [disabled]="showError || myForm.invalid" (click)="onSave()">Save</button>
+  </div>
+</form>

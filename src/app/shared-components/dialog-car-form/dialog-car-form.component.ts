@@ -13,45 +13,45 @@ import { takeWhile } from 'rxjs/operators';
   styleUrls: ['./dialog-car-form.component.scss']
 })
 export class DialogCarFormComponent implements OnInit {
-  
 
-   cars: Array<Car>;
-   isAlive: boolean;
-   
-  
-  constructor(private popUp: MatDialogRef<DialogCarFormComponent>, 
-    private carsService: CarsService, private dealerService: DealersService) { }
+
+  cars: Array<Car>;
+  isAlive: boolean;
+
+
+  constructor(private popUp: MatDialogRef<DialogCarFormComponent>,
+    private carsService: CarsService, private dealerService: DealersService) { 
+      popUp.disableClose = true;
+    }
 
   ngOnInit(): void {
-    
+
   }
   ngOnDestroy(): void {
     this.isAlive = false;
   }
 
-  
+  saveCarData(data: Car): void {
 
-  saveCarData(data: Car): void{
-    
     const newCar: Car = {
       ...data,
     };
-    
-    this.popUp.close({event : 'close', data: newCar})
+
+    this.popUp.close({ event: 'close', data: newCar })
 
     this.carsService.insertCar(data).subscribe(() => {
       this.dealerService.getDealerById(newCar.brand)
-      .pipe(takeWhile(()=>(this.isAlive = true)))
-      .subscribe((dealer: Dealers) => {
-        this.dealerService.updateDealers({
-          ...dealer,
-          amountOfCars: dealer.amountOfCars + 1,
-        }).subscribe();
-      });
+        .pipe(takeWhile(() => (this.isAlive = true)))
+        .subscribe((dealer: Dealers) => {
+          this.dealerService.updateDealers({
+            ...dealer,
+            amountOfCars: dealer.amountOfCars + 1,
+          }).subscribe();
+        });
     });
   }
-   
-  onClose(): void{
+
+  onClose(): void {
     this.popUp.close();
   }
 

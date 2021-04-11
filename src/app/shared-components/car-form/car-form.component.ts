@@ -30,33 +30,23 @@ export class CarFormComponent implements OnInit, OnDestroy {
   dealerChange$: Observable<any>;
   dealers$: Observable<Array<Dealers>>;
   isAlive: boolean = true;
-  
+
 
   @Output() saveCarData: EventEmitter<Car> = new EventEmitter<Car>();
   @Output() cancelCar: EventEmitter<any> = new EventEmitter();
 
   @Input() carItem: Car = null;
 
-  
-
-
-
-
-
-
-  
   constructor(
-  
     public carService: CarsService,
     private formBuilder: FormBuilder,
     public dealerService: DealersService
-  ) {
-    
-  }
+  ) {}
 
   ngOnInit(): void {
-
-    this.carService.getAllCars().subscribe(
+    this.carService.getAllCars()
+    .pipe(takeWhile(() => (this.isAlive = true)))
+    .subscribe(
       (res) => {
         this.carsList = res;
       },
@@ -76,6 +66,15 @@ export class CarFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.isAlive = false;
+  }
+
+  getBrandName(brand: string): string {
+    const dealer = this.dealers.find((dealer: Dealers) => dealer.id === brand);
+    if (dealer) {
+      return dealer.name;
+    } else {
+      return "";
+    }
   }
 
   getAllDealers(): void {
@@ -100,9 +99,6 @@ export class CarFormComponent implements OnInit, OnDestroy {
 
   }
 
-
-  
-
   selectDealer(dealerOption: any): void {
     this.myForm.controls.dealer.setValue(dealerOption.option.value.name);
   }
@@ -120,14 +116,14 @@ export class CarFormComponent implements OnInit, OnDestroy {
 
   unicId(): string {
     let unicId: string;
-   this.carsList.forEach((el)=>{
-     if(el.id !== this.randomNumber()){
-      unicId = this.randomNumber();
-     }
-     else {
-      this.randomNumber();
-     }
-   })
+    this.carsList.forEach((el) => {
+      if (el.id !== this.randomNumber()) {
+        unicId = this.randomNumber();
+      }
+      else {
+        this.randomNumber();
+      }
+    })
     return unicId;
   }
 
@@ -136,13 +132,13 @@ export class CarFormComponent implements OnInit, OnDestroy {
     );
     const updatedCar = {
       ...this.myForm.getRawValue(),
-      brand: selectedDealer ? selectedDealer.name : null ,
-      id:this.carItem ? this.carItem.id : this.unicId(),
-      newItem: this.carItem ? this.carItem.newItem  : true,
-      registration: this.carItem  ? this.carItem.registration : new Date(), 
+      brand: selectedDealer ? selectedDealer.name : null,
+      id: this.carItem ? this.carItem.id : this.unicId(),
+      newItem: this.carItem ? this.carItem.newItem : true,
+      registration: this.carItem ? this.carItem.registration : new Date(),
     };
     this.saveCarData.emit(updatedCar);
   }
- 
+
 
 }

@@ -7,7 +7,7 @@ import { CarsService } from '../../shared/servises/cars.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { Location } from '@angular/common';
-import { CarFormComponent} from '../car-form/car-form.component';
+import { CarFormComponent } from '../car-form/car-form.component';
 import { tap } from 'rxjs/operators';
 import { FormGroup, Validators, FormBuilder, FormControl, FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { Dealers } from 'src/app/dealers';
@@ -37,6 +37,8 @@ export class DetailsCarComponent implements OnInit, OnChanges {
   localData: any;
   selectedValue: string;
   isAlive: boolean;
+  dealersList: Array<Dealers>;
+ 
 
 
 
@@ -53,10 +55,10 @@ export class DetailsCarComponent implements OnInit, OnChanges {
 
     this.isDataLoading = true;
     this.route.data
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe((res) => {
-      this.isEdit = res.isEdit;
-    })
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe((res) => {
+        this.isEdit = res.isEdit;
+      })
     this.route.paramMap
       .pipe(
         switchMap((params: ParamMap) => {
@@ -66,12 +68,23 @@ export class DetailsCarComponent implements OnInit, OnChanges {
         }
         )
       )
-      .pipe(takeWhile(()=>(this.isAlive = true)))
+      .pipe(takeWhile(() => (this.isAlive = true)))
       .subscribe((p) => {
         this.car = p;
       });
-  }
 
+      this.dealerService.getAllDealers().subscribe((res)=>{
+      this.dealersList = res;
+      })
+  }
+  getBrandName(brand: string): string {
+    const dealer = this.dealersList.find((dealer: Dealers) => dealer.id === brand);
+    if (dealer) {
+      return dealer.name;
+    } else {
+      return "";
+    }
+  }
   ngOnChanges(changes: SimpleChanges): void { }
   ngOnDestroy(): void {
     this.isAlive = false;
@@ -91,16 +104,27 @@ export class DetailsCarComponent implements OnInit, OnChanges {
 
 
   onSave(data: Car): void {
-    if (!data) {
-      return
-    }
-   
+    
     this.carsService.updateCars(data)
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe(() => {
-      this.car = data;
-      this.router.navigate(['/cars', `${this.id}`]);
-    });
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe(() => {
+        this.car = data;
+        this.router.navigate(['/cars', `${this.id}`]);
+        this.dealerService.getDealerById(this.car.brand)
+          .pipe(takeWhile(() => (this.isAlive = true)))
+          .subscribe((dealer: Dealers) => {
+            this.dealerService.updateDealers({
+              ...dealer,
+              amountOfCars: dealer.amountOfCars + 1,
+            }).subscribe();
+          });
+      });
+     
+
+     
+      
+      // this.carsService.insertCar(data).subscribe();
+
   }
 
   delete(car: Car): void {
@@ -111,15 +135,15 @@ export class DetailsCarComponent implements OnInit, OnChanges {
       }
     });
     confirmDialog.afterClosed()
-    .pipe(takeWhile(()=>(this.isAlive = true)))
-    .subscribe((result) => {
-      if (result === true) {
-        this.carsService.deleteCarById(car)
-        .pipe(takeWhile(()=>(this.isAlive = true)))
-        .subscribe();
-        this.changePage();
-      }
-    })
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe((result) => {
+        if (result === true) {
+          this.carsService.deleteCarById(car)
+            .pipe(takeWhile(() => (this.isAlive = true)))
+            .subscribe();
+          this.changePage();
+        }
+      })
   }
 
   changePage(): void {
