@@ -38,9 +38,6 @@ export class DetailsCarComponent implements OnInit, OnChanges {
   selectedValue: string;
   isAlive: boolean;
   dealersList: Array<Dealers>;
- 
-
-
 
   constructor(
     private route: ActivatedRoute,
@@ -70,14 +67,22 @@ export class DetailsCarComponent implements OnInit, OnChanges {
       )
       .pipe(takeWhile(() => (this.isAlive = true)))
       .subscribe((p) => {
+        console.log(p);
         this.car = p;
       });
 
       this.dealerService.getAllDealers().subscribe((res)=>{
       this.dealersList = res;
+
       })
   }
   getBrandName(brand: string): string {
+    console.log('dealerList',this.dealersList);
+    console.log('brand',brand);
+    if (brand === null || this.dealersList === undefined) {
+      return "";
+    }
+
     const dealer = this.dealersList.find((dealer: Dealers) => dealer.id === brand);
     if (dealer) {
       return dealer.name;
@@ -104,7 +109,6 @@ export class DetailsCarComponent implements OnInit, OnChanges {
 
 
   onSave(data: Car): void {
-    
     this.carsService.updateCars(data)
       .pipe(takeWhile(() => (this.isAlive = true)))
       .subscribe(() => {

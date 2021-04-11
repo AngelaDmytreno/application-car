@@ -27,8 +27,6 @@ export class HomeComponent implements OnInit {
   isMyDealerloading: boolean;
   isAlive: boolean;
 
-
-
   constructor(public dealersService: DealersService, public popUp: MatDialog, public carService: CarsService) { }
 
   ngOnInit(): void {
@@ -45,10 +43,9 @@ export class HomeComponent implements OnInit {
       .pipe(takeWhile(() => (this.isAlive = true)))
       .subscribe((cars) => {
         this.newCarList = cars.filter((car) => car.newItem);
+        console.log(this.newCarList);
         this.isMyCarLoading = false;
-
       });
-
   }
 
   ngOnDestroy(): void {
