@@ -46,7 +46,7 @@ import { FormsModule } from '@angular/forms';
     DealersModule,
     CarsModule,
     FormsModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { apiBase: '/', delay: 1000 })
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { apiBase: '/', delay: 500 })
   ],
   providers: [],
   bootstrap: [AppComponent]

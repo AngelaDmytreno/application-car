@@ -80,12 +80,12 @@ export class CarFormComponent implements OnInit, OnDestroy {
   getAllDealers(): void {
     this.dealers$ = this.dealerService.getAllDealers().pipe(tap((dealers: Array<Dealers>) => {
       this.dealers = dealers;
+      // this.myForm.controls.dealer.setValue('fghbn');
     }))
   }
   formBuild(carItem: Car): void {
     this.myForm = this.formBuilder.group(
       {
-
         model: [this.carItem ? this.carItem.model : null, [Validators.required]],
         dealer: [this.carItem ? this.carItem.brand : null, [Validators.required]],
         class: [this.carItem ? this.carItem.class : null],

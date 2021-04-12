@@ -69,10 +69,12 @@ export class DetailsCarComponent implements OnInit, OnChanges {
       .subscribe((p) => {
         console.log(p);
         this.car = p;
+        
       });
 
       this.dealerService.getAllDealers().subscribe((res)=>{
-      this.dealersList = res;
+        this.dealersList = res;
+        // this.myForm.controls.dealer.setValue('ghvcshbc');
 
       })
   }
@@ -123,11 +125,6 @@ export class DetailsCarComponent implements OnInit, OnChanges {
             }).subscribe();
           });
       });
-     
-
-     
-      
-      // this.carsService.insertCar(data).subscribe();
 
   }
 
