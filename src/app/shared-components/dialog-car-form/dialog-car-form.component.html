@@ -1,11 +1,8 @@
-
-  <div class="car-form-container">
-    <h1 mat-dialog-title>
-      <strong> Add Cars</strong>
-    </h1>
-    <div class="mat-dialog-content">
-      <app-car-form [carItem] ="cars" (formData) ="formData($event)"></app-car-form>
-    </div>
-  
-    
+<div class="car-form-container">
+  <h1 mat-dialog-title>
+    <strong> Add Cars</strong>
+  </h1>
+  <div class="mat-dialog-content">
+    <app-car-form [carItem]="cars" (saveCarData)="saveCarData($event)" (cancelCar)="onClose()"></app-car-form>
   </div>
+</div>

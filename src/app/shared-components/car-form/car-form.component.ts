@@ -9,7 +9,7 @@ import { Dealers, initDealer } from '../../dealers'
 import { from, Observable } from 'rxjs';
 import { debounceTime, takeWhile, tap } from 'rxjs/operators';
 
-export interface FormDataOutput { action: 'cancel' | 'save'; data: Car }
+
 
 @Component({
   selector: 'app-car-form',
@@ -28,33 +28,25 @@ export class CarFormComponent implements OnInit, OnDestroy {
   selectedValue: string;
   showError: boolean = false;
   dealerChange$: Observable<any>;
-  // selectedImagePath: string;
-
-  @Output() formData: EventEmitter<FormDataOutput> = new EventEmitter<FormDataOutput>();
-
-  @Input() carItem: Car = null;
-
   dealers$: Observable<Array<Dealers>>;
   isAlive: boolean = true;
 
 
+  @Output() saveCarData: EventEmitter<Car> = new EventEmitter<Car>();
+  @Output() cancelCar: EventEmitter<any> = new EventEmitter();
 
+  @Input() carItem: Car = null;
 
-
-
-  
   constructor(
-  
     public carService: CarsService,
     private formBuilder: FormBuilder,
     public dealerService: DealersService
-  ) {
-    
-  }
+  ) {}
 
   ngOnInit(): void {
-
-    this.carService.getAllCars().subscribe(
+    this.carService.getAllCars()
+    .pipe(takeWhile(() => (this.isAlive = true)))
+    .subscribe(
       (res) => {
         this.carsList = res;
       },
@@ -76,15 +68,24 @@ export class CarFormComponent implements OnInit, OnDestroy {
     this.isAlive = false;
   }
 
+  getBrandName(brand: string): string {
+    const dealer = this.dealers.find((dealer: Dealers) => dealer.id === brand);
+    if (dealer) {
+      return dealer.name;
+    } else {
+      return "";
+    }
+  }
+
   getAllDealers(): void {
     this.dealers$ = this.dealerService.getAllDealers().pipe(tap((dealers: Array<Dealers>) => {
       this.dealers = dealers;
+      // this.myForm.controls.dealer.setValue('fghbn');
     }))
   }
   formBuild(carItem: Car): void {
     this.myForm = this.formBuilder.group(
       {
-
         model: [this.carItem ? this.carItem.model : null, [Validators.required]],
         dealer: [this.carItem ? this.carItem.brand : null, [Validators.required]],
         class: [this.carItem ? this.carItem.class : null],
@@ -97,11 +98,6 @@ export class CarFormComponent implements OnInit, OnDestroy {
     );
 
   }
-
-
-  onClose(): void {
-    this.emmitFormData('cancel');
-  };
 
   selectDealer(dealerOption: any): void {
     this.myForm.controls.dealer.setValue(dealerOption.option.value.name);
@@ -120,42 +116,28 @@ export class CarFormComponent implements OnInit, OnDestroy {
 
   unicId(): string {
     let unicId: string;
-   this.carsList.forEach((el)=>{
-     if(el.id !== this.randomNumber()){
-      unicId = this.randomNumber();
-     }
-     else {
-      this.randomNumber();
-     }
-   })
-  
-   
-    console.log('unic', unicId);
+    this.carsList.forEach((el) => {
+      if (el.id !== this.randomNumber()) {
+        unicId = this.randomNumber();
+      }
+      else {
+        this.randomNumber();
+      }
+    })
     return unicId;
   }
 
-  emmitFormData(action: 'cancel' | 'save'): void {
+  onSave(): void {
     const selectedDealer = this.dealers.find((el) => el.name.toLowerCase() === (this.myForm.value.dealer || '').toLowerCase()
     );
-    
-
-    this.formData.emit({
-      action: action, 
-      data: 
-      action ==='cancel' ? null : {
-        ...this.myForm.getRawValue(),
-        brand: selectedDealer ? selectedDealer.name : null ,
-        id:this.carItem ? this.carItem.id : this.unicId(),
-        newItem: this.carItem ? false : true,
-        registration: this.carItem  ? this.carItem.registration : new Date(),
-      
-      } 
-      
-    });
-  
-  }
-  onSave(): void {
-    this.emmitFormData('save');
+    const updatedCar = {
+      ...this.myForm.getRawValue(),
+      brand: selectedDealer ? selectedDealer.name.toUpperCase() : null,
+      id: this.carItem ? this.carItem.id : this.unicId(),
+      newItem: this.carItem ? this.carItem.newItem : true,
+      registration: this.carItem ? this.carItem.registration : new Date(),
+    };
+    this.saveCarData.emit(updatedCar);
   }
 
 

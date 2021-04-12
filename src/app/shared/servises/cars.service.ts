@@ -32,11 +32,8 @@ export class CarsService {
     const url = `${this.carsUrl}/${id}`;
     return this.http.get<Car>(url);
   }
-  // deleteCarById(car: Car | string): Observable<Car> {
+
   deleteCarById(car: Car): Observable<Car> {
-    // const id: string = typeof car === 'string' ? car : car.id;
-    // const url: string = `${this.carsUrl}/${id}`;
-    // console.log('url: ', url);
     const url: string = `${this.carsUrl}/${car.id}`;
     return this.http.delete<Car>(url, httpOptions).pipe(
       switchMap(() => this.dealersService.getDealerById(car.brand)),
@@ -49,6 +46,7 @@ export class CarsService {
 
     );
   }
+  
 
   insertCar(car: Car): Observable<Car> {
     return this.http.post<Car>(`${this.carsUrl}.json`, car, httpOptions).pipe(
@@ -63,18 +61,7 @@ export class CarsService {
     );
   }
 
-  // addCar(car: CarItem): Observable<void> {
-  //   return this.http.post<CarItem>(this.carsUrl, car, this.httpOptions).pipe(
-  //     switchMap(() => this.dealersService.getDealerById(car.brand)),
-  //     switchMap((dealer: DealerItem) =>
-  //       this.dealersService.updateDealer({
-  //         ...dealer,
-  //         amountOfCars: dealer.amountOfCars + 1,
-  //       })
-  //     ),
-  //     catchError(this.handleError<CarItem>('addCar'))
-  //   );
-  // }
+  
 
 }
 

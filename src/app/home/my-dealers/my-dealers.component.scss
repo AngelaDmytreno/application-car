@@ -1,18 +1,22 @@
 .dealers__conatiner-column{
-width: 20vw;
-margin: 0 auto;
-  .dealers__item{
-     height: 25px;
-     border-bottom: 3px solid gray;
-     padding-bottom: 10px;
-  }
-  .info{
-    display: flex;
-    justify-content: space-between;
-  }
-  .dealers__text{
-    margin-top: 5px;
-    font-size: 12px;
-   }
+  width: 20vw;
+  margin: 0 auto;
+    .loading{
+      margin-top: 20px;
+      margin-left: 50px;
+    }
+    .dealers__item{
+      height: 25px;
+      border-bottom: 3px solid gray;
+      padding-bottom: 10px;
+    }
+    .info{
+      display: flex;
+      justify-content: space-between;
+    }
+    .dealers__text{
+      margin-top: 5px;
+      font-size: 12px;
+    }
 }
 

@@ -1,7 +1,7 @@
 <div class="home__conatainer">
   <app-car-i-like></app-car-i-like>
-  <app-mycars [new-cars]="newCarList"></app-mycars>
-  <app-my-dealers [new-dealers]="newDealersList"></app-my-dealers>
+  <app-mycars [new-cars]="newCarList" [isLoadingCar]="isMyCarLoading"></app-mycars>
+  <app-my-dealers [new-dealers]="newDealersList" [isLoadingDealer]="isMyDealerloading"></app-my-dealers>
   <section>
     <div class="example-button-row">
       <button mat-raised-button color="accent" (click)="openPopUpCarForm()">Add car</button>
