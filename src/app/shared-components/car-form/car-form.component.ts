@@ -68,19 +68,12 @@ export class CarFormComponent implements OnInit, OnDestroy {
     this.isAlive = false;
   }
 
-  getBrandName(brand: string): string {
-    const dealer = this.dealers.find((dealer: Dealers) => dealer.id === brand);
-    if (dealer) {
-      return dealer.name;
-    } else {
-      return "";
-    }
-  }
-
+ 
   getAllDealers(): void {
     this.dealers$ = this.dealerService.getAllDealers().pipe(tap((dealers: Array<Dealers>) => {
       this.dealers = dealers;
-      // this.myForm.controls.dealer.setValue('fghbn');
+      this.carItem && this.myForm.controls.dealer.setValue(this.getBrandName(this.carItem.brand));
+     
     }))
   }
   formBuild(carItem: Car): void {
@@ -97,6 +90,20 @@ export class CarFormComponent implements OnInit, OnDestroy {
       }
     );
 
+  }
+
+  getBrandName(brand: string): string {
+   
+    if (brand === null || this.dealers=== undefined) {
+      return "";
+    }
+
+    const dealer = this.dealers.find((dealer: Dealers) => dealer.id === brand);
+    if (dealer) {
+      return dealer.name;
+    } else {
+      return "";
+    }
   }
 
   selectDealer(dealerOption: any): void {
