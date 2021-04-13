@@ -74,9 +74,7 @@ export class DetailsCarComponent implements OnInit, OnChanges {
 
       this.dealerService.getAllDealers().subscribe((res)=>{
         this.dealersList = res;
-        // this.myForm.controls.dealer.setValue('ghvcshbc');
-
-      })
+      });
   }
   getBrandName(brand: string): string {
     console.log('dealerList',this.dealersList);
