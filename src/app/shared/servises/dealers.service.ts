@@ -28,6 +28,7 @@ export class DealersService {
   
  
     getDealerById(id: string): Observable<Dealers> {
+      console.log(id);
       const url = `${this.dealersUrl}/${id.toUpperCase()}`;
       return this.http.get<Dealers>(url);
     }

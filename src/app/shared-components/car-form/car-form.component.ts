@@ -139,7 +139,7 @@ export class CarFormComponent implements OnInit, OnDestroy {
     );
     const updatedCar = {
       ...this.myForm.getRawValue(),
-      brand: selectedDealer ? selectedDealer.name.toUpperCase() : null,
+      brand: selectedDealer ? selectedDealer.id.toUpperCase() : null,
       id: this.carItem ? this.carItem.id : this.unicId(),
       newItem: this.carItem ? this.carItem.newItem : true,
       registration: this.carItem ? this.carItem.registration : new Date(),
