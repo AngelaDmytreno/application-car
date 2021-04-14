@@ -61,10 +61,12 @@ export class AllCarsComponent implements OnInit {
   }
 
   onKey(event: any) {
+    console.log(event);
     setTimeout(() => this.filterCars(event.target.value), 2000);
   }
 
   filterCars(param): void {
+  
     this.resetStartEnd();
     this.selectedCars = this.carListItems
       .filter(el => this.isModel(el.model, param) || this.isBrand(el.brand, param) || param === '')

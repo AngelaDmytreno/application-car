@@ -34,30 +34,17 @@ export class TableComponent implements OnInit {
   constructor(public dealersService: DealersService, public popUp: MatDialog, public dialog: MatDialog, public carService: CarsService) { }
 
   ngOnInit(): void {
-    
-    // this.dealersService.getAllDealers()
-    // .pipe(finalize(() => (this.isDataLoading = false)))
-    //   .pipe(takeWhile(() => (this.isAlive = true)))
-    //   .subscribe(
-    //     (res) => {
-    //       // this.allDealersList = res;
-    //       // this.dataSource = new MatTableDataSource(this.allDealersList);
-    //       // this.dataSource.paginator = this.paginator;
-    //       // this.dataSource.sort = this.sort;
-    //       // this.isDataLoading = false;
-    //       this.tableUpdate();
-    //     },
-    //     err => console.log(err)
-    //   );
+    this.isDataLoading = true;
     this.dealersService.getAllDealers()
-   
     .pipe(takeWhile(() => (this.isAlive = true)))
     .subscribe(
       res => {
         this.allDealersList = res;
+        
         this.dataSource = new MatTableDataSource(this.allDealersList);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+        this.isDataLoading = false;
       
       },
       err => console.log(err)

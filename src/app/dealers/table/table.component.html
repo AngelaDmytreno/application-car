@@ -14,7 +14,7 @@
     </div>
   </section>
 </div>
-<div class="mat-elevation-z8" *ngIf="!isDataLoading">
+<div [hidden]="isDataLoading" class="mat-elevation-z8" >
   <table  mat-table [dataSource]="dataSource" matSort >
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
