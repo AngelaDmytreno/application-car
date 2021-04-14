@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Car } from 'src/app/car';
 import { Dealers } from 'src/app/dealers';
+import { CarFormComponent } from 'src/app/shared-components/car-form/car-form.component';
+import { CarsService } from 'src/app/shared/servises/cars.service';
 import { DealersService } from 'src/app/shared/servises/dealers.service';
 
 @Component({
@@ -24,11 +26,11 @@ export class MycarsComponent implements OnInit {
   }
 
   getBrandName(brand: string): string {
-    const dealer = this.dealersList.find((dealer: Dealers) => dealer.id === brand);
+    const dealer = this.dealersList.find((dealer: Dealers) => dealer.name === brand);
     if (dealer) {
       return dealer.name;
     } else {
-      return "";
+      return 'trololo';
     }
   }
 

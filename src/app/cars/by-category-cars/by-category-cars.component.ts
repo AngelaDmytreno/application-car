@@ -42,17 +42,15 @@ export class ByCategoryCarsComponent implements OnInit {
         },
         err => console.log(err)
       );
-    this.dealerService.getAllDealers().subscribe((res)=>{
+    this.dealerService.getAllDealers().subscribe((res) => {
       this.dealersList = res;
-    }); 
+    });
   }
 
   ngOnDestroy(): void {
     this.isAlive = false;
   }
   getBrandName(brand: string): string {
-    console.log('dealerList',this.dealersList);
-    console.log('brand',brand);
     if (brand === null || this.dealersList === undefined) {
       return "";
     }
@@ -76,7 +74,6 @@ export class ByCategoryCarsComponent implements OnInit {
 
   selectCar(car: Car): void {
     this.selectedCar = car;
-    console.log(this.selectedCar);
     this.firstSelected = false;
   }
 
