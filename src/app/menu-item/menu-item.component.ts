@@ -22,11 +22,7 @@ export class MenuItemComponent implements OnInit {
       .pipe(takeWhile(() => (this.isAlive = true)))
       .subscribe((e: RouterEvent) => {
         if (e.url) {
-          if (e.url === this.menuItem.url || (e.url === '/' && this.menuItem.url === '/home')) {
-            this.visibility = true;
-          } else if (e.url !== this.menuItem.url) {
-            this.visibility = false;
-          }
+          this.visibility = !!(e.url === this.menuItem.url || (e.url === '/' && this.menuItem.url === '/home'));
         }
       });
   }
