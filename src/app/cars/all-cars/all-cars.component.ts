@@ -63,7 +63,7 @@ export class AllCarsComponent implements OnInit {
     this.filterControl.valueChanges
       .pipe(
         takeWhile(() => this.isAlive),
-        debounceTime(2000)
+        debounceTime(1000)
       ).subscribe((param) => {
         this.resetStartEnd();
         this.selectedCars = this.carListItems
@@ -74,11 +74,11 @@ export class AllCarsComponent implements OnInit {
 
   isModel(model: string, params: string): boolean {
     const re = new RegExp(`^${params.toLocaleLowerCase()}`);
-    return !!model.toLocaleLowerCase().match(re);
-    
+    return !!model.toLocaleLowerCase().match(re); 
   }
 
   isBrand(brand: string, params: string): boolean {
+    this.getBrandName(brand);
     const re = new RegExp(`${params.toLocaleLowerCase()}`);
     return !!brand.toLocaleLowerCase().match(re);
   }
