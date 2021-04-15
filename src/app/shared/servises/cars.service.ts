@@ -49,7 +49,7 @@ export class CarsService {
   
 
   insertCar(car: Car): Observable<Car> {
-    return this.http.post<Car>(`${this.carsUrl}.json`, car, httpOptions).pipe(
+    return this.http.post<Car>(this.carsUrl, car, httpOptions).pipe(
       switchMap(() => this.dealersService.getDealerById(car.brand)),
       switchMap((dealer: Dealers) =>
         this.dealersService.updateDealers({

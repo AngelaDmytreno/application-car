@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from "../../shared-components/confirmation-dialog/confirmation-dialog.component";
 import { CarsService } from 'src/app/shared/servises/cars.service';
 import { Car } from 'src/app/car';
-import { takeWhile } from 'rxjs/operators';
+import { finalize, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-table',
@@ -21,10 +21,10 @@ import { takeWhile } from 'rxjs/operators';
 export class TableComponent implements OnInit {
 
   allDealersList: Array<Dealers>;
-  dataSource: any;
+  dataSource: MatTableDataSource<Dealers>
   displayedColumns: string[] = ['name', 'amountOfCars', 'headquarters', 'country', 'foundedIn', 'edit'];
-  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   createDealer: Dealers;
   valueFilter: string = '';
   isDataLoading: boolean;
@@ -36,18 +36,19 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
     this.isDataLoading = true;
     this.dealersService.getAllDealers()
-      .pipe(takeWhile(() => (this.isAlive = true)))
-      .subscribe(
-        res => {
-          this.allDealersList = res;
-          this.dataSource = new MatTableDataSource(this.allDealersList);
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-          this.isDataLoading = false;
-          this.tableUpdate();
-        },
-        err => console.log(err)
-      );
+    .pipe(takeWhile(() => (this.isAlive = true)))
+    .subscribe(
+      res => {
+        this.allDealersList = res;
+        
+        this.dataSource = new MatTableDataSource(this.allDealersList);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.isDataLoading = false;
+      
+      },
+      err => console.log(err)
+    );
   }
 
 

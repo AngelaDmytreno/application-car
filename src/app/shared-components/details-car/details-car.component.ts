@@ -67,20 +67,14 @@ export class DetailsCarComponent implements OnInit, OnChanges {
       )
       .pipe(takeWhile(() => (this.isAlive = true)))
       .subscribe((p) => {
-        console.log(p);
         this.car = p;
-        
       });
 
       this.dealerService.getAllDealers().subscribe((res)=>{
         this.dealersList = res;
-        // this.myForm.controls.dealer.setValue('ghvcshbc');
-
-      })
+      });
   }
   getBrandName(brand: string): string {
-    console.log('dealerList',this.dealersList);
-    console.log('brand',brand);
     if (brand === null || this.dealersList === undefined) {
       return "";
     }

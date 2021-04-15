@@ -7,7 +7,7 @@
     <mat-list-option *ngFor="let car of newCars">
       <span class="name"><b>{{car.model}}</b></span>
       <div class="info">
-        <span class="country">{{getBrandName(car.brand)}}</span>
+        <span class="country">{{car.dealer}}</span>
         <span class="registration">{{car.registration | date:'d/M/YYYY' }}</span>
       </div>
     </mat-list-option>
