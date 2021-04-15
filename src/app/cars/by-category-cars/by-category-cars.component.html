@@ -1,0 +1,39 @@
+<mat-spinner *ngIf="isDataLoading" class="loading"></mat-spinner>
+<div class="car-container">
+  <div class="category__conatainer">
+    <mat-tab-group (selectedTabChange)="tabChange($event)">
+      <mat-tab [label]="category | titlecase" *ngFor="let category of carsCategories">
+        <mat-selection-list #cars [multiple]="false">
+          <mat-list-option *ngFor="let car of takeCarsByCategory(category); let i = index"
+            [selected]="car&&i==0 && firstSelected" (click)="selectCar(car)">
+            <span class="model"><b>{{car.model}}</b></span>
+            <span class="brand">{{getBrandName(car?.brand)}}</span>
+          </mat-list-option>
+        </mat-selection-list>
+        <div class="container__info">
+          <div class="car__img" *ngIf="selectedCar">
+            <img *ngIf="selectedCar.image" [src]="selectedCar.image" [alt]="selectedCar.model">
+            <img *ngIf="!selectedCar.image" src="../../../assets/images/defoult.jpg" [alt]="selectedCar.model">
+          </div>
+          <ul class="detail__info" *ngIf="selectedCar">
+            <li>
+              <h3>{{selectedCar.model}}</h3>
+            </li>
+            <li>
+              <h4>Dealers: <b>{{getBrandName(selectedCar.brand)}}</b></h4>
+            </li>
+            <li>
+              <h4>Class: <b>{{selectedCar.class |titlecase}}</b></h4>
+            </li>
+            <li>
+              <h4>Year: <b>{{selectedCar.year}}</b></h4>
+            </li>
+            <li>
+              <h4>Color: <b>{{selectedCar.color}}</b></h4>
+            </li>
+          </ul>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+.container{
+  .loading{
+    margin-top: 200px;
+  }
+  .container__input{
+    width: 1150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .mat-form-field{
+      width: 200px;
+      font-size: 14px;
+    }
+    .example-button-row {
+      display: table-cell;
+    }
+    .example-button-row .mat-button-base {
+      margin: 8px 8px 8px 0;
+    } 
+  }
+  .mat-table{
+    width: 1150px;
+    height: 100%;
+    td, th{
+      width: 15%;
+    }
+  }
+  
+  
+}

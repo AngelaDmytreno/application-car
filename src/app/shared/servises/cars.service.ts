@@ -1,35 +1,68 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Car } from '../entities/car.interface';
+import { Car } from '../../car'
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap, switchMap } from 'rxjs/operators';
+import { DealersService } from './dealers.service';
+import { Dealers } from 'src/app/dealers';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarsService {
 
-  carsUrl: string = '/cars';
-  allCars: Array<Car>;
-  carsCategories: Set<string> = new Set<string>();
+  private carsUrl: string = '/cars';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private dealersService: DealersService) { }
 
-  getAllCars(): void {
-    this.http.get<Array<Car>>(this.carsUrl).subscribe(
-      res => { 
-        this.allCars = res;
-        this.takeAllCategories();
-      },
-      err => console.log(err)
+  getAllCars(): Observable<Array<Car>> {
+    return this.http.get<Array<Car>>(this.carsUrl);
+  }
+
+  updateCars(car: Car): Observable<Car> {
+    return this.http.put<Car>(`${this.carsUrl}.json`, car, httpOptions);
+  }
+
+  getCarById(id: string): Observable<Car> {
+    const url = `${this.carsUrl}/${id}`;
+    return this.http.get<Car>(url);
+  }
+
+  deleteCarById(car: Car): Observable<Car> {
+    const url: string = `${this.carsUrl}/${car.id}`;
+    return this.http.delete<Car>(url, httpOptions).pipe(
+      switchMap(() => this.dealersService.getDealerById(car.brand)),
+      switchMap((dealer: Dealers) =>
+        this.dealersService.updateDealers({
+          ...dealer,
+          amountOfCars: dealer.amountOfCars - 1,
+        })
+      )
+
+    );
+  }
+  
+
+  insertCar(car: Car): Observable<Car> {
+    return this.http.post<Car>(this.carsUrl, car, httpOptions).pipe(
+      switchMap(() => this.dealersService.getDealerById(car.brand)),
+      switchMap((dealer: Dealers) =>
+        this.dealersService.updateDealers({
+          ...dealer,
+          amountOfCars: dealer.amountOfCars++,
+        })
+      )
+
     );
   }
 
-  takeAllCategories(): void {
-    this.allCars.forEach((car: Car )=> {
-      let category: string = 'other';
-      if (car.category != null) {
-        category = car.category;
-      }
-      this.carsCategories.add(category);
-    });
-  }
+  
+
 }
+
+
