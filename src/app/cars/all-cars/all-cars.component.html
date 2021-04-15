@@ -4,8 +4,8 @@
     <form class="example-form">
       <mat-form-field class="example-form-field" *ngIf="!isDataLoading">
         <mat-label>Filter</mat-label>
-        <input (keyup)="onKey($event)" matInput placeholder="Filter" type="text" [(ngModel)]="valueFilter" name="filter">
-        <button mat-button *ngIf="valueFilter" matSuffix mat-icon-button aria-label="" (click)="resetFilter()">
+        <input  matInput placeholder="Filter" type="text"  #filterInput [formControl]="filterControl">
+        <button mat-button *ngIf="filterInput.value" matSuffix mat-icon-button aria-label="" (click)="resetFilter(); filterInput.value = ''">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>

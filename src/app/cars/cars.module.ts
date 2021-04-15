@@ -14,6 +14,7 @@ import {MatInputModule} from '@angular/material/input';
 import { SmCardCarComponent } from '../shared-components/sm-card-car/sm-card-car.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -39,8 +40,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatInputModule,
     SharedComponentsModule,
     MatProgressSpinnerModule,
-   
-    
+    ReactiveFormsModule,
+  
   ]
 })
 export class CarsModule { }
