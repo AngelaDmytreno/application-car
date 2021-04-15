@@ -1,0 +1,25 @@
+<div class="all-car__container">
+  <mat-spinner *ngIf="isDataLoading" class="loading"></mat-spinner>
+  <div class="all-car__items">
+    <form class="example-form">
+      <mat-form-field class="example-form-field" *ngIf="!isDataLoading">
+        <mat-label>Filter</mat-label>
+        <input (keyup)="onKey($event)" matInput placeholder="Filter" type="text" [(ngModel)]="valueFilter" name="filter">
+        <button mat-button *ngIf="valueFilter" matSuffix mat-icon-button aria-label="" (click)="resetFilter()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="all-car__list-container" *ngIf="!isDataLoading">
+    <div *ngFor="let carItem of selectedCars">
+      <app-sm-card-car [car-item]="carItem" [brand]="getBrandName(carItem.brand)" [card-type]="'lg'"></app-sm-card-car>
+    </div>
+  </div>
+  <section *ngIf="!isDataLoading">
+    <div *ngIf="isShowLoadButton()" class="example-button-row">
+      <button mat-raised-button color="accent" (click)="loadMore()">Load More</button>
+    </div>
+    <div *ngIf="selectedCars.length===0"> Car not found.</div>
+  </section>
+</div>

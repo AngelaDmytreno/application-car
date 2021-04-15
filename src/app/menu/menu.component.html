@@ -1,7 +1,5 @@
 <div class="container__menu">
   <div *ngFor="let menuIten of menuItems">
-    <app-menu-item [menu-item]="menuIten"
-                   [is-selected]="menuIten.isSelected"
-                   (selected)="onSelected($event)"></app-menu-item>
+    <app-menu-item [menu-item]="menuIten"></app-menu-item>
   </div>
 </div>

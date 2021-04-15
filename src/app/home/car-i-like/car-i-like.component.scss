@@ -1,0 +1,20 @@
+.like__conatiner-column{
+  width: 22vw;
+  .like__item{
+    height: 25px;
+    border-bottom: 3px solid gray;
+    padding-bottom: 10px;
+  }
+}
+.loading{
+  margin-top: 20px;
+  margin-left: 90px;
+}
+.card__container{
+  max-width: 22vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 4px;
+  justify-content: space-between;
+}

@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router, RouterEvent } from '@angular/router';
+import { takeWhile } from 'rxjs/operators';
 import { MenuItem } from './menu-item';
 
 @Component({
@@ -10,29 +11,27 @@ import { MenuItem } from './menu-item';
 export class MenuItemComponent implements OnInit {
 
   @Input('menu-item') menuItem: MenuItem;
-  @Input('is-selected') set isSelected(value: boolean) {
-    if (value) {
-      this.visibility = this.lineStyleVisible;
-    } else {
-      this.visibility = this.lineStyleUnVisible;
-    }
-  };
-  @Output() selected = new EventEmitter<MenuItem>();
 
-  visibility: any; // TODO: Спросить у Нади, нужно ли такое типизировать и как?
-  lineStyleVisible: any = { 'line-visible': true }; // TODO: Спросить у Нади, нужно ли такое типизировать и как?
-  lineStyleUnVisible: any = { 'line-unvisible': true }; // TODO: Спросить у Нади, нужно ли такое типизировать и как?
+  visibility: boolean = false;
+  isAlive: boolean;
 
   constructor(private router: Router) { }
 
-  ngOnInit(): void { 
-    if (this.menuItem.isSelected) {
-      this.visibility = this.lineStyleVisible;
-    }
+  ngOnInit(): void {
+    this.router.events
+      .pipe(takeWhile(() => (this.isAlive = true)))
+      .subscribe((e: RouterEvent) => {
+        if (e.url) {
+          if (e.url === this.menuItem.url || (e.url === '/' && this.menuItem.url === '/home')) {
+            this.visibility = true;
+          } else if (e.url !== this.menuItem.url) {
+            this.visibility = false;
+          }
+        }
+      });
   }
 
-  onNavigate(): void {
-    this.selected.emit(this.menuItem);
-    this.router.navigate([this.menuItem.path]);
+  ngOnDestroy(): void {
+    this.isAlive = false;
   }
 }

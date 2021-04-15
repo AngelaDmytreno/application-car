@@ -1,0 +1,18 @@
+<div class="dealers__conatiner-column">
+  <div class="dealers__item">
+    <h4>My Dealers</h4>
+  </div>
+  <mat-spinner *ngIf="isLoadingDealer" class="loading"></mat-spinner>
+  <mat-selection-list [multiple]="false" *ngIf="!isLoadingDealer">
+    <mat-list-option *ngFor="let dealer of newDealers">
+      <span class="name"><b>{{dealer.name}}</b></span>
+      <div class="info">
+        <span class="country">{{dealer.country}}</span>
+        <span class="registration">{{dealer.registration | date:'d/M/YYYY' }}</span>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+
+  <div *ngIf="newDealers.length === 0 && !isLoadingDealer" class="dealers__text">
+    You havent added any dealrs yet
+  </div>

@@ -1,0 +1,11 @@
+<div class="like__conatiner-column">
+  <div class="like__item">
+    <h4>Car I Like</h4>
+  </div>
+</div>
+<mat-spinner *ngIf="isDataLoading" class="loading"></mat-spinner>
+<div class="card__container" *ngIf="!isDataLoading">
+  <div *ngFor="let carItem of carItems">
+    <app-sm-card-car [car-item]="carItem" [brand]="getBrandName(carItem.brand)"></app-sm-card-car>
+  </div>
+</div>
