@@ -53,11 +53,7 @@ export class AllCarsComponent implements OnInit {
 
   getBrandName(brand: string): string {
     const dealer = this.dealersList.find((dealer: Dealers) => dealer.id === brand);
-    if (dealer) {
-      return dealer.name;
-    } else {
-      return "";
-    }
+    return dealer ? dealer.name : '';
   }
 
   onKey(event: any) {
@@ -73,12 +69,14 @@ export class AllCarsComponent implements OnInit {
 
   isModel(model: string, params: string): boolean {
     const re = new RegExp(`^${params.toLocaleLowerCase()}`);
-    return model.toLocaleLowerCase().match(re) ? true : false;
+    // return model.toLocaleLowerCase().match(re) ? true : false;
+    return !!model.toLocaleLowerCase().match(re);
   }
 
   isBrand(brand: string, params: string): boolean {
     const re = new RegExp(`${params.toLocaleLowerCase()}`);
-    return brand.toLocaleLowerCase().match(re) ? true : false;
+    // return brand.toLocaleLowerCase().match(re) ? true : false;
+    return !!brand.toLocaleLowerCase().match(re);
   }
 
   loadMore(): void {

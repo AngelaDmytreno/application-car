@@ -26,12 +26,8 @@ export class MycarsComponent implements OnInit {
   }
 
   getBrandName(brand: string): string {
-    const dealer = this.dealersList.find((dealer: Dealers) => dealer.name === brand);
-    if (dealer) {
-      return dealer.name;
-    } else {
-      return 'trololo';
-    }
+   const dealer = this.dealersList.find((dealer: Dealers) => dealer.id === brand);
+    return dealer ? dealer.name : '';
   }
 
 }

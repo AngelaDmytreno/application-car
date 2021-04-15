@@ -25,13 +25,13 @@ export class DealersService {
   getAllDealers(): any {
     return this.http.get<Array<Dealers>>(`${this.dealersUrl}.json`, httpOptions);
   }
-  
- 
-    getDealerById(id: string): Observable<Dealers> {
-      const url = `${this.dealersUrl}/${id.toUpperCase()}`;
-      return this.http.get<Dealers>(url);
-    }
-  
+
+
+  getDealerById(id: string): Observable<Dealers> {
+    const url = `${this.dealersUrl}/${id.toUpperCase()}`;
+    return this.http.get<Dealers>(url);
+  }
+
   updateDealers(dealers: Dealers): Observable<any> {
     return this.http.put(`${this.dealersUrl}.json`, dealers, httpOptions);
   }
@@ -48,7 +48,7 @@ export class DealersService {
         this.http.delete<Car>(carUrl, httpOptions).subscribe(
           (car: Car) => console.log(car),
           err => console.log(err)
-          );
+        );
       });
     });
     return this.http
