@@ -40,7 +40,6 @@ export class TableComponent implements OnInit {
     .subscribe(
       res => {
         this.allDealersList = res;
-        
         this.dataSource = new MatTableDataSource(this.allDealersList);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -69,11 +68,11 @@ export class TableComponent implements OnInit {
       .pipe(takeWhile(() => (this.isAlive = true)))
       .subscribe((result) => {
         this.createDealer = result.data;
-        if (result.data.newRecord === true) {
+        if (result.data.newRecord) {
           this.dealersService.insertDealers(this.createDealer)
             .pipe(takeWhile(() => (this.isAlive = true)))
             .subscribe();
-        } else if (result.data.newRecord === false) {
+        } else if (result.data.newRecord) {
           this.dealersService.updateDealers(this.createDealer)
             .pipe(takeWhile(() => (this.isAlive = true)))
             .subscribe();
@@ -105,7 +104,7 @@ export class TableComponent implements OnInit {
       }
     });
     confirmDialog.afterClosed().subscribe((result) => {
-      if (result === true) {
+      if (result) {
         this.dealersService.deleteDealer(dealer)
           .pipe(takeWhile(() => (this.isAlive = true)))
           .subscribe();

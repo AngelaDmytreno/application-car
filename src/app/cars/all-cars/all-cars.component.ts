@@ -3,7 +3,8 @@ import { CarsService } from '../../shared/servises/cars.service';
 import { Car } from '../../shared/entities/car.interface';
 import { Dealers } from 'src/app/dealers';
 import { DealersService } from 'src/app/shared/servises/dealers.service';
-import { takeWhile } from 'rxjs/operators';
+import { debounceTime, delay, takeWhile, tap} from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-all-cars',
@@ -22,6 +23,7 @@ export class AllCarsComponent implements OnInit {
   useFilter: boolean;
   dealersList: Array<Dealers>;
   isAlive: boolean = true;
+  filterControl: FormControl = new FormControl();
 
   constructor(public carsService: CarsService, public dealerService: DealersService) { }
 
@@ -45,6 +47,7 @@ export class AllCarsComponent implements OnInit {
         },
         err => console.log(err)
       );
+      this.filterCars();
   }
 
   ngOnDestroy(): void {
@@ -53,32 +56,31 @@ export class AllCarsComponent implements OnInit {
 
   getBrandName(brand: string): string {
     const dealer = this.dealersList.find((dealer: Dealers) => dealer.id === brand);
-    if (dealer) {
-      return dealer.name;
-    } else {
-      return "";
-    }
+    return dealer ? dealer.name : '';
   }
 
-  onKey(event: any) {
-    setTimeout(() => this.filterCars(event.target.value), 2000);
-  }
-
-  filterCars(param): void {
-    this.resetStartEnd();
-    this.selectedCars = this.carListItems
+  filterCars(): void{
+    this.filterControl.valueChanges
+      .pipe(
+        takeWhile(() => this.isAlive),
+        debounceTime(1000)
+      ).subscribe((param) => {
+        this.resetStartEnd();
+        this.selectedCars = this.carListItems
       .filter(el => this.isModel(el.model, param) || this.isBrand(el.brand, param) || param === '')
       .slice(0, this.loadCount);
+      })
   }
 
   isModel(model: string, params: string): boolean {
     const re = new RegExp(`^${params.toLocaleLowerCase()}`);
-    return model.toLocaleLowerCase().match(re) ? true : false;
+    return !!model.toLocaleLowerCase().match(re); 
   }
 
   isBrand(brand: string, params: string): boolean {
+    this.getBrandName(brand);
     const re = new RegExp(`${params.toLocaleLowerCase()}`);
-    return brand.toLocaleLowerCase().match(re) ? true : false;
+    return !!brand.toLocaleLowerCase().match(re);
   }
 
   loadMore(): void {
@@ -93,7 +95,6 @@ export class AllCarsComponent implements OnInit {
 
   resetFilter(): void {
     this.resetStartEnd();
-    this.valueFilter = '';
     this.selectedCars = this.carListItems.slice(0, this.loadCount);
   }
 

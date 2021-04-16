@@ -93,17 +93,13 @@ export class CarFormComponent implements OnInit, OnDestroy {
   }
 
   getBrandName(brand: string): string {
-   
-    if (brand === null || this.dealers=== undefined) {
-      return "";
-    }
-
-    const dealer = this.dealers.find((dealer: Dealers) => dealer.id === brand);
-    if (dealer) {
-      return dealer.name;
+    if (brand && this.dealers) {
+    	const dealer = this.dealers.find((dealer: Dealers) => dealer.id === brand);
+    	return dealer ? dealer.name : '';
     } else {
-      return "";
+    	return '';
     }
+   
   }
 
   selectDealer(dealerOption: any): void {

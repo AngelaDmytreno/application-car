@@ -51,23 +51,17 @@ export class ByCategoryCarsComponent implements OnInit {
     this.isAlive = false;
   }
   getBrandName(brand: string): string {
-    if (brand === null || this.dealersList === undefined) {
-      return "";
-    }
-
-    const dealer = this.dealersList.find((dealer: Dealers) => dealer.id === brand);
-    if (dealer) {
-      return dealer.name;
+    if (brand && this.dealersList) {
+    	const dealer = this.dealersList.find((dealer: Dealers) => dealer.id === brand);
+    	return dealer ? dealer.name : '';
     } else {
-      return "";
+    	return '';
     }
   }
 
   takeAllCategories(): void {
     this.allCars.forEach((car: Car) => {
-      if (car.category != null) {
-        this.carsCategories.add(car.category);
-      }
+      car.category && this.carsCategories.add(car.category);
     });
     this.carsCategories.add('other');
   }

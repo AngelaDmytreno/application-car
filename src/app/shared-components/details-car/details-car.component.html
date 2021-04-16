@@ -13,16 +13,11 @@
       </li>
       <li>Dealers: <b>{{getBrandName(car?.brand)}}</b></li>
       <li *ngIf="car?.class">Class: <b>{{car?.class |titlecase}}</b></li>
-      <li *ngIf="!car?.class"></li>
       <li *ngIf="car?.year">Year: <b>{{car?.year}}</b></li>
-      <li *ngIf="!car?.year"></li>
       <li *ngIf="car?.color">Color: <b>{{car?.color}}</b></li>
-      <li *ngIf="!car?.color"></li>
       <li *ngIf="car?.wikilink" class="car__site">Site: <b><a href="{{car?.wikilink}}"
             target="blank">{{car?.wikilink}}</a></b></li>
-      <li *ngIf="!car?.wikilink" class="car__site"></li>
       <li *ngIf="car?.description" class="car__description">{{car?.description}}</li>
-      <li *ngIf="!car?.description"></li>
     </ul>
   </div>
   <div class="car__controls" *ngIf="!isEdit">

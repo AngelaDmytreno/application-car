@@ -30,7 +30,7 @@ export class CarILikeComponent implements OnInit {
       .subscribe(
         res => {
           this.allCarListItems = res;
-          this.getFavoriteCars();
+          // this.getFavoriteCars();
           this.carItems = this.getFavoriteCars();
           this.isDataLoading = false;
         },
@@ -52,15 +52,11 @@ export class CarILikeComponent implements OnInit {
 
   getBrandName(brand: string): string {
     const dealer = this.allDealersList.find((dealer: Dealers) => dealer.id === brand);
-    if (dealer) {
-      return dealer.name;
-    } else {
-      return "";
-    }
+    return dealer ? dealer.name : '';
   }
 
   getFavoriteCars(): any {
-    return this.allCarListItems.filter(el => el.liked === true);
+    return this.allCarListItems.filter(el => el.liked);
   }
 }
 
